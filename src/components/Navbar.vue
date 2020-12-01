@@ -3,40 +3,168 @@
     <div class="logo">
       <h4><router-link to="/">BRIJ</router-link></h4>
     </div>
-    <ul class="nav-links">
-      <li><router-link to="/about">About</router-link></li>
-      <li><router-link to="/portfolio">Portfolio</router-link></li>
-      <li><router-link to="/shop">Shop</router-link></li>
-      <li><router-link to="/exhibitions">Exhibitions</router-link></li>
-    </ul>
+    <div class="nav-links" :class="{ 'nav-active': !hideLinks }">
+      <router-link :class="{ 'first-link': !hideLinks }" to="/about">About</router-link>
+      <router-link @click="navSlide" :class="{ 'second-link': !hideLinks }" to="/portfolio"
+        >Portfolio</router-link
+      >
+      <router-link @click="navSlide" :class="{ 'third-link': !hideLinks }" to="/shop"
+        >Shop</router-link
+      >
+      <router-link @click="navSlide" :class="{ 'fourth-link': !hideLinks }" to="/exhibitions"
+        >Exhibitions</router-link
+      >
+    </div>
+    <div class="burger" :class="{ toggle: !hideLinks }" @click="navSlide">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld'
+  name: 'HelloWorld',
+  data() {
+    return {
+      hideLinks: true
+    }
+  },
+  methods: {
+    navSlide() {
+      this.hideLinks = !this.hideLinks
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-#nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 8vh;
+body {
+  height: 100vh;
+  overflow-x: hidden; // stops us being able to scroll to see translate-x(100%) nav bar
 
-  .logo {
-    router-link {
-      color: red;
-      letter-spacing: 5px;
-    }
-  }
-
-  .nav-links {
+  #nav {
     display: flex;
     justify-content: space-around;
-    width: 30%;
+    align-items: center;
+    min-height: 8vh;
+
+    a {
+      text-decoration: none;
+      color: $navcolour;
+    }
+
+    .logo {
+      a {
+        letter-spacing: 5px;
+      }
+
+      @include media('<=tablet') {
+        margin-left: 30px;
+      }
+
+      @include media('<=tabletPortrait') {
+        margin-left: 0;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: space-around;
+      width: 30%;
+      background-color: orange;
+
+      .first-link {
+        animation: navLinkFade 0.5s ease forwards 0.3s;
+      }
+
+      .second-link {
+        animation: navLinkFade 0.5s ease forwards 0.4s;
+      }
+
+      .third-link {
+        animation: navLinkFade 0.5s ease forwards 0.5s;
+      }
+
+      .fourth-link {
+        animation: navLinkFade 0.5s ease forwards 0.6s;
+      }
+
+      @include media('<=desktop') {
+        width: 40%;
+      }
+
+      @include media('<=tablet') {
+        width: 50%;
+        margin-left: auto;
+        margin-right: 20px;
+      }
+
+      @include media('<=tabletPortrait') {
+        position: absolute;
+        height: 92vh;
+        top: 8vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-right: 0;
+        transform: translateX(100%); //moves it off the screen
+        transition: transform 0.4s ease-out;
+      }
+
+      a {
+        @include media('<=tabletPortrait') {
+          opacity: 0;
+        }
+      }
+    }
+
+    .nav-active {
+      transform: translateX(0%);
+    }
+
+    .burger {
+      display: none;
+
+      @include media('<=tabletPortrait') {
+        display: block;
+        cursor: pointer;
+      }
+
+      div {
+        width: 20px;
+        height: 2px;
+        background-color: $navcolour;
+        margin: 5px;
+        transition: all 0.5s ease-in-out;
+      }
+
+      &.toggle {
+        .line1 {
+          transform: rotate(-135deg) rotateZ(360deg) translate(-3px, -7px);
+        }
+        .line2 {
+          opacity: 0;
+        }
+        .line3 {
+          transform: rotate(135deg) rotateZ(360deg) translate(-3px, 7px);
+        }
+      }
+    }
+  }
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 </style>

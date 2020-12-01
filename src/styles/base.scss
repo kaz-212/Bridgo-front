@@ -1,6 +1,18 @@
+@import './_include-media.scss';
+// ======== VARIABLES =========
+
+// nav
+$navcolour: rgb(25, 144, 241);
+
+// ======== STYLES =========
+
 // configured in vue.config.js
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  overflow: hidden;
 }
