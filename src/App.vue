@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <Navbar />
     <router-view />
   </div>
@@ -18,10 +18,10 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.021), rgba(0, 0, 0, 0.411)),
+    url('./assets/main.jpg');
+  background-size: cover;
+  background-position: top;
 }
 </style>

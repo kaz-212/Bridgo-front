@@ -4,14 +4,16 @@
       <h4><router-link to="/">BRIJ</router-link></h4>
     </div>
     <div class="nav-links" :class="{ 'nav-active': !hideLinks }">
-      <router-link :class="{ 'first-link': !hideLinks }" to="/about">About</router-link>
-      <router-link @click="navSlide" :class="{ 'second-link': !hideLinks }" to="/portfolio"
+      <router-link class="nav-link" :class="{ 'first-link': !hideLinks }" to="/about"
+        >About</router-link
+      >
+      <router-link class="nav-link" :class="{ 'second-link': !hideLinks }" to="/portfolio"
         >Portfolio</router-link
       >
-      <router-link @click="navSlide" :class="{ 'third-link': !hideLinks }" to="/shop"
+      <router-link class="nav-link" :class="{ 'third-link': !hideLinks }" to="/shop"
         >Shop</router-link
       >
-      <router-link @click="navSlide" :class="{ 'fourth-link': !hideLinks }" to="/exhibitions"
+      <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/exhibitions"
         >Exhibitions</router-link
       >
     </div>
@@ -49,7 +51,9 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    min-height: 8vh;
+    min-height: 40px;
+    height: 6vh;
+    // background-color: $navslider;
 
     a {
       text-decoration: none;
@@ -59,7 +63,13 @@ body {
     .logo {
       a {
         letter-spacing: 5px;
+
+        &:hover {
+          color: $navhover;
+        }
       }
+
+      margin-left: 30px;
 
       @include media('<=tablet') {
         margin-left: 30px;
@@ -74,7 +84,30 @@ body {
       display: flex;
       justify-content: space-around;
       width: 30%;
-      background-color: orange;
+      margin-left: auto;
+
+      .nav-link {
+        &:hover {
+          color: $navhover;
+        }
+
+        &::after {
+          content: '';
+          display: block;
+          width: 0;
+          height: 1px;
+          background-color: $navhover;
+          transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+          width: 100%;
+        }
+
+        @include media('<=tabletPortrait') {
+          color: white;
+        }
+      }
 
       .first-link {
         animation: navLinkFade 0.5s ease forwards 0.3s;
@@ -104,8 +137,8 @@ body {
 
       @include media('<=tabletPortrait') {
         position: absolute;
-        height: 92vh;
-        top: 8vh;
+        height: 100vh;
+        top: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -113,6 +146,7 @@ body {
         margin-right: 0;
         transform: translateX(100%); //moves it off the screen
         transition: transform 0.4s ease-out;
+        background-color: $navslider;
       }
 
       a {
@@ -144,12 +178,14 @@ body {
 
       &.toggle {
         .line1 {
+          background-color: white;
           transform: rotate(-135deg) rotateZ(360deg) translate(-3px, -7px);
         }
         .line2 {
           opacity: 0;
         }
         .line3 {
+          background-color: white;
           transform: rotate(135deg) rotateZ(360deg) translate(-3px, 7px);
         }
       }
