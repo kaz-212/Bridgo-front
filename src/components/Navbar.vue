@@ -51,7 +51,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    min-height: 40px;
+    min-height: 60px;
     height: 6vh;
     // background-color: $navslider;
 
@@ -76,7 +76,7 @@ body {
       }
 
       @include media('<=tabletPortrait') {
-        margin-left: 0;
+        margin-left: 6%;
       }
     }
 
@@ -166,6 +166,8 @@ body {
       @include media('<=tabletPortrait') {
         display: block;
         cursor: pointer;
+        margin-left: auto;
+        margin-right: 8%;
       }
 
       div {
