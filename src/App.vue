@@ -17,11 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  min-height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.021), rgba(0, 0, 0, 0.411)),
-    url('./assets/main.jpg');
-  background-size: cover;
-  background-position: top;
+html {
+  overflow-x: hidden;
 }
 </style>
