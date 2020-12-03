@@ -53,6 +53,9 @@ body {
     align-items: center;
     min-height: 60px;
     height: 6vh;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     // background-color: $navslider;
 
     a {

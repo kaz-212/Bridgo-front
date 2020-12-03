@@ -1,12 +1,10 @@
 <template>
-  <div id="card">
-    <div id="img-box">
-      <img :src="require(`@/assets/${image.imgName}`)" />
-      <div class="img-info">
-        <h3>{{ image.pieceName }}</h3>
-        <h4>{{ image.materials }}</h4>
-        <h4>{{ image.year }}</h4>
-      </div>
+  <div id="img-box">
+    <img :src="require(`@/assets/${image.imgName}`)" />
+    <div class="img-info">
+      <h3>{{ image.pieceName }}</h3>
+      <h4>{{ image.materials }}</h4>
+      <h4>{{ image.year }}</h4>
     </div>
   </div>
 </template>
@@ -21,13 +19,14 @@ export default {
 <style lang="scss" scoped>
 #img-box {
   // border: solid rgb(51, 51, 51) 1px;
-  max-width: 50%;
-  height: auto;
+
   position: relative;
   cursor: pointer;
+  max-width: 50%;
+  height: auto;
 
   img {
-    max-height: 100%;
+    max-height: 60vh;
     max-width: 100%;
     display: block;
   }

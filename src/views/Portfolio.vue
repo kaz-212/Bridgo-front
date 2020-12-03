@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="main">
     <section class="section s1">
       <PortfolioWindow class="window left-image" :image="images[0]" />
       <PortfolioWindow class="window right-image" :image="images[1]" />
@@ -53,18 +53,57 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#home {
+#main {
   .section {
-    height: 94vh;
+    height: 100vh;
+    width: 100%;
     position: relative;
+
+    .window {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .right-image {
+      position: absolute;
+      left: 50%;
+    }
+
+    .left-image {
+      position: absolute;
+      left: 0;
+    }
 
     &.s1 {
       background-color: olive;
+      height: 94vh;
     }
 
     &.s2 {
       background-color: aliceblue;
     }
   }
+
+  // .sections-menu {
+  //   position: fixed;
+  //   right: 1rem;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+
+  //   .menu-point {
+  //     width: 10px;
+  //     height: 10px;
+  //     border-radius: 50%;
+  //     background-color: #fff;
+  //     display: block;
+  //     margin: 1rem 0;
+  //     opacity: 0.6;
+  //     transition: 0.4s ease all;
+
+  //     &.active {
+  //       opacity: 1;
+  //       transform: scale(1.5);
+  //     }
+  //   }
+  // }
 }
 </style>

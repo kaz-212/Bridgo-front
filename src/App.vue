@@ -19,5 +19,9 @@ export default {
 <style lang="scss">
 html {
   overflow-x: hidden;
+
+  #app {
+    height: 100vh;
+  }
 }
 </style>
