@@ -43,6 +43,7 @@ const routes = [
     children: [
       {
         path: 'projects',
+        name: 'AdminProject',
         component: Projects,
         children: [
           {

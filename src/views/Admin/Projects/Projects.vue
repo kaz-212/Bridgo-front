@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <h1>Projects</h1>
+  <div class="main">
     <router-view />
   </div>
 </template>
@@ -11,3 +10,9 @@ export default {
   components: {}
 }
 </script>
+
+<style lang="scss" scoped>
+.main {
+  margin-left: 15vw;
+}
+</style>

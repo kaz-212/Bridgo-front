@@ -15,3 +15,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.admin {
+  height: 94vh;
+}
+</style>

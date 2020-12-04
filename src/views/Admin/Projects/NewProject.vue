@@ -1,12 +1,12 @@
 <template>
-  <nav id="new-proj">
+  <div id="new-proj">
     <h2>Add Project</h2>
     <ProjectForm />
-  </nav>
+  </div>
 </template>
 
 <script>
-import ProjectForm from '@/components/Admin/ProjectForm.vue'
+import ProjectForm from '@/components/Admin/Projects/ProjectForm.vue'
 
 export default {
   name: 'AdminNav',
@@ -17,4 +17,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#new-proj {
+  height: 94vh;
+}
+</style>
