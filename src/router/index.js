@@ -3,6 +3,9 @@ import Home from '@/views/Home.vue'
 import Portfolio from '@/views/Portfolio.vue'
 import Exhibitions from '@/views/Exhibitions.vue'
 import Shop from '@/views/Shop.vue'
+import Admin from '@/views/Admin/Admin.vue'
+import Projects from '@/views/Admin/Projects/Projects.vue'
+import NewProject from '@/views/Admin/Projects/NewProject.vue'
 
 const routes = [
   {
@@ -32,6 +35,23 @@ const routes = [
     path: '/shop',
     name: 'Shop',
     component: Shop
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    children: [
+      {
+        path: 'projects',
+        component: Projects,
+        children: [
+          {
+            path: 'new',
+            component: NewProject
+          }
+        ]
+      }
+    ]
   }
 ]
 

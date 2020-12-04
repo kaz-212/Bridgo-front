@@ -25,3 +25,10 @@ h1 {
 body {
   min-height: 100vh;
 }
+
+input,
+textarea {
+  display: block;
+  resize: none;
+  width: 60%;
+}

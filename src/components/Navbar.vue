@@ -16,7 +16,11 @@
       <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/exhibitions"
         >Exhibitions</router-link
       >
+      <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
+        >Admin</router-link
+      >
     </div>
+
     <div class="burger" :class="{ toggle: !hideLinks }" @click="navSlide">
       <div class="line1"></div>
       <div class="line2"></div>
@@ -27,7 +31,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Navbar',
   data() {
     return {
       hideLinks: true
@@ -126,6 +130,10 @@ body {
 
       .fourth-link {
         animation: navLinkFade 0.5s ease forwards 0.6s;
+      }
+
+      .fifth-link {
+        animation: navLinkFade 0.5s ease forwards 0.7s;
       }
 
       @include media('<=desktop') {
