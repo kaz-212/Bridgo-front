@@ -27,18 +27,23 @@
       <input id="materials" v-model="pieces[0].materials" type="text" required />
       <label class="form-item" for="PieceDescription">Description</label>
       <textarea id="PieceDescription" v-model="pieces[0].pieceDescription" rows="5" required />
+      <label for="image">Image</label>
+      <input type="file" id="image" ref="fileSelector" @change="onFileSelected" />
+      <!-- proxy button to click -->
+      <!-- <button @click.prevent="$refs.fileSelector.click()">Choose Image</button> -->
       <label for="yes">Show this piece in project?</label>
       <input class="check-box" v-model="pieces[0].showInProj" id="yes" type="checkbox" />
       <button @click.prevent="submitProject">Submit Project</button>
+      {{ img }}
     </div>
   </form>
 </template>
 
 <script>
 import ProjectCard from '@/components/Admin/Projects/ProjectCard.vue'
-import axios from 'axios'
+// import axios from 'axios'
 
-const url = 'http://localhost:5000/api/'
+// const url = 'http://localhost:5000/api/'
 
 export default {
   name: 'ProjectForm',
@@ -61,7 +66,7 @@ export default {
           price: '',
           size: '',
           materials: '',
-          imgURL: 'www.hello.com',
+          img: null,
           showInProj: false
         }
       ]
@@ -74,19 +79,26 @@ export default {
     projectForm() {
       this.status = 1
     },
+    onFileSelected(event) {
+      console.log(event)
+      this.pieces[0].img = event.target.files[0]
+    },
 
     submitProject() {
-      axios
-        .post(`${url}projects`, {
-          project: this.project,
-          pieces: this.pieces
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(e => {
-          console.log('ERROr', e)
-        })
+      const formData = new FormData()
+      formData.append('project', this.project)
+      formData.append('pieces', this.pieces)
+      console.log(formData)
+      // axios
+      //   .post(`${url}projects`, {
+      //     formData
+      //   })
+      //   .then(res => {
+      //     console.log(res)
+      //   })
+      //   .catch(e => {
+      //     console.log('ERROr', e)
+      //   })
     }
   }
 }
