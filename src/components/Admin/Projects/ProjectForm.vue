@@ -18,7 +18,7 @@
       <label class="form-item" for="pieceName">Piece Name</label>
       <input id="pieceName" v-model="pieces[0].name" type="text" required />
       <label class="form-item" for="pieceYear">Year</label>
-      <input id="pieceYear" v-model="pieces[0].year" type="text" required />
+      <input id="pieceYear" v-model="pieces[0].pieceYear" type="text" required />
       <label class="form-item" for="price">Price</label>
       <input id="price" v-model="pieces[0].price" type="text" required />
       <label class="form-item" for="size">Size</label>
@@ -26,9 +26,9 @@
       <label class="form-item" for="materials">Materials</label>
       <input id="materials" v-model="pieces[0].materials" type="text" required />
       <label class="form-item" for="PieceDescription">Description</label>
-      <textarea id="PieceDescription" v-model="pieces[0].description" rows="5" required />
+      <textarea id="PieceDescription" v-model="pieces[0].pieceDescription" rows="5" required />
       <label for="yes">Show this piece in project?</label>
-      <input class="check-box" v-model="pieces[0].onShow" id="yes" type="checkbox" />
+      <input class="check-box" v-model="pieces[0].showInProj" id="yes" type="checkbox" />
       <button @click.prevent="submitProject">Submit Project</button>
     </div>
   </form>
@@ -36,6 +36,9 @@
 
 <script>
 import ProjectCard from '@/components/Admin/Projects/ProjectCard.vue'
+import axios from 'axios'
+
+const url = 'http://localhost:5000/api/'
 
 export default {
   name: 'ProjectForm',
@@ -46,19 +49,20 @@ export default {
       project: {
         name: '',
         year: '',
-        description: ''
+        description: '',
+        onShow: false
       },
       pieces: [
         {
           name: '',
           isMain: true,
-          year: '',
-          description: '',
+          pieceYear: '',
+          pieceDescription: '',
           price: '',
           size: '',
           materials: '',
           imgURL: 'www.hello.com',
-          onShow: false
+          showInProj: false
         }
       ]
     }
@@ -72,7 +76,17 @@ export default {
     },
 
     submitProject() {
-      console.log(this.project, this.pieces)
+      axios
+        .post(`${url}projects`, {
+          project: this.project,
+          pieces: this.pieces
+        })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(e => {
+          console.log('ERROr', e)
+        })
     }
   }
 }
