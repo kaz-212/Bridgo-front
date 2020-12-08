@@ -54,6 +54,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: fixed;
+  top: 0;
 
   h1 {
     margin-top: 0;

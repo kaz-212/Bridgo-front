@@ -18,15 +18,15 @@ export default {
 
 <style lang="scss" scoped>
 #img-box {
-  // border: solid rgb(51, 51, 51) 1px;
+  border: solid rgb(51, 51, 51) 10px;
 
   position: relative;
   cursor: pointer;
-  max-width: 50%;
+  max-width: 90%;
   height: auto;
 
   img {
-    max-height: 60vh;
+    max-height: 70vh;
     max-width: 100%;
     display: block;
   }
@@ -34,7 +34,7 @@ export default {
   .img-info {
     width: 100%;
     height: 100%;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.596);
     color: white;
     position: absolute;
     top: 0;
@@ -46,7 +46,7 @@ export default {
     justify-content: center;
 
     &:hover {
-      opacity: 0.5;
+      opacity: 1;
     }
   }
 }

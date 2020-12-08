@@ -1,12 +1,14 @@
 <template>
   <div id="main">
-    <section class="section s1">
-      <PortfolioWindow class="window left-image" :image="images[0]" />
-      <PortfolioWindow class="window right-image" :image="images[1]" />
-    </section>
-    <section class="section s2">
-      <PortfolioWindow class="window left-image" :image="images[2]" />
-      <PortfolioWindow class="window right-image" :image="images[3]" />
+    <section class="section">
+      <div class="left-side">
+        <PortfolioWindow :class="{ hide: slide !== 1 }" class="window" :image="images[0]" />
+        <PortfolioWindow :class="{ hide: slide !== 2 }" class="window " :image="images[2]" />
+      </div>
+      <div class="right-side">
+        <PortfolioWindow :class="{ hide: slide !== 1 }" class="window" :image="images[1]" />
+        <PortfolioWindow :class="{ hide: slide !== 2 }" class="window " :image="images[3]" />
+      </div>
     </section>
   </div>
 </template>
@@ -21,6 +23,7 @@ export default {
   },
   data() {
     return {
+      slide: 1,
       images: [
         {
           imgName: 'sub1.jpg',
@@ -48,38 +51,63 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    throttle(fn, delay) {
+      /* eslint-disable consistent-return */
+
+      let last = 0
+      return (...args) => {
+        const now = new Date().getTime()
+        if (now - last < delay) {
+          return
+        }
+        last = now
+        return fn(...args)
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener(
+      'wheel',
+      this.throttle(event => {
+        if (event.deltaY < 0) {
+          this.slide -= 1
+        } else if (event.deltaY > 0) {
+          this.slide += 1
+        }
+      }, 1000)
+    )
   }
 }
 </script>
 
 <style lang="scss" scoped>
 #main {
+  // height: 94vh;
   .section {
-    height: 100vh;
+    // height: 100vh;
     width: 100%;
     position: relative;
+    // background-color: olive;
+    height: 91vh;
+    display: flex;
 
-    .window {
-      top: 50%;
-      transform: translateY(-50%);
+    .left-side {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .right-image {
-      position: absolute;
-      left: 50%;
-    }
-
-    .left-image {
-      position: absolute;
-      left: 0;
-    }
-
-    &.s1 {
-      background-color: olive;
-      height: 94vh;
+    .right-side {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    &.s2 {
-      background-color: aliceblue;
+    .hide {
+      display: none;
     }
   }
 

@@ -82,24 +82,29 @@ export default {
     onFileSelected(event) {
       console.log(event)
       this.pieces[0].img = event.target.files[0]
-    },
-
-    submitProject() {
-      const formData = new FormData()
-      formData.append('project', this.project)
-      formData.append('pieces', this.pieces)
-      console.log(formData)
-      // axios
-      //   .post(`${url}projects`, {
-      //     formData
-      //   })
-      //   .then(res => {
-      //     console.log(res)
-      //   })
-      //   .catch(e => {
-      //     console.log('ERROr', e)
-      //   })
     }
+
+    // submitProject() {
+    // const formData = new FormData()
+    // for (const key of Object.keys(this.project)) {
+    // formData.append(key, this.project[key])
+    // console.log(key, this.project[key])
+    // }
+    // console.log(formData)
+    // for (let key of this.pieces) {
+    //   formData.append(key, this.pieces[key])
+    // }
+    // console.log(Array.from(formData))
+    // axios
+    //   .post(`${url}projects`, {
+    //     formData
+    //   })
+    //   .then(res => {
+    //     console.log(res)
+    //   })
+    //   .catch(e => {
+    //     console.log('ERROr', e)
+    //   })
   }
 }
 </script>
