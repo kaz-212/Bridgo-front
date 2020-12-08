@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 #img-box {
-  border: solid rgb(51, 51, 51) 10px;
+  border: solid rgb(0, 0, 0) 10px;
 
   position: relative;
   cursor: pointer;

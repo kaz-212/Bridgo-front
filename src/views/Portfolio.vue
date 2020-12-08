@@ -1,11 +1,15 @@
 <template>
   <div id="main">
+    <div class="menu">
+      <div class="menu-point" :class="{ active: slide === 1 }" @click="changeSlide(1)"></div>
+      <div class="menu-point" :class="{ active: slide === 2 }" @click="changeSlide(2)"></div>
+    </div>
     <section class="section">
       <div class="left-side">
         <PortfolioWindow
           :class="{ destroy: delaySlide !== 1, hide: slide !== 1, show: slide === 1 }"
           class="window"
-          :image="images[0]"
+          :image="images[1]"
         />
         <PortfolioWindow
           :class="{ destroy: delaySlide !== 2, hide: slide !== 2, show: slide === 2 }"
@@ -17,7 +21,7 @@
         <PortfolioWindow
           :class="{ destroy: delaySlide !== 1, hide: slide !== 1, show: slide === 1 }"
           class="window"
-          :image="images[1]"
+          :image="images[0]"
         />
         <PortfolioWindow
           :class="{ destroy: delaySlide !== 2, hide: slide !== 2, show: slide === 2 }"
@@ -78,10 +82,14 @@ export default {
       }
       setTimeout(() => {
         this.delaySlide = newVal
-      }, 300)
+      }, 350)
     }
   },
   methods: {
+    changeSlide(n) {
+      this.slide = n
+    },
+
     throttle(fn, delay) {
       /* eslint-disable consistent-return */
 
@@ -105,7 +113,7 @@ export default {
         } else if (event.deltaY > 0) {
           this.slide += 1
         }
-      }, 1000)
+      }, 2000)
     )
   }
 }
@@ -116,9 +124,10 @@ export default {
   // height: 94vh;
   .section {
     // height: 100vh;
-    width: 100%;
+    width: 100vw;
+    left: 0;
     position: relative;
-    // background-color: olive;
+    // background-color: rgb(92, 92, 6);
     height: 91vh;
     display: flex;
 
@@ -127,6 +136,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-left: 6%;
 
       .hide {
         animation: leftImageSwoop 0.5s ease-in 1 forwards;
@@ -145,6 +155,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-right: 10%;
 
       .hide {
         animation: rightImageSwoop 0.5s ease-in 1 forwards;
@@ -152,6 +163,7 @@ export default {
 
       .show {
         animation: bottomImageSwoop 0.5s ease-out 1 forwards;
+        background-color: olive;
       }
 
       .destroy {
@@ -196,27 +208,30 @@ export default {
     }
   }
 
-  // .sections-menu {
-  //   position: fixed;
-  //   right: 1rem;
-  //   top: 50%;
-  //   transform: translateY(-50%);
+  .menu {
+    position: fixed;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
 
-  //   .menu-point {
-  //     width: 10px;
-  //     height: 10px;
-  //     border-radius: 50%;
-  //     background-color: #fff;
-  //     display: block;
-  //     margin: 1rem 0;
-  //     opacity: 0.6;
-  //     transition: 0.4s ease all;
+    .menu-point {
+      cursor: pointer;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid black;
+      background-color: #fff;
+      display: block;
+      margin: 1rem 0;
+      opacity: 0.6;
+      transition: 0.4s ease all;
 
-  //     &.active {
-  //       opacity: 1;
-  //       transform: scale(1.5);
-  //     }
-  //   }
-  // }
+      &.active {
+        opacity: 1;
+        transform: scale(1.3);
+      }
+    }
+  }
 }
 </style>
