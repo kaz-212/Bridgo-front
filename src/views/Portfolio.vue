@@ -2,12 +2,28 @@
   <div id="main">
     <section class="section">
       <div class="left-side">
-        <PortfolioWindow :class="{ hide: slide !== 1 }" class="window" :image="images[0]" />
-        <PortfolioWindow :class="{ hide: slide !== 2 }" class="window " :image="images[2]" />
+        <PortfolioWindow
+          :class="{ destroy: delaySlide !== 1, hide: slide !== 1, show: slide === 1 }"
+          class="window"
+          :image="images[0]"
+        />
+        <PortfolioWindow
+          :class="{ destroy: delaySlide !== 2, hide: slide !== 2, show: slide === 2 }"
+          class="window "
+          :image="images[2]"
+        />
       </div>
       <div class="right-side">
-        <PortfolioWindow :class="{ hide: slide !== 1 }" class="window" :image="images[1]" />
-        <PortfolioWindow :class="{ hide: slide !== 2 }" class="window " :image="images[3]" />
+        <PortfolioWindow
+          :class="{ destroy: delaySlide !== 1, hide: slide !== 1, show: slide === 1 }"
+          class="window"
+          :image="images[1]"
+        />
+        <PortfolioWindow
+          :class="{ destroy: delaySlide !== 2, hide: slide !== 2, show: slide === 2 }"
+          class="window "
+          :image="images[3]"
+        />
       </div>
     </section>
   </div>
@@ -24,6 +40,7 @@ export default {
   data() {
     return {
       slide: 1,
+      delaySlide: 1,
       images: [
         {
           imgName: 'sub1.jpg',
@@ -50,6 +67,18 @@ export default {
           year: '1920'
         }
       ]
+    }
+  },
+  watch: {
+    slide(newVal) {
+      if (newVal > 2) {
+        this.slide = 1
+      } else if (newVal < 1) {
+        this.slide = 2
+      }
+      setTimeout(() => {
+        this.delaySlide = newVal
+      }, 300)
     }
   },
   methods: {
@@ -98,16 +127,72 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+
+      .hide {
+        animation: leftImageSwoop 0.5s ease-in 1 forwards;
+      }
+
+      .show {
+        animation: topImageSwoop 0.5s ease-out 1 forwards;
+      }
+
+      .destroy {
+        display: none;
+      }
     }
     .right-side {
       width: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
 
-    .hide {
-      display: none;
+      .hide {
+        animation: rightImageSwoop 0.5s ease-in 1 forwards;
+      }
+
+      .show {
+        animation: bottomImageSwoop 0.5s ease-out 1 forwards;
+      }
+
+      .destroy {
+        display: none;
+      }
+    }
+  }
+
+  @keyframes rightImageSwoop {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100vw);
+    }
+  }
+
+  @keyframes leftImageSwoop {
+    from {
+      transform: translateX(0vw);
+    }
+    to {
+      transform: translateX(-100vw);
+    }
+  }
+
+  @keyframes topImageSwoop {
+    from {
+      transform: translateY(-90vh);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bottomImageSwoop {
+    from {
+      transform: translateY(90vh);
+    }
+    to {
+      transform: translateY(0);
     }
   }
 
