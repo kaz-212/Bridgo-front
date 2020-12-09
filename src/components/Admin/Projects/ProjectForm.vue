@@ -54,10 +54,6 @@ export default {
     projectForm() {
       this.status = 1
     },
-    onFileSelected() {
-      console.log()
-      this.pieces[0].img = this.$refs.fileSelector.files[0]
-    },
 
     submitPiece(piece) {
       this.pieces.push(piece)
@@ -66,8 +62,14 @@ export default {
 
     submitProject() {
       const formData = new FormData()
-      formData.append('img', this.pieces[0].img)
-      formData.append('project', JSON.stringify(this.project))
+      // append images
+      for (let i = 0; i < this.pieces.length; i += 1) {
+        const { img } = this.pieces[i]
+        const { index } = this.pieces[i]
+        formData.append('imgs', img, `img_${index}`)
+      }
+      formData.append('project', JSON.stringify(this.project)) // append project object
+      formData.append('pieces', JSON.stringify(this.pieces)) // append pieces array
       axios
         .post(`${url}/projects`, formData, {
           headers: {

@@ -50,7 +50,8 @@ export default {
         size: '',
         materials: '',
         showInProj: true,
-        img: null
+        img: null,
+        index: ''
       }
     }
   },
@@ -60,6 +61,9 @@ export default {
         return true
       }
       return false
+    },
+    index() {
+      return this.pieces.length
     }
   },
   methods: {
@@ -69,6 +73,7 @@ export default {
 
     addPiece() {
       this.piece.isMain = this.main
+      this.piece.index = this.index
       this.$emit('submit-piece', this.piece)
 
       // this.piece.name = ''
