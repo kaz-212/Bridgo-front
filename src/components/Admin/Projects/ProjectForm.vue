@@ -1,6 +1,6 @@
 <template>
   <form class="form" action="#">
-    <div class="form-holder" id="project" v-if="status == 1">
+    <div class="form-holder form" id="project" v-if="status == 1">
       <label class="form-item" for="name">Project Name</label>
       <input id="name" v-model="project.name" type="text" required />
       <label class="form-item" for="year">Year</label>
@@ -10,44 +10,31 @@
       <label for="yes">Show this project in portfoio?</label>
       <input class="check-box" v-model="project.onShow" id="yes" type="checkbox" />
       <button @click.prevent="piecesForm">Add Pieces</button>
+      <button v-if="pieces.length > 0" @click.prevent="submitProject">Submit Project</button>
     </div>
     <div class="form-holder" id="pieces" v-if="status == 2">
-      <ProjectCard :project="project" @project-status="projectForm" />
-      <h3>Pieces</h3>
-      <h4>Main Piece</h4>
-      <label class="form-item" for="pieceName">Piece Name</label>
-      <input id="pieceName" v-model="pieces[0].name" type="text" required />
-      <label class="form-item" for="pieceYear">Year</label>
-      <input id="pieceYear" v-model="pieces[0].pieceYear" type="text" required />
-      <label class="form-item" for="price">Price</label>
-      <input id="price" v-model="pieces[0].price" type="text" required />
-      <label class="form-item" for="size">Size</label>
-      <input id="size" v-model="pieces[0].size" type="text" required />
-      <label class="form-item" for="materials">Materials</label>
-      <input id="materials" v-model="pieces[0].materials" type="text" required />
-      <label class="form-item" for="PieceDescription">Description</label>
-      <textarea id="PieceDescription" v-model="pieces[0].pieceDescription" rows="5" required />
-      <label for="image">Image</label>
-      <input type="file" id="image" ref="fileSelector" @change="onFileSelected" />
-      <!-- proxy button to click -->
-      <!-- <button @click.prevent="$refs.fileSelector.click()">Choose Image</button> -->
-      <label for="yes">Show this piece in project?</label>
-      <input class="check-box" v-model="pieces[0].showInProj" id="yes" type="checkbox" />
-      <button @click.prevent="submitProject">Submit Project</button>
-      {{ img }}
+      <!-- <ProjectCard :project="project" @project-status="projectForm" /> -->
+      <PieceForm :pieces="pieces" @submit-piece="submitPiece" />
+    </div>
+    <div class="form-holder" id="overview" v-if="status == 3">
+      {{ project }}
+      {{ pieces }}
+      <button @click.prevent="projectForm">Edit Project</button>
+      <button @click.prevent="piecesForm">Add New Piece</button>
     </div>
   </form>
 </template>
 
 <script>
-import ProjectCard from '@/components/Admin/Projects/ProjectCard.vue'
-// import axios from 'axios'
+// import ProjectCard from '@/components/Admin/Projects/ProjectCard.vue'
+import PieceForm from '@/components/Admin/Projects/PieceForm.vue'
+import axios from 'axios'
 
-// const url = 'http://localhost:5000/api/'
+const url = 'http://localhost:5000/api'
 
 export default {
   name: 'ProjectForm',
-  components: { ProjectCard },
+  components: { PieceForm },
   data() {
     return {
       status: 1,
@@ -57,19 +44,7 @@ export default {
         description: '',
         onShow: false
       },
-      pieces: [
-        {
-          name: '',
-          isMain: true,
-          pieceYear: '',
-          pieceDescription: '',
-          price: '',
-          size: '',
-          materials: '',
-          img: null,
-          showInProj: false
-        }
-      ]
+      pieces: []
     }
   },
   methods: {
@@ -79,41 +54,39 @@ export default {
     projectForm() {
       this.status = 1
     },
-    onFileSelected(event) {
-      console.log(event)
-      this.pieces[0].img = event.target.files[0]
-    }
+    onFileSelected() {
+      console.log()
+      this.pieces[0].img = this.$refs.fileSelector.files[0]
+    },
 
-    // submitProject() {
-    // const formData = new FormData()
-    // for (const key of Object.keys(this.project)) {
-    // formData.append(key, this.project[key])
-    // console.log(key, this.project[key])
-    // }
-    // console.log(formData)
-    // for (let key of this.pieces) {
-    //   formData.append(key, this.pieces[key])
-    // }
-    // console.log(Array.from(formData))
-    // axios
-    //   .post(`${url}projects`, {
-    //     formData
-    //   })
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    //   .catch(e => {
-    //     console.log('ERROr', e)
-    //   })
+    submitPiece(piece) {
+      this.pieces.push(piece)
+      this.status = 3
+    },
+
+    submitProject() {
+      const formData = new FormData()
+      formData.append('img', this.pieces[0].img)
+      formData.append('project', JSON.stringify(this.project))
+      axios
+        .post(`${url}/projects`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(() => {
+          console.log('SUCCESSS!!!')
+        })
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   justify-content: flex-start;
   min-height: 70vh;
   margin-left: 3vw;
@@ -138,6 +111,10 @@ export default {
       padding-top: 3%;
       padding-bottom: 1%;
       display: inline-block;
+    }
+
+    button {
+      width: 80px;
     }
   }
 }

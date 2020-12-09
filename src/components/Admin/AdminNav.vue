@@ -26,18 +26,24 @@ export default {
     }
   },
   created() {
-    if (this.$route.matched[1].name === 'AdminProject') {
-      this.projectRoute = true
+    try {
+      if (this.$route.matched[1].name === 'AdminProject') {
+        this.projectRoute = true
+        this.inventoryRoute = false
+        this.portfolioRoute = false
+      } else if (this.$route.matched[1].name === 'AdminInventory') {
+        this.projectRoute = false
+        this.inventoryRoute = true
+        this.portfolioRoute = false
+      } else if (this.$route.matched[1].name === 'AdminPortfolio') {
+        this.projectRoute = false
+        this.inventoryRoute = false
+        this.portfolioRoute = true
+      }
+    } catch {
+      this.projectRoute = false
       this.inventoryRoute = false
       this.portfolioRoute = false
-    } else if (this.$route.matched[1].name === 'AdminInventory') {
-      this.projectRoute = false
-      this.inventoryRoute = true
-      this.portfolioRoute = false
-    } else if (this.$route.matched[1].name === 'AdminPortfolio') {
-      this.projectRoute = false
-      this.inventoryRoute = false
-      this.portfolioRoute = true
     }
   }
 }

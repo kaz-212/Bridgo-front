@@ -121,7 +121,7 @@ export default {
 
 <style lang="scss" scoped>
 #main {
-  // height: 94vh;
+  overflow-y: hidden;
   .section {
     // height: 100vh;
     width: 100vw;
