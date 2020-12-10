@@ -43,14 +43,13 @@ const routes = [
     children: [
       {
         path: 'projects',
-        name: 'AdminProject',
-        component: Projects,
-        children: [
-          {
-            path: 'new',
-            component: NewProject
-          }
-        ]
+        name: 'AdminProjects',
+        component: Projects
+      },
+      {
+        path: 'projects/new',
+        name: 'NewProject',
+        component: NewProject
       }
     ]
   }

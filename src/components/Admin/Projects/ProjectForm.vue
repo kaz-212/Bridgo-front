@@ -8,19 +8,20 @@
       <label class="form-item" for="description">Description</label>
       <textarea id="description" v-model="project.description" rows="8" required />
       <label for="yes">Show this project in portfoio?</label>
-      <input class="check-box" v-model="project.onShow" id="yes" type="checkbox" />
+      <input class="check-box" v-model="project.onShow" id="yes" type="checkbox" checked />
       <button @click.prevent="piecesForm">Add Pieces</button>
       <button v-if="pieces.length > 0" @click.prevent="submitProject">Submit Project</button>
     </div>
     <div class="form-holder" id="pieces" v-if="status == 2">
       <!-- <ProjectCard :project="project" @project-status="projectForm" /> -->
-      <PieceForm :pieces="pieces" @submit-piece="submitPiece" />
+      <PieceForm :pieces="pieces" @submit-piece="submitPiece" @cancel-piece="cancelPiece" />
     </div>
     <div class="form-holder" id="overview" v-if="status == 3">
       {{ project }}
       {{ pieces }}
       <button @click.prevent="projectForm">Edit Project</button>
       <button @click.prevent="piecesForm">Add New Piece</button>
+      <button v-if="pieces.length > 0" @click.prevent="submitProject">Submit Project</button>
     </div>
   </form>
 </template>
@@ -42,7 +43,7 @@ export default {
         name: '',
         year: '',
         description: '',
-        onShow: false
+        onShow: true
       },
       pieces: []
     }
@@ -60,13 +61,17 @@ export default {
       this.status = 3
     },
 
+    cancelPiece() {
+      this.status = 3
+    },
+
     submitProject() {
       const formData = new FormData()
       // append images
       for (let i = 0; i < this.pieces.length; i += 1) {
         const { img } = this.pieces[i]
-        const { index } = this.pieces[i]
-        formData.append('imgs', img, `img_${index}`)
+        const { pieceName } = this.pieces[i]
+        formData.append('imgs', img, pieceName) // give img the same name as the piece
       }
       formData.append('project', JSON.stringify(this.project)) // append project object
       formData.append('pieces', JSON.stringify(this.pieces)) // append pieces array
@@ -76,8 +81,12 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         })
-        .then(() => {
-          console.log('SUCCESSS!!!')
+        .then(res => {
+          console.log('SUCCESSS!!!', res)
+          this.$router.push({ name: 'AdminProjects' })
+        })
+        .catch(err => {
+          console.log('ERRORR!!!', err)
         })
     }
   }

@@ -20,5 +20,6 @@ export default {
 <style lang="scss" scoped>
 #new-proj {
   height: 94vh;
+  margin-left: 18vw;
 }
 </style>

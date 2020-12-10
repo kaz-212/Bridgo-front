@@ -1,6 +1,7 @@
 <template>
   <div class="main">
-    <router-view />
+    <h1>All projects</h1>
+    <router-link to="/admin/projects/new"><button>New Project</button></router-link>
   </div>
 </template>
 

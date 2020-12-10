@@ -27,7 +27,7 @@ export default {
   },
   created() {
     try {
-      if (this.$route.matched[1].name === 'AdminProject') {
+      if (this.$route.matched[1].name === 'AdminProjects') {
         this.projectRoute = true
         this.inventoryRoute = false
         this.portfolioRoute = false
