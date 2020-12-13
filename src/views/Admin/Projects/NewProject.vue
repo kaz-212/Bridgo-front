@@ -2,6 +2,7 @@
   <div id="new-proj">
     <h2>Add Project</h2>
     <ProjectForm />
+    <router-link :to="{ name: 'AdminProjects' }"><button>Cancel</button></router-link>
   </div>
 </template>
 

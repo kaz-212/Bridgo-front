@@ -31,7 +31,7 @@
 import PieceForm from '@/components/Admin/Projects/PieceForm.vue'
 import axios from 'axios'
 
-const url = 'http://localhost:5000/api'
+// const url = 'http://localhost:5000/api/'
 
 export default {
   name: 'ProjectForm',
@@ -76,7 +76,7 @@ export default {
       formData.append('project', JSON.stringify(this.project)) // append project object
       formData.append('pieces', JSON.stringify(this.pieces)) // append pieces array
       axios
-        .post(`${url}/projects`, formData, {
+        .post('projects', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

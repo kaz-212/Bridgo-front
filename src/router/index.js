@@ -4,8 +4,9 @@ import Portfolio from '@/views/Portfolio.vue'
 import Exhibitions from '@/views/Exhibitions.vue'
 import Shop from '@/views/Shop.vue'
 import Admin from '@/views/Admin/Admin.vue'
-import Projects from '@/views/Admin/Projects/Projects.vue'
+import AllProjects from '@/views/Admin/Projects/AllProjects.vue'
 import NewProject from '@/views/Admin/Projects/NewProject.vue'
+import ShowProject from '@/views/Admin/Projects/ShowProject.vue'
 
 const routes = [
   {
@@ -44,12 +45,17 @@ const routes = [
       {
         path: 'projects',
         name: 'AdminProjects',
-        component: Projects
+        component: AllProjects
       },
       {
         path: 'projects/new',
         name: 'NewProject',
         component: NewProject
+      },
+      {
+        path: 'projects/:id',
+        name: 'ShowProject',
+        component: ShowProject
       }
     ]
   }
