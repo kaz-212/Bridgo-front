@@ -1,6 +1,9 @@
 <template>
   <div class="main">
     <h1>{{ project.name }}</h1>
+    <img :src="project.pieces[0].imgURL" />
+    <router-link :to="`/admin/projects/${project._id}/edit`"><button>Edit</button></router-link>
+    <button>Delete</button>
   </div>
 </template>
 
@@ -26,5 +29,9 @@ export default {
 <style lang="scss" scoped>
 .main {
   margin-left: 15vw;
+
+  img {
+    max-width: 50%;
+  }
 }
 </style>
