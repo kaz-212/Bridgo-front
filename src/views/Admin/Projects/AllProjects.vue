@@ -35,7 +35,7 @@ export default {
     //     }
     //     // console.log(res.data)
     //   })
-    this.$store.dispatch('getProjects')
+    // this.$store.dispatch('getProjects')
   }
 }
 </script>

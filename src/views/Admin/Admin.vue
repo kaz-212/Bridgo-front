@@ -12,6 +12,9 @@ export default {
   name: 'Admin',
   components: {
     AdminNav
+  },
+  mounted() {
+    this.$store.dispatch('getProjects')
   }
 }
 </script>

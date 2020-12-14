@@ -32,3 +32,9 @@ textarea {
   resize: none;
   width: 60%;
 }
+
+input[type='radio'],
+input[type='checkbox'] {
+  display: inline;
+  width: 15px;
+}
