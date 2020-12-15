@@ -28,6 +28,17 @@ export default createStore({
     async deleteProject({ commit }, id) {
       const res = await axios.delete(`projects/${id}`)
       commit('deleteProject', res.data)
+    },
+    async submitPiece({ commit }, payload) {
+      const fd = new FormData()
+      fd.append('img', payload.piece.img)
+      fd.append('piece', JSON.stringify(payload.piece))
+
+      const res = await axios.patch(`projects/${payload.id}`, fd, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
     }
   },
   getters: {

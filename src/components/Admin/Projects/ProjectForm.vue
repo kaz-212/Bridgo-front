@@ -27,11 +27,8 @@
 </template>
 
 <script>
-// import ProjectCard from '@/components/Admin/Projects/ProjectCard.vue'
 import PieceForm from '@/components/Admin/Projects/PieceForm.vue'
 import axios from 'axios'
-
-// const url = 'http://localhost:5000/api/'
 
 export default {
   name: 'ProjectForm',

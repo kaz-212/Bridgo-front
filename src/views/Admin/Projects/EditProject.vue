@@ -158,8 +158,8 @@ export default {
         this.project.pieces.splice(pieceIndex, 1)
       }
       axios
-        .patch(
-          `projects/${this.id}/edit`,
+        .put(
+          `projects/${this.id}`,
           { project: this.project, filenames: this.deleteFilenames },
           {
             headers: {

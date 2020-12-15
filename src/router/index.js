@@ -8,6 +8,7 @@ import AllProjects from '@/views/Admin/Projects/AllProjects.vue'
 import NewProject from '@/views/Admin/Projects/NewProject.vue'
 import ShowProject from '@/views/Admin/Projects/ShowProject.vue'
 import EditProject from '@/views/Admin/Projects/EditProject.vue'
+import AddPiece from '@/views/Admin/Projects/AddPiece.vue'
 
 const routes = [
   {
@@ -62,6 +63,11 @@ const routes = [
         path: 'projects/:id/edit',
         name: 'EditProject',
         component: EditProject
+      },
+      {
+        path: 'projects/:id/add-piece',
+        name: 'AddPiece',
+        component: AddPiece
       }
     ]
   }

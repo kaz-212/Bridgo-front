@@ -3,6 +3,9 @@
     <h1>{{ project.name }}</h1>
     <img :src="project.pieces[0].imgURL" />
     <router-link :to="`/admin/projects/${project._id}/edit`"><button>Edit</button></router-link>
+    <router-link :to="`/admin/projects/${project._id}/add-piece`"
+      ><button>Add Piece</button></router-link
+    >
     <button @click="deleteProject">Delete</button>
   </div>
 </template>
