@@ -15,13 +15,13 @@
       </div>
       <h2>Main Piece</h2>
       <ul class="main-piece">
-        <li v-for="piece in project.pieces" :key="piece._id">
+        <li v-for="(piece, index) in project.pieces" :key="piece._id">
           <input
             type="radio"
             name="isMain"
             :id="piece._id"
             :checked="piece.isMain"
-            @click="toggleTrue(piece._id)"
+            @click="toggleTrue(piece._id, index, piece.filename)"
           />
           {{ piece.name }}
         </li>
@@ -129,6 +129,7 @@ export default {
   },
   methods: {
     deletePiece(pieceIndex, filename) {
+      // not piece.index-index of piece in project from for loop(makes it easier to splice onSubmit)
       const pieceI = this.deletePieces.indexOf(pieceIndex)
       const filenameI = this.deleteFilenames.indexOf(filename)
       /* eslint-disable */
@@ -141,13 +142,15 @@ export default {
       }
     },
 
-    toggleTrue(id) {
+    toggleTrue(id, pieceIndex, filename) {
       for (let piece of this.project.pieces) {
         piece._id === id ? (piece.isMain = true) : (piece.isMain = false)
         // delete from deleted pieces if selected to be main image
-        const index = this.deletePieces.indexOf(id)
+        const index = this.deletePieces.indexOf(pieceIndex)
+        console.log(index)
         if (index >= 0) {
-          this.deletePieces.splice(index, 1)
+          console.log('YOOOOOOO')
+          this.deletePiece(pieceIndex, filename) // if piece is in deletePieces, this will remove it
         }
       }
       // console.log(id, this.project.pieces)
