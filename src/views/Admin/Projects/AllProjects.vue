@@ -25,17 +25,6 @@ export default {
     projects() {
       return this.$store.state.projects
     }
-  },
-
-  mounted() {
-    //   axios.get('projects').then(res => {
-    //     /* eslint-disable no-restricted-syntax */
-    //     for (const proj of res.data) {
-    //       this.projects.push(proj)
-    //     }
-    //     // console.log(res.data)
-    //   })
-    // this.$store.dispatch('getProjects')
   }
 }
 </script>

@@ -73,6 +73,11 @@ export default {
       ]
     }
   },
+  computed: {
+    projects() {
+      return this.$store.getters.getPortfolioPieces
+    }
+  },
   watch: {
     slide(newVal) {
       if (newVal > 2) {
@@ -214,6 +219,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     z-index: 1000;
+    width: 15px;
 
     .menu-point {
       cursor: pointer;
@@ -223,7 +229,7 @@ export default {
       border: 2px solid black;
       background-color: #fff;
       display: block;
-      margin: 1rem 0;
+      margin: 1rem 0.1rem;
       opacity: 0.6;
       transition: 0.4s ease all;
 

@@ -25,25 +25,32 @@ export default createStore({
       const res = await axios.get('projects')
       commit('setProjects', res.data)
     },
+
     async deleteProject({ commit }, id) {
       const res = await axios.delete(`projects/${id}`)
       commit('deleteProject', res.data)
     },
-    async submitPiece({ commit }, payload) {
+
+    async submitPiece({ dispatch }, payload) {
       const fd = new FormData()
       fd.append('img', payload.piece.img)
       fd.append('piece', JSON.stringify(payload.piece))
-
       const res = await axios.patch(`projects/${payload.id}`, fd, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
+      router.push({ name: 'ShowProject', params: { id: payload.id } })
+      dispatch('getProjects')
     }
   },
   getters: {
     /* eslint-disable no-underscore-dangle */
-    getProjById: state => id => state.projects.find(todo => todo._id === id)
+    getProjById: state => id => state.projects.find(todo => todo._id === id),
+
+    getPortfolioPieces: state => {
+      return state.projects.filter(project => project.onShow)
+    }
   },
   modules: {}
 })

@@ -12,6 +12,9 @@ export default {
   name: 'App',
   components: {
     Navbar
+  },
+  mounted() {
+    this.$store.dispatch('getProjects')
   }
 }
 </script>
