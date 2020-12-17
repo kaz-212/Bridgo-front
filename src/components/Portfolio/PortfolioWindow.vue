@@ -29,7 +29,7 @@ a {
   margin: 0;
 }
 .img-box {
-  border: solid rgb(0, 0, 0) 10px;
+  // border: solid rgb(0, 0, 0) 10px;
 
   position: relative;
   cursor: pointer;
