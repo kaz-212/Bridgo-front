@@ -1,10 +1,10 @@
 <template>
-  <div id="img-box">
-    <img :src="require(`@/assets/${image.imgName}`)" />
+  <div class="img-box">
+    <img :src="mainUrl" />
     <div class="img-info">
-      <h3>{{ image.pieceName }}</h3>
-      <h4>{{ image.materials }}</h4>
-      <h4>{{ image.year }}</h4>
+      <h3>{{ project.name }}</h3>
+      <!-- <h4>{{ project.materials }}</h4> -->
+      <h4>{{ project.year }}</h4>
     </div>
   </div>
 </template>
@@ -12,12 +12,18 @@
 <script>
 export default {
   name: 'PortfolioWindow',
-  props: { image: Object }
+  props: { project: Object },
+  computed: {
+    mainUrl() {
+      const found = this.project.pieces.find(piece => piece.isMain)
+      return found.imgURL
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-#img-box {
+.img-box {
   border: solid rgb(0, 0, 0) 10px;
 
   position: relative;

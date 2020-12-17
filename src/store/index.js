@@ -49,7 +49,8 @@ export default createStore({
     getProjById: state => id => state.projects.find(todo => todo._id === id),
 
     getPortfolioPieces: state => {
-      return state.projects.filter(project => project.onShow)
+      const portProjects = state.projects.filter(project => project.onShow)
+      return portProjects.sort((a, b) => a.index - b.index)
     }
   },
   modules: {}

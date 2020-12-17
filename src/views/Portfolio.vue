@@ -1,11 +1,44 @@
 <template>
   <div id="main">
     <div class="menu">
-      <div class="menu-point" :class="{ active: slide === 1 }" @click="changeSlide(1)"></div>
-      <div class="menu-point" :class="{ active: slide === 2 }" @click="changeSlide(2)"></div>
+      <div
+        class="menu-point"
+        v-for="n in leftSide.length"
+        :key="n"
+        :class="{ active: slide === n - 1 }"
+        @click="changeSlide(n - 1)"
+      ></div>
+      <!-- <div class="menu-point" :class="{ active: slide === 1 }" @click="changeSlide(1)"></div>
+      <div class="menu-point" :class="{ active: slide === 2 }" @click="changeSlide(2)"></div> -->
     </div>
     <section class="section">
       <div class="left-side">
+        <PortfolioWindow
+          v-for="(project, index) in leftSide"
+          :key="project._id"
+          class="window"
+          :class="{
+            destroy: delaySlide !== index,
+            hide: slide !== index,
+            show: slide === index
+          }"
+          :project="project"
+        />
+      </div>
+      <div class="right-side">
+        <PortfolioWindow
+          v-for="(project, index) in rightSide"
+          :key="project._id"
+          class="window"
+          :class="{
+            destroy: delaySlide !== index,
+            hide: slide !== index,
+            show: slide === index
+          }"
+          :project="project"
+        />
+      </div>
+      <!-- <div class="left-side">
         <PortfolioWindow
           :class="{ destroy: delaySlide !== 1, hide: slide !== 1, show: slide === 1 }"
           class="window"
@@ -28,7 +61,7 @@
           class="window "
           :image="images[3]"
         />
-      </div>
+      </div> -->
     </section>
   </div>
 </template>
@@ -43,8 +76,8 @@ export default {
   },
   data() {
     return {
-      slide: 1,
-      delaySlide: 1,
+      slide: 0,
+      delaySlide: 0,
       images: [
         {
           imgName: 'sub1.jpg',
@@ -75,15 +108,29 @@ export default {
   },
   computed: {
     projects() {
-      return this.$store.getters.getPortfolioPieces
+      return this.$store.getters.getPortfolioPieces // list of included projects sorted by index
+    },
+    leftSide() {
+      const leftSide = []
+      for (let i = 0; i < this.projects.length; i += 2) {
+        leftSide.push(this.projects[i])
+      }
+      return leftSide
+    },
+    rightSide() {
+      const rightSide = []
+      for (let i = 1; i < this.projects.length; i += 2) {
+        rightSide.push(this.projects[i])
+      }
+      return rightSide
     }
   },
   watch: {
     slide(newVal) {
-      if (newVal > 2) {
-        this.slide = 1
-      } else if (newVal < 1) {
-        this.slide = 2
+      if (newVal >= this.leftSide.length) {
+        this.slide = 0
+      } else if (newVal < 0) {
+        this.slide = this.leftSide.length - 1
       }
       setTimeout(() => {
         this.delaySlide = newVal
