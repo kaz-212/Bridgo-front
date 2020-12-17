@@ -8,8 +8,6 @@
         :class="{ active: slide === n - 1 }"
         @click="changeSlide(n - 1)"
       ></div>
-      <!-- <div class="menu-point" :class="{ active: slide === 1 }" @click="changeSlide(1)"></div>
-      <div class="menu-point" :class="{ active: slide === 2 }" @click="changeSlide(2)"></div> -->
     </div>
     <section class="section">
       <div class="left-side">
@@ -38,36 +36,12 @@
           :project="project"
         />
       </div>
-      <!-- <div class="left-side">
-        <PortfolioWindow
-          :class="{ destroy: delaySlide !== 1, hide: slide !== 1, show: slide === 1 }"
-          class="window"
-          :image="images[1]"
-        />
-        <PortfolioWindow
-          :class="{ destroy: delaySlide !== 2, hide: slide !== 2, show: slide === 2 }"
-          class="window "
-          :image="images[2]"
-        />
-      </div>
-      <div class="right-side">
-        <PortfolioWindow
-          :class="{ destroy: delaySlide !== 1, hide: slide !== 1, show: slide === 1 }"
-          class="window"
-          :image="images[0]"
-        />
-        <PortfolioWindow
-          :class="{ destroy: delaySlide !== 2, hide: slide !== 2, show: slide === 2 }"
-          class="window "
-          :image="images[3]"
-        />
-      </div> -->
     </section>
   </div>
 </template>
 
 <script>
-import PortfolioWindow from '@/components/PortfolioWindow.vue'
+import PortfolioWindow from '@/components/Portfolio/PortfolioWindow.vue'
 
 export default {
   name: 'Portfolio',
@@ -77,33 +51,7 @@ export default {
   data() {
     return {
       slide: 0,
-      delaySlide: 0,
-      images: [
-        {
-          imgName: 'sub1.jpg',
-          pieceName: 'Yummy',
-          materials: 'Oil on Canvas',
-          year: '2020'
-        },
-        {
-          imgName: 'sub2.jpg',
-          pieceName: 'Tasty',
-          materials: 'Acrilic on Canvas',
-          year: '2013'
-        },
-        {
-          imgName: 'sub3.jpg',
-          pieceName: 'Piccy',
-          materials: 'Pencil on Canvas',
-          year: '2015'
-        },
-        {
-          imgName: 'sub4.jpg',
-          pieceName: 'Elvis',
-          materials: 'Poo on Canvas',
-          year: '1920'
-        }
-      ]
+      delaySlide: 0
     }
   },
   computed: {
@@ -176,7 +124,7 @@ export default {
   overflow-y: hidden;
   .section {
     // height: 100vh;
-    width: 100vw;
+    max-width: 100vw;
     left: 0;
     position: relative;
     // background-color: rgb(92, 92, 6);
@@ -215,7 +163,6 @@ export default {
 
       .show {
         animation: bottomImageSwoop 0.5s ease-out 1 forwards;
-        background-color: olive;
       }
 
       .destroy {

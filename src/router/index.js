@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
-import Portfolio from '@/views/Portfolio.vue'
+import Portfolio from '@/views/Portfolio/Portfolio.vue'
+import AllPortfolio from '@/views/Portfolio/AllPortfolio.vue'
+import ShowPortfolio from '@/views/Portfolio/ShowPortfolio.vue'
 import Exhibitions from '@/views/Exhibitions.vue'
 import Shop from '@/views/Shop.vue'
 import Admin from '@/views/Admin/Admin.vue'
@@ -27,7 +29,19 @@ const routes = [
   {
     path: '/portfolio',
     name: 'Portfolio',
-    component: Portfolio
+    component: Portfolio,
+    children: [
+      {
+        path: '',
+        name: 'AllPortfolio',
+        component: AllPortfolio
+      },
+      {
+        path: ':id',
+        name: 'ShowPortfolio',
+        component: ShowPortfolio
+      }
+    ]
   },
   {
     path: '/exhibitions',

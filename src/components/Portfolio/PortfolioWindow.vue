@@ -1,12 +1,14 @@
 <template>
-  <div class="img-box">
-    <img :src="mainUrl" />
-    <div class="img-info">
-      <h3>{{ project.name }}</h3>
-      <!-- <h4>{{ project.materials }}</h4> -->
-      <h4>{{ project.year }}</h4>
+  <router-link :to="{ name: 'ShowPortfolio', params: { id: project._id } }">
+    <div class="img-box">
+      <img :src="mainUrl" />
+      <div class="img-info">
+        <h3>{{ project.name }}</h3>
+        <!-- <h4>{{ project.materials }}</h4> -->
+        <h4>{{ project.year }}</h4>
+      </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -23,6 +25,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a {
+  margin: 0;
+}
 .img-box {
   border: solid rgb(0, 0, 0) 10px;
 
