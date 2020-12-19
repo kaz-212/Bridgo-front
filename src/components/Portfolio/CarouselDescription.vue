@@ -2,6 +2,7 @@
   <div id="carousel-description">
     <h2>{{ piece.name }}</h2>
     <p>{{ piece.description }}</p>
+    <i class="fas fa-chevron-right"></i>
   </div>
 </template>
 

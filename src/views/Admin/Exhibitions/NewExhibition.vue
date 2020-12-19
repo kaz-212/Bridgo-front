@@ -1,12 +1,16 @@
 <template>
   <div id="new-exhibition">
     <h1>New Exhibition</h1>
+    <ExhibitionForm />
   </div>
 </template>
 
 <script>
+import ExhibitionForm from '@/components/Admin/Exhibitions/ExhibitionForm.vue'
+
 export default {
   name: 'NewExhibition',
+  components: { ExhibitionForm },
   created() {}
 }
 </script>
