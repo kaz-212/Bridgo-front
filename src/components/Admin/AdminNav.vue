@@ -8,8 +8,8 @@
       <router-link class="nav-link" :class="{ active: inventoryRoute }" to="/admin/inventory"
         >Inventory</router-link
       >
-      <router-link class="nav-link" :class="{ active: portfolioRoute }" to="/admin/portfolio"
-        >Portfolio</router-link
+      <router-link class="nav-link" :class="{ active: exhibitionRoute }" to="/admin/exhibitions"
+        >Exhibition</router-link
       >
     </div>
   </nav>
@@ -22,7 +22,7 @@ export default {
     return {
       projectRoute: false,
       inventoryRoute: false,
-      portfolioRoute: false
+      exhibitionRoute: false
     }
   },
   created() {
@@ -30,20 +30,20 @@ export default {
       if (this.$route.matched[1].name === 'AdminProjects') {
         this.projectRoute = true
         this.inventoryRoute = false
-        this.portfolioRoute = false
+        this.exhibitionRoute = false
       } else if (this.$route.matched[1].name === 'AdminInventory') {
         this.projectRoute = false
         this.inventoryRoute = true
-        this.portfolioRoute = false
+        this.exhibitionRoute = false
       } else if (this.$route.matched[1].name === 'AdminPortfolio') {
         this.projectRoute = false
         this.inventoryRoute = false
-        this.portfolioRoute = true
+        this.exhibitionRoute = true
       }
     } catch {
       this.projectRoute = false
       this.inventoryRoute = false
-      this.portfolioRoute = false
+      this.exhibitionRoute = false
     }
   }
 }

@@ -6,11 +6,15 @@ import ShowPortfolio from '@/views/Portfolio/ShowPortfolio.vue'
 import Exhibitions from '@/views/Exhibitions.vue'
 import Shop from '@/views/Shop.vue'
 import Admin from '@/views/Admin/Admin.vue'
+import Projects from '@/views/Admin/Projects/Projects.vue'
 import AllProjects from '@/views/Admin/Projects/AllProjects.vue'
 import NewProject from '@/views/Admin/Projects/NewProject.vue'
 import ShowProject from '@/views/Admin/Projects/ShowProject.vue'
 import EditProject from '@/views/Admin/Projects/EditProject.vue'
 import AddPiece from '@/views/Admin/Projects/AddPiece.vue'
+import AdminExhibitions from '@/views/Admin/Exhibitions/Exhibitions.vue'
+import AllExhibitions from '@/views/Admin/Exhibitions/AllExhibitions.vue'
+import NewExhibition from '@/views/Admin/Exhibitions/NewExhibition.vue'
 
 const routes = [
   {
@@ -60,28 +64,52 @@ const routes = [
     children: [
       {
         path: 'projects',
-        name: 'AdminProjects',
-        component: AllProjects
+        name: 'Projects',
+        component: Projects,
+        children: [
+          {
+            path: '',
+            name: 'AdminProjects',
+            component: AllProjects
+          },
+          {
+            path: 'new',
+            name: 'NewProject',
+            component: NewProject
+          },
+          {
+            path: ':id',
+            name: 'ShowProject',
+            component: ShowProject
+          },
+          {
+            path: ':id/edit',
+            name: 'EditProject',
+            component: EditProject
+          },
+          {
+            path: ':id/add-piece',
+            name: 'AddPiece',
+            component: AddPiece
+          }
+        ]
       },
       {
-        path: 'projects/new',
-        name: 'NewProject',
-        component: NewProject
-      },
-      {
-        path: 'projects/:id',
-        name: 'ShowProject',
-        component: ShowProject
-      },
-      {
-        path: 'projects/:id/edit',
-        name: 'EditProject',
-        component: EditProject
-      },
-      {
-        path: 'projects/:id/add-piece',
-        name: 'AddPiece',
-        component: AddPiece
+        path: 'exhibitions',
+        name: 'AdminExhibitions',
+        component: AdminExhibitions,
+        children: [
+          {
+            path: '',
+            name: 'AllExhibitions',
+            component: AllExhibitions
+          },
+          {
+            path: 'new',
+            name: 'NewExhibition',
+            component: NewExhibition
+          }
+        ]
       }
     ]
   }
