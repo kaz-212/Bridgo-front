@@ -1,7 +1,8 @@
 <template>
   <div id="carousel-main">
+    <i @click="nextSlide" class="chevvy fas fa-chevron-left"></i>
     <img :src="piece.imgURL" />
-    <i class="fas fa-chevron-right"></i>
+    <i @click="prevSlide" class="chevvy fas fa-chevron-right"></i>
   </div>
 </template>
 
@@ -11,6 +12,14 @@ export default {
   props: { piece: Object },
   data() {
     return {}
+  },
+  methods: {
+    nextSlide() {
+      this.$emit('next-slide')
+    },
+    prevSlide() {
+      this.$emit('prev-slide')
+    }
   },
   created() {}
 }
@@ -24,6 +33,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .chevvy {
+    cursor: pointer;
+  }
 
   img {
     max-height: 100%;

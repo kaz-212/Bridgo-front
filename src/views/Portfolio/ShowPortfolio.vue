@@ -3,7 +3,7 @@
     <h1>{{ project.name }}</h1>
     <div class="carousel-wrapper">
       <section class="img-desc">
-        <CarouselMain :piece="pieces[selected]" />
+        <CarouselMain :piece="pieces[selected]" @next-slide="nextSlide" @prev-slide="prevSlide" />
         <CarouselDescription :piece="pieces[selected]" />
       </section>
       <section class="carousel-thumbnails">
@@ -47,6 +47,13 @@ export default {
   methods: {
     selectPiece(index) {
       this.selected = index
+    },
+    nextSlide() {
+      // this.selected += 1
+      console.log('YOOOO')
+    },
+    prevSlide() {
+      this.selected -= 1
     }
   }
 }
