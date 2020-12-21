@@ -8,20 +8,31 @@
     <input id="location" v-model="exhibition.location" type="text" required />
     <label class="form-item" for="description">Description</label>
     <textarea id="description" v-model="exhibition.description" rows="5" required />
-    <label for="image">Image</label>
-    <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
+    <div class="image-upload">
+      <label for="image">Image(s)</label>
+      <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
+    </div>
+
+    <div class="files">
+      <div v-for="(img, index) in imgs" :key="index" class="file-display">
+        {{ img.name }} <i @click="deleteImage(index)" class="far fa-trash-alt"></i>
+      </div>
+    </div>
+
     <!-- proxy button to click -->
-    <!-- <button @click.prevent="$refs.fileSelector.click()">Choose Image</button> -->
+    <button @click.prevent="$refs.fileSelector.click()">Choose Image(s)</button>
     <label for="Show">Show this exhibition?</label>
     <input class="check-box" v-model="exhibition.onShow" id="show" type="checkbox" checked />
     <label for="Show">Is this an upcoming Exhibition?</label>
     <input class="check-box" v-model="exhibition.isUpcoming" id="show" type="checkbox" checked />
-    <button @click.prevent="add">Add</button>
+    <button @click.prevent="submitExhibition">Submit</button>
     <button @click.prevent="cancel">Back</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'ExhibitionForm',
   components: {},
@@ -33,30 +44,43 @@ export default {
         date: '',
         description: '',
         location: '',
-        imgs: [],
         isUpcoming: true,
         onShow: true
-      }
+      },
+      imgs: ''
     }
   },
   computed: {},
   methods: {
     onFileSelected() {
       const { files } = this.$refs.fileSelector
-      this.exhibition.imgs = [...this.exhibition.imgs, ...files]
+      this.imgs = [...this.imgs, ...files]
+      console.log(files)
     },
 
-    cancelPiece() {
-      this.$emit('cancel-piece')
+    deleteImage(index) {
+      this.imgs.splice(index, 1)
     },
 
-    addPiece() {
-      this.piece.isMain = this.main
-      this.piece.index = this.index
-      this.$emit('submit-piece', this.piece)
+    submitExhibition() {
+      const fd = new FormData()
+      this.imgs.forEach(img => fd.append('imgs', img))
+
+      fd.append('exhibition', JSON.stringify(this.exhibition))
+      axios.post('exhibitions', fd)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.form {
+  #image {
+    display: none;
+  }
+
+  i {
+    cursor: pointer;
+  }
+}
+</style>

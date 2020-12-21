@@ -1,7 +1,7 @@
 <template>
   <div id="carousel-description">
     <h2>{{ piece.name }}</h2>
-    <p>{{ piece.description }}</p>
+    <p class="description">{{ piece.description }}</p>
   </div>
 </template>
 
@@ -26,9 +26,12 @@ export default {
   justify-content: center;
   flex-direction: column;
 
-  img {
-    max-height: 100%;
-    max-width: 100%;
+  h2 {
+    margin-bottom: 25px;
+  }
+
+  .description {
+    white-space: pre-line;
   }
 }
 </style>
