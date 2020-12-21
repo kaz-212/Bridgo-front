@@ -1,15 +1,27 @@
 <template>
   <div id="carousel-main">
-    <i @click="nextSlide" class="chevvy fas fa-chevron-left"></i>
-    <img :src="piece.imgURL" />
-    <i @click="prevSlide" class="chevvy fas fa-chevron-right"></i>
+    <div class="wrapper">
+      <img :src="piece.imgURL" />
+      <div class="arrow-overlay">
+        <i
+          v-if="selected !== 0"
+          @click="prevSlide"
+          class="chevvy left fas fa-2x fa-chevron-left"
+        ></i>
+        <i
+          v-if="selected != length - 1"
+          @click="nextSlide"
+          class="chevvy right fas fa-2x fa-chevron-right"
+        ></i>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CarouselMain',
-  props: { piece: Object },
+  props: { piece: Object, selected: Number, length: Number },
   data() {
     return {}
   },
@@ -34,8 +46,39 @@ export default {
   align-items: center;
   justify-content: center;
 
-  .chevvy {
-    cursor: pointer;
+  .wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    // background-color: red;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrow-overlay {
+    position: absolute;
+    color: white;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.171);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease-out;
+    &:hover {
+      opacity: 1;
+    }
+    .chevvy {
+      cursor: pointer;
+      &.right {
+        margin-left: auto;
+      }
+    }
   }
 
   img {
