@@ -7,10 +7,10 @@ export default {
     projects: []
   },
   mutations: {
-    setProjects(state, projects) {
+    GET_PROJECTS(state, projects) {
       state.projects = projects
     },
-    deleteProject(state, project) {
+    DELETE_PROJECT(state, project) {
       /* eslint-disable */
       router.push({ name: 'AdminProjects' })
       for (let i = 0; i < state.projects.length; i++) {
@@ -22,13 +22,17 @@ export default {
   },
   actions: {
     async getProjects({ commit }) {
-      const res = await axios.get('projects')
-      commit('setProjects', res.data)
+      try {
+        const res = await axios.get('projects')
+        commit('GET_PROJECTS', res.data)
+      } catch (e) {
+        console.log('ERROR', e)
+      }
     },
 
     async deleteProject({ commit }, id) {
       const res = await axios.delete(`projects/${id}`)
-      commit('deleteProject', res.data)
+      commit('DELETE_PROJECT', res.data)
     },
 
     async submitPiece({ dispatch }, payload) {

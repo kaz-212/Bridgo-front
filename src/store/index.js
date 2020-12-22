@@ -1,8 +1,10 @@
 import { createStore } from 'vuex'
-import projectsModule from './projects'
+import projectModule from './project'
+import exhibitionModule from './exhibition'
 
 export default createStore({
   modules: {
-    project: projectsModule
+    project: projectModule,
+    exhibition: exhibitionModule
   }
 })

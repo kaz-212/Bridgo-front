@@ -8,6 +8,16 @@
     <input id="location" v-model="exhibition.location" type="text" required />
     <label class="form-item" for="description">Description</label>
     <textarea id="description" v-model="exhibition.description" rows="5" required />
+
+    <label class="form-item" for="links">Links</label>
+    <div id="links" v-for="(link, index) in exhibition.links" :key="index">
+      <em>Link {{ index + 1 }} <i @click="deleteLink(index)" class="far fa-trash-alt"></i></em>
+      <input type="text" v-model="link.name" placeholder="name" />
+      <input type="text" v-model="link.url" placeholder="URL" />
+    </div>
+    <button v-if="exhibition.links.length === 0" @click.prevent="addLink">Add Link</button>
+    <button v-if="exhibition.links.length > 0" @click.prevent="addLink">Add Another Link</button>
+
     <div class="image-upload">
       <label for="image">Image(s)</label>
       <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
@@ -27,7 +37,6 @@
     <input class="check-box" v-model="exhibition.isUpcoming" id="show" type="checkbox" checked />
     <button @click.prevent="submitExhibition">Submit</button>
     <button @click.prevent="cancel">Back</button>
-    <button @click.prevent="get">Get</button>
   </div>
 </template>
 
@@ -46,7 +55,8 @@ export default {
         description: '',
         location: '',
         isUpcoming: true,
-        onShow: true
+        onShow: true,
+        links: []
       },
       imgs: ''
     }
@@ -59,6 +69,14 @@ export default {
       console.log(files)
     },
 
+    addLink() {
+      this.exhibition.links.push({ url: '', name: '' })
+    },
+
+    deleteLink(index) {
+      this.exhibition.links.splice(index, 1)
+    },
+
     deleteImage(index) {
       this.imgs.splice(index, 1)
     },
@@ -69,14 +87,6 @@ export default {
       fd.append('exhibition', JSON.stringify(this.exhibition))
       try {
         const res = await axios.post('exhibitions', fd)
-        console.log(res)
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    async get() {
-      try {
-        const res = await axios.get('exhibitions')
         console.log(res)
       } catch (e) {
         console.log(e)
