@@ -27,6 +27,7 @@
     <input class="check-box" v-model="exhibition.isUpcoming" id="show" type="checkbox" checked />
     <button @click.prevent="submitExhibition">Submit</button>
     <button @click.prevent="cancel">Back</button>
+    <button @click.prevent="get">Get</button>
   </div>
 </template>
 
@@ -62,12 +63,24 @@ export default {
       this.imgs.splice(index, 1)
     },
 
-    submitExhibition() {
+    async submitExhibition() {
       const fd = new FormData()
       this.imgs.forEach(img => fd.append('imgs', img))
-
       fd.append('exhibition', JSON.stringify(this.exhibition))
-      axios.post('exhibitions', fd)
+      try {
+        const res = await axios.post('exhibitions', fd)
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async get() {
+      try {
+        const res = await axios.get('exhibitions')
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
