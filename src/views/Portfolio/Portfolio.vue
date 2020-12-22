@@ -8,7 +8,7 @@
 export default {
   name: 'App',
   created() {
-    this.$store.dispatch('getProjects')
+    this.$store.dispatch('project/getProjects')
   }
 }
 </script>

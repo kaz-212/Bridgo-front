@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     projects() {
-      return this.$store.getters.getPortfolioPieces // list of included projects sorted by index
+      return this.$store.getters['project/getPortfolioPieces'] // list of included projects sorted by index
     },
     leftSide() {
       const leftSide = []

@@ -43,7 +43,7 @@ export default {
       return this.$route.params.id
     },
     project() {
-      return this.$store.getters.getProjById(this.id)
+      return this.$store.getters['project/getProjById'](this.id)
     },
     pieces() {
       // array of pieces sorted by index

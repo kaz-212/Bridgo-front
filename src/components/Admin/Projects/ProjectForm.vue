@@ -80,7 +80,7 @@ export default {
         })
         .then(res => {
           console.log('SUCCESSS!!!', res)
-          this.$store.dispatch('getProjects')
+          this.$store.dispatch('project/getProjects')
           this.$router.push({ name: 'AdminProjects' })
         })
         .catch(err => {

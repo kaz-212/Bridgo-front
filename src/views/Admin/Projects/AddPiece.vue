@@ -18,7 +18,7 @@ export default {
     },
 
     project() {
-      return this.$store.getters.getProjById(this.id)
+      return this.$store.getters['project/getProjById'](this.id)
     }
   },
   methods: {
@@ -26,7 +26,7 @@ export default {
       this.$router.push({ name: 'ShowProject' })
     },
     submitPiece(piece) {
-      this.$store.dispatch('submitPiece', { id: this.id, piece })
+      this.$store.dispatch('project/submitPiece', { id: this.id, piece })
     }
   }
 }

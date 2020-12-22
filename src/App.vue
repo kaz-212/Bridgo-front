@@ -14,7 +14,7 @@ export default {
     Navbar
   },
   mounted() {
-    this.$store.dispatch('getProjects')
+    this.$store.dispatch('project/getProjects')
   }
 }
 </script>

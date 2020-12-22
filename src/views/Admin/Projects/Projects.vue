@@ -8,7 +8,7 @@
 export default {
   name: 'Projects',
   created() {
-    this.$store.dispatch('getProjects')
+    this.$store.dispatch('project/getProjects')
   }
 }
 </script>

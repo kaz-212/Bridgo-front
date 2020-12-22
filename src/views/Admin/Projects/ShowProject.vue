@@ -27,14 +27,14 @@ export default {
     },
 
     project() {
-      return this.$store.getters.getProjById(this.id)
+      return this.$store.getters['project/getProjById'](this.id)
     }
   },
   methods: {
     deleteProject() {
       /* eslint-disable */
       if (confirm('You sure pal?')) {
-        this.$store.dispatch('deleteProject', this.id)
+        this.$store.dispatch('project/deleteProject', this.id)
       }
     }
   }

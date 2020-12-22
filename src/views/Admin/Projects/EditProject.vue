@@ -124,7 +124,7 @@ export default {
     },
 
     project() {
-      return this.$store.getters.getProjById(this.id)
+      return this.$store.getters['project/getProjById'](this.id)
     }
   },
   methods: {
