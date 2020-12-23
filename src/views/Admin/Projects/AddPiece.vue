@@ -26,7 +26,10 @@ export default {
       this.$router.push({ name: 'ShowProject' })
     },
     submitPiece(piece) {
-      this.$store.dispatch('project/submitPiece', { id: this.id, piece })
+      const fd = new FormData()
+      fd.append('img', piece.img)
+      fd.append('piece', JSON.stringify(piece))
+      this.$store.dispatch('project/submitPiece', { fd, id: this.id })
     }
   }
 }

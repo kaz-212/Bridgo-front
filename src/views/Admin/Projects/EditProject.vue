@@ -107,8 +107,6 @@
 </template>
 // Need to change piece.name to piece.pieceName etc.
 <script>
-import axios from 'axios'
-
 export default {
   name: 'EditProject',
   components: {},
@@ -160,23 +158,28 @@ export default {
       for (let pieceIndex of this.deletePieces) {
         this.project.pieces.splice(pieceIndex, 1)
       }
-      axios
-        .put(
-          `projects/${this.id}`,
-          { project: this.project, filenames: this.deleteFilenames },
-          {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }
-        )
-        .then(res => {
-          console.log(res)
-          this.$router.push({ name: 'AdminProjects' })
-        })
-        .catch(e => {
-          console.log('ERROR!', e)
-        })
+      this.$store.dispatch('EditProject', {
+        project: this.project,
+        filenames: this.deleteFilenames
+      })
+
+      // axios
+      //   .put(
+      //     `projects/${this.id}`,
+      //     { project: this.project, filenames: this.deleteFilenames },
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json'
+      //       }
+      //     }
+      //   )
+      //   .then(res => {
+      //     console.log(res)
+      //     this.$router.push({ name: 'AdminProjects' })
+      //   })
+      //   .catch(e => {
+      //     console.log('ERROR!', e)
+      //   })
     }
   }
 }

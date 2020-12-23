@@ -1,13 +1,15 @@
 <template>
-  <div class="main">
+  <div v-if="project" class="main">
     <h1>{{ project.name }}</h1>
     <img :src="project.pieces[0].imgURL" />
     <h2>Pieces:</h2>
     <ul>
       <li v-for="piece in project.pieces" :key="piece._id">{{ piece.name }}</li>
     </ul>
-    <router-link :to="`/admin/projects/${project._id}/edit`"><button>Edit</button></router-link>
-    <router-link :to="`/admin/projects/${project._id}/add-piece`"
+    <router-link :to="{ name: 'EditProject', params: { id: project._id } }"
+      ><button>Edit</button></router-link
+    >
+    <router-link :to="{ name: 'AddPiece', params: { id: project._id } }"
       ><button>Add Piece</button></router-link
     >
     <button @click="deleteProject">Delete</button>

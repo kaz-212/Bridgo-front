@@ -15,6 +15,7 @@ import AddPiece from '@/views/Admin/Projects/AddPiece.vue'
 import AdminExhibitions from '@/views/Admin/Exhibitions/Exhibitions.vue'
 import AllExhibitions from '@/views/Admin/Exhibitions/AllExhibitions.vue'
 import NewExhibition from '@/views/Admin/Exhibitions/NewExhibition.vue'
+import EditExhibition from '../views/Admin/Exhibitions/EditExhibition.vue'
 
 const routes = [
   {
@@ -83,7 +84,7 @@ const routes = [
             component: ShowProject
           },
           {
-            path: ':id/edit',
+            path: 'edit/:id',
             name: 'EditProject',
             component: EditProject
           },
@@ -108,6 +109,11 @@ const routes = [
             path: 'new',
             name: 'NewExhibition',
             component: NewExhibition
+          },
+          {
+            path: 'edit/:id',
+            name: 'EditExhibition',
+            component: EditExhibition
           }
         ]
       }

@@ -28,7 +28,6 @@
 
 <script>
 import PieceForm from '@/components/Admin/Projects/PieceForm.vue'
-import axios from 'axios'
 
 export default {
   name: 'ProjectForm',
@@ -63,29 +62,16 @@ export default {
     },
 
     submitProject() {
-      const formData = new FormData()
+      const fd = new FormData()
       // append images
       for (let i = 0; i < this.pieces.length; i += 1) {
         const { img } = this.pieces[i]
         const { pieceName } = this.pieces[i]
-        formData.append('imgs', img, pieceName) // give img the same name as the piece
+        fd.append('imgs', img, pieceName) // give img the same name as the piece
       }
-      formData.append('project', JSON.stringify(this.project)) // append project object
-      formData.append('pieces', JSON.stringify(this.pieces)) // append pieces array
-      axios
-        .post('projects', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then(res => {
-          console.log('SUCCESSS!!!', res)
-          this.$store.dispatch('project/getProjects')
-          this.$router.push({ name: 'AdminProjects' })
-        })
-        .catch(err => {
-          console.log('ERRORR!!!', err)
-        })
+      fd.append('project', JSON.stringify(this.project)) // append project object
+      fd.append('pieces', JSON.stringify(this.pieces)) // append pieces array
+      this.$store.dispatch('project/submitProject', fd)
     }
   }
 }

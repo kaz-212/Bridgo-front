@@ -11,6 +11,10 @@ import ExhibitionForm from '@/components/Admin/Exhibitions/ExhibitionForm.vue'
 export default {
   name: 'NewExhibition',
   components: { ExhibitionForm },
+  data() {
+    return {}
+  },
+  computed: {},
   created() {}
 }
 </script>

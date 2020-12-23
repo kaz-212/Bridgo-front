@@ -36,30 +36,26 @@
     <label for="Show">Is this an upcoming Exhibition?</label>
     <input class="check-box" v-model="exhibition.isUpcoming" id="show" type="checkbox" checked />
     <button @click.prevent="submitExhibition">Submit</button>
+    <button @click.prevent="deleteExhibition">Delete</button>
     <button @click.prevent="cancel">Back</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ExhibitionForm',
+  name: 'EditExhibitionForm',
   components: {},
-  props: {},
+  props: { id: String },
   data() {
     return {
-      exhibition: {
-        name: '',
-        date: '',
-        description: '',
-        location: '',
-        isUpcoming: true,
-        onShow: true,
-        links: []
-      },
       imgs: ''
     }
   },
-  computed: {},
+  computed: {
+    exhibition() {
+      return this.$store.getters['exhibition/getExhibitionById'](this.id)
+    }
+  },
   methods: {
     onFileSelected() {
       const { files } = this.$refs.fileSelector
@@ -79,11 +75,22 @@ export default {
       this.imgs.splice(index, 1)
     },
 
+    cancel() {
+      this.$router.push({ name: 'AllExhibitions' })
+    },
+
+    deleteExhibition() {
+      /* eslint-disable */
+      if (confirm('You sure brij? I liked this one!')) {
+        this.$store.dispatch('exhibition/deleteExhibition', this.id)
+      }
+    },
+    // ======== NEEDS EDITING TO PATCH ROUTE AND OHTER ========
     async submitExhibition() {
       const fd = new FormData()
       this.imgs.forEach(img => fd.append('imgs', img))
       fd.append('exhibition', JSON.stringify(this.exhibition))
-      this.$store.dispatch('exhibition/submitExhibition', fd)
+      // this.$store
     }
   }
 }

@@ -14,7 +14,7 @@ export default {
     AdminNav
   },
   mounted() {
-    this.$store.dispatch('project/getProjects')
+    // this.$store.dispatch('project/getProjects')
   }
 }
 </script>

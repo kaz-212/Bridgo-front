@@ -7,7 +7,9 @@
 <script>
 export default {
   name: 'exhibitions',
-  created() {}
+  created() {
+    this.$store.dispatch('exhibition/getExhibitions')
+  }
 }
 </script>
 

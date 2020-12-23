@@ -18,8 +18,23 @@ export default {
           state.projects.splice(i, 1)
         }
       }
+    },
+
+    SUBMIT_PROJECT(state, project) {
+      state.projects.push(project)
+      router.push({ name: 'AdminProjects' })
+    },
+
+    SUBMIT_PIECE(state, payload) {
+      for (project in state.projects) {
+        if (project._id == payload.id) {
+          project.pieces.push(payload.piece)
+        }
+      }
+      router.push({ name: 'AdminProjects' })
     }
   },
+
   actions: {
     async getProjects({ commit }) {
       try {
@@ -35,22 +50,56 @@ export default {
       commit('DELETE_PROJECT', res.data)
     },
 
-    async submitPiece({ dispatch }, payload) {
-      const fd = new FormData()
-      fd.append('img', payload.piece.img)
-      fd.append('piece', JSON.stringify(payload.piece))
-      const res = await axios.patch(`projects/${payload.id}`, fd, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      router.push({ name: 'ShowProject', params: { id: payload.id } })
-      dispatch('getProjects')
+    async submitProject({ commit }, fd) {
+      try {
+        const res = await axios.post('projects', fd, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        commit('SUBMIT_PROJECT', res.data)
+      } catch (err) {
+        console.log('Error!', err)
+      }
+    },
+
+    async submitPiece({ commit }, payload) {
+      try {
+        const res = await axios.patch(`projects/${payload.id}`, payload.fd, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        router.push({ name: 'ShowProject', params: { id: payload.id } })
+        commit('SUBMIT_PIECE', { piece: res.data, id: payload.id })
+      } catch (e) {
+        console.log('ERROR!!', e)
+      }
+    },
+
+    async editPiece({ commit }, payload) {
+      axios
+        .put(
+          `projects/${this.id}`,
+          { project: this.project, filenames: this.deleteFilenames },
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        .then(res => {
+          console.log(res)
+          this.$router.push({ name: 'AdminProjects' })
+        })
+        .catch(e => {
+          console.log('ERROR!', e)
+        })
     }
   },
   getters: {
     /* eslint-disable no-underscore-dangle */
-    getProjById: state => id => state.projects.find(todo => todo._id === id),
+    getProjById: state => id => state.projects.find(project => project._id === id),
 
     getPortfolioPieces: state => {
       const portProjects = state.projects.filter(project => project.onShow)
