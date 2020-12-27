@@ -151,35 +151,17 @@ export default {
           this.deletePiece(pieceIndex, filename) // if piece is in deletePieces, this will remove it
         }
       }
-      // console.log(id, this.project.pieces)
     },
 
     async submitChanges() {
+      // delete pieces before sending off
       for (let pieceIndex of this.deletePieces) {
         this.project.pieces.splice(pieceIndex, 1)
       }
-      this.$store.dispatch('EditProject', {
+      this.$store.dispatch('project/editProject', {
         project: this.project,
         filenames: this.deleteFilenames
       })
-
-      // axios
-      //   .put(
-      //     `projects/${this.id}`,
-      //     { project: this.project, filenames: this.deleteFilenames },
-      //     {
-      //       headers: {
-      //         'Content-Type': 'application/json'
-      //       }
-      //     }
-      //   )
-      //   .then(res => {
-      //     console.log(res)
-      //     this.$router.push({ name: 'AdminProjects' })
-      //   })
-      //   .catch(e => {
-      //     console.log('ERROR!', e)
-      //   })
     }
   }
 }

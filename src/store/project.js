@@ -26,12 +26,21 @@ export default {
     },
 
     SUBMIT_PIECE(state, payload) {
-      for (project in state.projects) {
+      for (let project of state.projects) {
         if (project._id == payload.id) {
           project.pieces.push(payload.piece)
         }
       }
       router.push({ name: 'AdminProjects' })
+    },
+
+    EDIT_PROJECT(state, newProject) {
+      for (let project of state.projects) {
+        if (project._id == newProject._id) {
+          project = newProject
+        }
+      }
+      router.push({ name: 'ShowProject', params: { id: newProject._id } })
     }
   },
 
@@ -77,24 +86,21 @@ export default {
       }
     },
 
-    async editPiece({ commit }, payload) {
-      axios
-        .put(
-          `projects/${this.id}`,
-          { project: this.project, filenames: this.deleteFilenames },
+    async editProject({ commit }, payload) {
+      try {
+        const res = await axios.put(
+          `projects/${payload.project._id}`,
+          { project: payload.project, filenames: payload.filenames },
           {
             headers: {
               'Content-Type': 'application/json'
             }
           }
         )
-        .then(res => {
-          console.log(res)
-          this.$router.push({ name: 'AdminProjects' })
-        })
-        .catch(e => {
-          console.log('ERROR!', e)
-        })
+        commit('EDIT_PROJECT', res.data)
+      } catch (err) {
+        console.log('ERROR!', err)
+      }
     }
   },
   getters: {
