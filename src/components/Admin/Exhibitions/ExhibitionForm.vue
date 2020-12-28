@@ -13,7 +13,7 @@
     <div id="links" v-for="(link, index) in exhibition.links" :key="index">
       <em>Link {{ index + 1 }} <i @click="deleteLink(index)" class="far fa-trash-alt"></i></em>
       <input type="text" v-model="link.name" placeholder="name" />
-      <input type="text" v-model="link.url" placeholder="URL" />
+      <input type="text" v-model="link.URL" placeholder="URL" />
     </div>
     <button v-if="exhibition.links.length === 0" @click.prevent="addLink">Add Link</button>
     <button v-if="exhibition.links.length > 0" @click.prevent="addLink">Add Another Link</button>
@@ -68,7 +68,7 @@ export default {
     },
 
     addLink() {
-      this.exhibition.links.push({ url: '', name: '' })
+      this.exhibition.links.push({ URL: '', name: '' })
     },
 
     deleteLink(index) {
@@ -81,7 +81,10 @@ export default {
 
     async submitExhibition() {
       const fd = new FormData()
-      this.imgs.forEach(img => fd.append('imgs', img))
+      /* eslint-disable */
+      for (const img of this.imgs) {
+        fd.append('imgs', img)
+      }
       fd.append('exhibition', JSON.stringify(this.exhibition))
       this.$store.dispatch('exhibition/submitExhibition', fd)
     }

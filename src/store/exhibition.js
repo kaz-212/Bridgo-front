@@ -48,6 +48,15 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+
+    async editExhibition({ commit }, payload) {
+      try {
+        const res = await axios.put(`exhibitions/${payload.id}`, payload.fd)
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
 

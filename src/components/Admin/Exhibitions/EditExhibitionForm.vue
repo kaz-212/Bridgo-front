@@ -1,5 +1,5 @@
 <template>
-  <div class="form" action="#">
+  <div v-if="exhibition" class="form" action="#">
     <label class="form-item" for="name">Name</label>
     <input id="Name" v-model="exhibition.name" type="text" required />
     <label class="form-item" for="date">Date</label>
@@ -13,13 +13,22 @@
     <div id="links" v-for="(link, index) in exhibition.links" :key="index">
       <em>Link {{ index + 1 }} <i @click="deleteLink(index)" class="far fa-trash-alt"></i></em>
       <input type="text" v-model="link.name" placeholder="name" />
-      <input type="text" v-model="link.url" placeholder="URL" />
+      <input type="text" v-model="link.URL" placeholder="URL" />
     </div>
     <button v-if="exhibition.links.length === 0" @click.prevent="addLink">Add Link</button>
     <button v-if="exhibition.links.length > 0" @click.prevent="addLink">Add Another Link</button>
 
     <div class="image-upload">
       <label for="image">Image(s)</label>
+      <div v-for="(image, index) in exhibition.images" :key="image._id">
+        <img :src="image.thumbnail" />
+        <label :for="`image${index}`"> delete? </label>
+        <input
+          :id="`image${index}`"
+          type="checkbox"
+          @change="deleteImageArray(index, image.filename)"
+        />
+      </div>
       <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
     </div>
 
@@ -29,13 +38,28 @@
       </div>
     </div>
 
+    {{ exhibition.images }}
+    {{ deleteImages }}
+
     <!-- proxy button to click -->
     <button @click.prevent="$refs.fileSelector.click()">Choose Image(s)</button>
     <label for="Show">Show this exhibition?</label>
-    <input class="check-box" v-model="exhibition.onShow" id="show" type="checkbox" checked />
+    <input
+      class="check-box"
+      v-model="exhibition.onShow"
+      id="show"
+      type="checkbox"
+      :checked="exhibition.onShow"
+    />
     <label for="Show">Is this an upcoming Exhibition?</label>
-    <input class="check-box" v-model="exhibition.isUpcoming" id="show" type="checkbox" checked />
-    <button @click.prevent="submitExhibition">Submit</button>
+    <input
+      class="check-box"
+      v-model="exhibition.isUpcoming"
+      id="show"
+      type="checkbox"
+      :checked="exhibition.isUpcoming"
+    />
+    <button @click.prevent="editExhibition">Update</button>
     <button @click.prevent="deleteExhibition">Delete</button>
     <button @click.prevent="cancel">Back</button>
   </div>
@@ -48,7 +72,9 @@ export default {
   props: { id: String },
   data() {
     return {
-      imgs: ''
+      imgs: '',
+      deleteImages: [],
+      deleteFilenames: []
     }
   },
   computed: {
@@ -64,7 +90,7 @@ export default {
     },
 
     addLink() {
-      this.exhibition.links.push({ url: '', name: '' })
+      this.exhibition.links.push({ URL: '', name: '' })
     },
 
     deleteLink(index) {
@@ -73,6 +99,19 @@ export default {
 
     deleteImage(index) {
       this.imgs.splice(index, 1)
+    },
+
+    deleteImageArray(pieceIndex, filename) {
+      const pieceI = this.deleteImages.indexOf(pieceIndex)
+      const filenameI = this.deleteFilenames.indexOf(filename)
+      /* eslint-disable */
+      if (pieceI >= 0) {
+        this.deleteImages.splice(pieceI, 1)
+        this.deleteFilenames.splice(filenameI, 1)
+      } else {
+        this.deleteImages.push(pieceIndex)
+        this.deleteFilenames.push(filename)
+      }
     },
 
     cancel() {
@@ -85,12 +124,19 @@ export default {
         this.$store.dispatch('exhibition/deleteExhibition', this.id)
       }
     },
+
     // ======== NEEDS EDITING TO PATCH ROUTE AND OHTER ========
-    async submitExhibition() {
+    editExhibition() {
+      for (const imageIndex of this.deleteImages) {
+        this.exhibition.images.splice(imageIndex, 1)
+      }
       const fd = new FormData()
-      this.imgs.forEach(img => fd.append('imgs', img))
+      for (const img of this.imgs) {
+        fd.append('imgs', img)
+      }
       fd.append('exhibition', JSON.stringify(this.exhibition))
-      // this.$store
+      fd.append('filenames', this.deleteFilenames)
+      this.$store.dispatch('exhibition/editExhibition', { id: this.id, fd })
     }
   }
 }
