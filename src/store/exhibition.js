@@ -77,6 +77,12 @@ export default {
     },
     getPastExhibitions: state => {
       return state.exhibitions.filter(exhibition => !exhibition.isUpcoming)
+    },
+    onShowPast: (state, getters) => {
+      return getters.getPastExhibitions.filter(exhibition => exhibition.onShow)
+    },
+    onShowUpcoming: (state, getters) => {
+      return getters.getUpcomingExhibitions.filter(exhibition => exhibition.onShow)
     }
   }
 }

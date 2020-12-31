@@ -3,7 +3,9 @@ import Home from '@/views/Home.vue'
 import Portfolio from '@/views/Portfolio/Portfolio.vue'
 import AllPortfolio from '@/views/Portfolio/AllPortfolio.vue'
 import ShowPortfolio from '@/views/Portfolio/ShowPortfolio.vue'
-import Exhibitions from '@/views/Exhibitions.vue'
+import Exhibitions from '@/views/Exhibitions/Exhibitions.vue'
+import OnShowExhibitions from '@/views/Exhibitions/AllExhibitions.vue'
+import ShowExhibition from '@/views/Exhibitions/ShowExhibition.vue'
 import Shop from '@/views/Shop.vue'
 import Admin from '@/views/Admin/Admin.vue'
 import Projects from '@/views/Admin/Projects/Projects.vue'
@@ -13,9 +15,9 @@ import ShowProject from '@/views/Admin/Projects/ShowProject.vue'
 import EditProject from '@/views/Admin/Projects/EditProject.vue'
 import AddPiece from '@/views/Admin/Projects/AddPiece.vue'
 import AdminExhibitions from '@/views/Admin/Exhibitions/Exhibitions.vue'
-import AllExhibitions from '@/views/Admin/Exhibitions/AllExhibitions.vue'
+import AllAdminExhibitions from '@/views/Admin/Exhibitions/AllExhibitions.vue'
 import NewExhibition from '@/views/Admin/Exhibitions/NewExhibition.vue'
-import EditExhibition from '../views/Admin/Exhibitions/EditExhibition.vue'
+import EditExhibition from '@/views/Admin/Exhibitions/EditExhibition.vue'
 
 const routes = [
   {
@@ -51,7 +53,19 @@ const routes = [
   {
     path: '/exhibitions',
     name: 'Exhibitions',
-    component: Exhibitions
+    component: Exhibitions,
+    children: [
+      {
+        path: '',
+        name: 'OnShowExhibitions',
+        component: OnShowExhibitions
+      },
+      {
+        path: ':id',
+        name: 'ShowExhibition',
+        component: ShowExhibition
+      }
+    ]
   },
   {
     path: '/shop',
@@ -103,7 +117,7 @@ const routes = [
           {
             path: '',
             name: 'AllExhibitions',
-            component: AllExhibitions
+            component: AllAdminExhibitions
           },
           {
             path: 'new',
