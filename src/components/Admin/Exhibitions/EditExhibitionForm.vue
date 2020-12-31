@@ -31,15 +31,13 @@
       </div>
       <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
     </div>
-
+    {{ deleteFilenames }}
+    {{ exhibition.images }}
     <div class="files">
       <div v-for="(img, index) in imgs" :key="index" class="file-display">
         {{ img.name }} <i @click="deleteImage(index)" class="far fa-trash-alt"></i>
       </div>
     </div>
-
-    {{ exhibition.images }}
-    {{ deleteImages }}
 
     <!-- proxy button to click -->
     <button @click.prevent="$refs.fileSelector.click()">Choose Image(s)</button>
@@ -73,7 +71,6 @@ export default {
   data() {
     return {
       imgs: '',
-      deleteImages: [],
       deleteFilenames: []
     }
   },
@@ -102,14 +99,11 @@ export default {
     },
 
     deleteImageArray(pieceIndex, filename) {
-      const pieceI = this.deleteImages.indexOf(pieceIndex)
       const filenameI = this.deleteFilenames.indexOf(filename)
       /* eslint-disable */
-      if (pieceI >= 0) {
-        this.deleteImages.splice(pieceI, 1)
+      if (filenameI >= 0) {
         this.deleteFilenames.splice(filenameI, 1)
       } else {
-        this.deleteImages.push(pieceIndex)
         this.deleteFilenames.push(filename)
       }
     },
@@ -127,15 +121,16 @@ export default {
 
     // ======== NEEDS EDITING TO PATCH ROUTE AND OHTER ========
     editExhibition() {
-      for (const imageIndex of this.deleteImages) {
-        this.exhibition.images.splice(imageIndex, 1)
-      }
+      const updatedImages = this.exhibition.images.filter(
+        image => !this.deleteFilenames.includes(image.filename)
+      )
+      this.exhibition.images = updatedImages
       const fd = new FormData()
       for (const img of this.imgs) {
         fd.append('imgs', img)
       }
       fd.append('exhibition', JSON.stringify(this.exhibition))
-      fd.append('filenames', this.deleteFilenames)
+      fd.append('filenames', JSON.stringify(this.deleteFilenames))
       this.$store.dispatch('exhibition/editExhibition', { id: this.id, fd })
     }
   }
