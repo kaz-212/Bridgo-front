@@ -24,6 +24,14 @@ export default {
     ADD_NEW_EXHIBITION(state, exhibition) {
       state.exhibitions.push(exhibition)
       router.push({ name: 'AllExhibitions' })
+    },
+    EDIT_EXHIBITION(state, exhibition) {
+      for (let i = 0; i < state.exhibitions.length; i++) {
+        if (state.exhibitions[i]._id === exhibition._id) {
+          state.exhibitions[i] = exhibition
+        }
+      }
+      router.push({ name: 'AllExhibitions' })
     }
   },
 
@@ -37,14 +45,14 @@ export default {
       }
     },
     async deleteExhibition({ commit }, id) {
-      const res = await axios.delete(`exhibitions/${id}`)
-      commit('DELETE_EXHIBITION', res.data)
+      const { data } = await axios.delete(`exhibitions/${id}`)
+      commit('DELETE_EXHIBITION', data)
     },
 
     async submitExhibition({ commit }, fd) {
       try {
-        const res = await axios.post('exhibitions', fd)
-        commit('ADD_NEW_EXHIBITION', res.data)
+        const { data } = await axios.post('exhibitions', fd)
+        commit('ADD_NEW_EXHIBITION', data)
       } catch (e) {
         console.log(e)
       }
@@ -52,8 +60,8 @@ export default {
 
     async editExhibition({ commit }, payload) {
       try {
-        const res = await axios.put(`exhibitions/${payload.id}`, payload.fd)
-        console.log(res)
+        const { data } = await axios.put(`exhibitions/${payload.id}`, payload.fd)
+        commit('EDIT_EXHIBITION', data)
       } catch (e) {
         console.log(e)
       }
@@ -64,9 +72,11 @@ export default {
     /* eslint-disable no-underscore-dangle */
     getExhibitionById: state => id => state.exhibitions.find(exhibition => exhibition._id === id),
 
-    getPortfolioPieces: state => {
-      const portProjects = state.projects.filter(project => project.onShow)
-      return portProjects.sort((a, b) => a.index - b.index)
+    getUpcomingExhibitions: state => {
+      return state.exhibitions.filter(exhibition => exhibition.isUpcoming)
+    },
+    getPastExhibitions: state => {
+      return state.exhibitions.filter(exhibition => !exhibition.isUpcoming)
     }
   }
 }

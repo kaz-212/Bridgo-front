@@ -31,8 +31,6 @@
       </div>
       <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
     </div>
-    {{ deleteFilenames }}
-    {{ exhibition.images }}
     <div class="files">
       <div v-for="(img, index) in imgs" :key="index" class="file-display">
         {{ img.name }} <i @click="deleteImage(index)" class="far fa-trash-alt"></i>

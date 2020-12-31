@@ -3,9 +3,9 @@
     <label class="form-item" for="name">Name</label>
     <input id="Name" v-model="exhibition.name" type="text" required />
     <label class="form-item" for="date">Date</label>
-    <input id="date" v-model="exhibition.date" type="text" required />
+    <textarea id="date" v-model="exhibition.date" rows="4" required />
     <label class="form-item" for="location">Location</label>
-    <input id="location" v-model="exhibition.location" type="text" required />
+    <textarea id="location" v-model="exhibition.location" rows="4" required />
     <label class="form-item" for="description">Description</label>
     <textarea id="description" v-model="exhibition.description" rows="5" required />
 
