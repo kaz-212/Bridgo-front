@@ -22,9 +22,6 @@ export default {
     exhibition() {
       return this.$store.getters['exhibition/getExhibitionById'](this.id)
     }
-  },
-  created() {
-    this.$store.dispatch('exhibition/getExhibitions')
   }
 }
 </script>
