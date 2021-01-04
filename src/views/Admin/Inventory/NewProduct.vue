@@ -18,17 +18,28 @@
     <input type="checkbox" v-model="sizingApplicable" />
 
     <div v-if="sizingApplicable">
-      <h4>Please put the smallest size first</h4>
+      <p>
+        Please order sizes from smallest to largest by putting a number in the 'Size order' box.
+        (e.g. smallest = 1, largest = 3)
+      </p>
       <div id="sizes" v-for="(size, index) in product.sizes" :key="index">
         <em>Size {{ index + 1 }} <i @click="deleteSize(index)" class="far fa-trash-alt"></i></em>
         <br />
-        <TextInput id="size" label="Size" v-model="size.size" />
-        <label for="size">Size</label>
-        <input id="size" type="text" v-model="size.size" placeholder="e.g. 'small' or '20 x 30'" />
-        <label for="price">Price (£)</label>
-        <input id="price" type="text" v-model="size.price" placeholder="e.g. '12.99'" />
-        <label for="qty">Quantity</label>
-        <input id="qty" type="text" v-model="size.qty" placeholder="e.g. 4" />
+        <TextInput
+          id="order-sizing"
+          label="Size Order"
+          v-model="size.index"
+          :placeholder="`e.g. '${index + 1}'`"
+        />
+
+        <TextInput
+          id="size"
+          label="Size"
+          v-model="size.size"
+          placeholder="e.g. 'small' or '20 x 30'"
+        />
+        <TextInput id="price" label="Price (£)" v-model="size.price" placeholder="e.g. '12.99'" />
+        <TextInput id="qtt" label="Quantity" v-model="size.qty" placeholder="e.g. '4'" />
       </div>
       <button @click.prevent="addSize">Add Size</button>
     </div>
@@ -39,20 +50,22 @@
         v-model="product.sizes[0].price"
         placeholder="e.g. '12.99'"
       />
-
-      <label for="qty">Quantity</label>
-      <input id="qty" type="text" v-model="product.sizes[0].qty" placeholder="e.g. 4" />
-      {{ product }}
+      <TextInput id="qty" label="Quantity" v-model="product.sizes[0].qty" placeholder="e.g. '4'" />
     </div>
+    <div>
+      <ImageUpload v-model="imgs" />
+    </div>
+    {{ imgs }}
   </div>
 </template>
 
 <script>
 import TextInput from '@/components/form/TextInput.vue'
+import ImageUpload from '@/components/form/ImageUpload.vue'
 
 export default {
   name: 'NewProduct',
-  components: { TextInput },
+  components: { TextInput, ImageUpload },
   data() {
     return {
       product: {
@@ -63,7 +76,8 @@ export default {
           {
             size: '',
             price: '',
-            qty: ''
+            qty: '',
+            index: ''
           }
         ]
       },
