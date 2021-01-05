@@ -13,7 +13,7 @@
       </select>
       <br />
       <label for="description">Product Description: </label>
-      <textarea id="description" rows="3"></textarea>
+      <textarea id="description" rows="3" v-model="product.description"></textarea>
 
       <h3>Sizing and Pricing</h3>
       <label for="sizing-applicable">Do you want to add sizes? </label>
@@ -78,14 +78,14 @@ export default {
   data() {
     return {
       product: {
-        name: '',
+        name: 'Tasty Print',
         type: 'print',
-        description: '',
+        description: 'Good Good Print',
         sizes: [
           {
             size: '',
-            price: '',
-            qty: '',
+            price: '12.99',
+            qty: '4',
             index: ''
           }
         ],
@@ -125,7 +125,7 @@ export default {
         }
       }
       const fd = new FormData()
-      for (const image of this.imgs) {
+      for (const img of this.imgs) {
         fd.append('imgs', img)
       }
       fd.append('product', JSON.stringify(this.product))
