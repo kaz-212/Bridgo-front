@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import router from '../router'
+import router from '../router'
 
 export default {
   namespaced: true,
@@ -10,24 +10,29 @@ export default {
   mutations: {
     GET_PRODUCTS(state, products) {
       state.products = products
+    },
+    SUBMIT_PRODUCT(state, product) {
+      state.products.push(product)
+      router.push({ name: 'AllProducts' })
     }
   },
 
   actions: {
-    // async getProducts({ commit }) {
-    //   try {
-    //     const res = await axios.get('products')
-    //     commit('GET_PRODUCTS', res.data)
-    //   } catch (e) {
-    //     console.log(e)
-    //   }
-    // },
+    async getProducts({ commit }) {
+      try {
+        const { data } = await axios.get('inventory')
+        console.log(data)
+        commit('GET_PRODUCTS', data)
+      } catch (e) {
+        console.log(e)
+      }
+    },
 
-    async submitProduct(state, fd) {
+    async submitProduct({ commit }, fd) {
       try {
         const { data } = await axios.post('inventory', fd)
-        console.log(data)
-        // commit('ADD_NEW_PRODUCT', data)
+        // console.log(data)
+        commit('SUBMIT_PRODUCT', data)
       } catch (e) {
         console.log(e)
       }

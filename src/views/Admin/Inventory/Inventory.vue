@@ -8,7 +8,7 @@
 export default {
   name: 'inventory',
   created() {
-    // this.$store.dispatch('exhibition/getExhibitions')
+    this.$store.dispatch('inventory/getProducts')
   }
 }
 </script>

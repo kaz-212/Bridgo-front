@@ -1,13 +1,25 @@
 <template>
   <div id="all-admin-products">
     <h1>All Products</h1>
+    <ul>
+      <li v-for="product in products" :key="product._id">
+        <router-link :to="{ name: 'EditProduct', params: { id: product._id } }">
+          {{ product.product.name }}
+        </router-link>
+      </li>
+    </ul>
     <router-link :to="{ name: 'NewProduct' }"><button>New Product</button></router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AllProducts'
+  name: 'AllProducts',
+  computed: {
+    products() {
+      return this.$store.state.inventory.products
+    }
+  }
 }
 </script>
 
@@ -16,7 +28,7 @@ html {
   overflow: hidden;
 }
 
-#exhibitions {
+#all-admin-products {
   margin-left: 15vw;
   width: 100%;
 }

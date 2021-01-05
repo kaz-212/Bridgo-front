@@ -28,20 +28,13 @@
           <em>Size {{ index + 1 }} <i @click="deleteSize(index)" class="far fa-trash-alt"></i></em>
           <br />
           <TextInput
-            id="order-sizing"
-            label="Size Order"
-            v-model="size.index"
-            :placeholder="`e.g. '${index + 1}'`"
-          />
-
-          <TextInput
             id="size"
             label="Size"
             v-model="size.size"
             placeholder="e.g. 'small' or '20 x 30'"
           />
           <TextInput id="price" label="Price (£)" v-model="size.price" placeholder="e.g. '12.99'" />
-          <TextInput id="qtt" label="Quantity" v-model="size.qty" placeholder="e.g. '4'" />
+          <TextInput id="qty" label="Quantity" v-model="size.qty" placeholder="e.g. '4'" />
         </div>
         <button @click.prevent="addSize">Add Size</button>
       </div>
@@ -86,7 +79,7 @@ export default {
             size: '',
             price: '12.99',
             qty: '4',
-            index: ''
+            index: 0
           }
         ],
         sizingApplicable: false
@@ -96,7 +89,12 @@ export default {
   },
   methods: {
     addSize() {
-      this.product.sizes.push({ size: '', price: '', qty: '' })
+      this.product.sizes.push({
+        size: '',
+        price: '',
+        qty: '',
+        index: this.product.sizes.length
+      })
     },
     deleteSize(index) {
       this.product.sizes.splice(index, 1)
@@ -109,7 +107,8 @@ export default {
           {
             size: 'unisize',
             price: this.product.sizes[0].price,
-            qty: this.product.sizes[0].qty
+            qty: this.product.sizes[0].qty,
+            index: 0
           }
         ]
         this.product.sizes = size
