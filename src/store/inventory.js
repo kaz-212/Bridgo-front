@@ -36,6 +36,14 @@ export default {
       } catch (e) {
         console.log(e)
       }
+    },
+    async editProduct(state, payload) {
+      try {
+        const { data } = await axios.put(`inventory/${payload.id}`, payload.fd)
+        console.log(data)
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
 
@@ -43,7 +51,10 @@ export default {
     /* eslint-disable no-underscore-dangle */
     getProductById: state => id => {
       const product = state.products.find(particular => particular._id === id)
-      product.size_price_qty.sort((a, b) => a.index - b.index)
+      // below to stop error cannot get size_type_qty of undefined
+      if (product) {
+        product.size_price_qty.sort((a, b) => a.index - b.index)
+      }
       return product
     }
   }

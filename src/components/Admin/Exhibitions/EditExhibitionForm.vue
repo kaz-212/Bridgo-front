@@ -22,7 +22,6 @@
       <label for="image">Image(s)</label>
       <DeleteImage :images="exhibition.images" v-model="deleteFilenames" />
       <ImageUpload v-model="imgs" />
-      {{ imgs }}
     </div>
     <label for="Show">Show this exhibition?</label>
     <input
@@ -67,22 +66,12 @@ export default {
     }
   },
   methods: {
-    onFileSelected() {
-      const { files } = this.$refs.fileSelector
-      this.imgs = [...this.imgs, ...files]
-      console.log(files)
-    },
-
     addLink() {
       this.exhibition.links.push({ URL: '', name: '' })
     },
 
     deleteLink(index) {
       this.exhibition.links.splice(index, 1)
-    },
-
-    deleteImage(index) {
-      this.imgs.splice(index, 1)
     },
 
     cancel() {

@@ -47,30 +47,35 @@
         />
         <TextInput id="qty" label="Quantity" v-model="sizes[0].qty" placeholder="e.g. '4'" />
       </div>
-      <div>
+      <div id="images">
+        <DeleteImage :images="particular.product.images" v-model="deleteFilenames" />
         <ImageUpload v-model="imgs" />
       </div>
-      <button @click.prevent="submitProduct">Add Product</button>
+      <button @click.prevent="editProduct">Submit Changes</button>
     </form>
-    {{ sizes }}
   </div>
 </template>
 
 <script>
 import TextInput from '@/components/form/TextInput.vue'
 import ImageUpload from '@/components/form/ImageUpload.vue'
+import DeleteImage from '@/components/form/DeleteImage.vue'
 
 export default {
   name: 'Edit Product',
-  components: { TextInput, ImageUpload },
+  components: { TextInput, ImageUpload, DeleteImage },
   data() {
     return {
-      imgs: ''
+      imgs: '',
+      deleteFilenames: []
     }
   },
   computed: {
     id() {
       return this.$route.params.id
+    },
+    product() {
+      return this.$store.inventory.products
     },
     particular() {
       return this.$store.getters['inventory/getProductById'](this.id)
@@ -80,6 +85,24 @@ export default {
     },
     sizingApplicable() {
       return this.sizes.length > 1
+    }
+  },
+  methods: {
+    editProduct() {
+      // delete images before sending to server
+      const updatedImages = this.particular.product.images.filter(
+        image => !this.deleteFilenames.includes(image.filename)
+      )
+      this.particular.product.images = updatedImages
+      const fd = new FormData()
+      /* eslint-disable*/
+      for (const img of this.imgs) {
+        fd.append('imgs', img)
+      }
+      fd.append('particular', JSON.stringify(this.particular))
+      fd.append('sizes', JSON.stringify(this.sizes))
+      fd.append('filenames', JSON.stringify(this.deleteFilenames))
+      this.$store.dispatch('inventory/editProduct', {id: this.id, fd})
     }
   }
 }
