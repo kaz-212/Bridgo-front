@@ -20,25 +20,10 @@
 
     <div class="image-upload">
       <label for="image">Image(s)</label>
-      <div v-for="(image, index) in exhibition.images" :key="image._id">
-        <img :src="image.thumbnail" />
-        <label :for="`image${index}`"> delete? </label>
-        <input
-          :id="`image${index}`"
-          type="checkbox"
-          @change="deleteImageArray(index, image.filename)"
-        />
-      </div>
-      <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
+      <DeleteImage :images="exhibition.images" v-model="deleteFilenames" />
+      <ImageUpload v-model="imgs" />
+      {{ imgs }}
     </div>
-    <div class="files">
-      <div v-for="(img, index) in imgs" :key="index" class="file-display">
-        {{ img.name }} <i @click="deleteImage(index)" class="far fa-trash-alt"></i>
-      </div>
-    </div>
-
-    <!-- proxy button to click -->
-    <button @click.prevent="$refs.fileSelector.click()">Choose Image(s)</button>
     <label for="Show">Show this exhibition?</label>
     <input
       class="check-box"
@@ -47,6 +32,7 @@
       type="checkbox"
       :checked="exhibition.onShow"
     />
+
     <label for="Show">Is this an upcoming Exhibition?</label>
     <input
       class="check-box"
@@ -62,9 +48,12 @@
 </template>
 
 <script>
+import DeleteImage from '@/components/form/DeleteImage.vue'
+import ImageUpload from '@/components/form/ImageUpload.vue'
+
 export default {
   name: 'EditExhibitionForm',
-  components: {},
+  components: { DeleteImage, ImageUpload },
   props: { id: String },
   data() {
     return {
@@ -94,16 +83,6 @@ export default {
 
     deleteImage(index) {
       this.imgs.splice(index, 1)
-    },
-
-    deleteImageArray(pieceIndex, filename) {
-      const filenameI = this.deleteFilenames.indexOf(filename)
-      /* eslint-disable */
-      if (filenameI >= 0) {
-        this.deleteFilenames.splice(filenameI, 1)
-      } else {
-        this.deleteFilenames.push(filename)
-      }
     },
 
     cancel() {

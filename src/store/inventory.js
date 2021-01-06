@@ -41,5 +41,10 @@ export default {
 
   getters: {
     /* eslint-disable no-underscore-dangle */
+    getProductById: state => id => {
+      const product = state.products.find(particular => particular._id === id)
+      product.size_price_qty.sort((a, b) => a.index - b.index)
+      return product
+    }
   }
 }
