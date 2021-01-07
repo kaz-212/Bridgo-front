@@ -67,7 +67,8 @@ export default {
   data() {
     return {
       imgs: '',
-      deleteFilenames: []
+      deleteFilenames: [],
+      sizingApplicable: false
     }
   },
   computed: {
@@ -82,9 +83,6 @@ export default {
     },
     sizes() {
       return this.particular.size_price_qty
-    },
-    sizingApplicable() {
-      return this.sizes.length > 1
     }
   },
   methods: {
@@ -102,7 +100,7 @@ export default {
       fd.append('particular', JSON.stringify(this.particular))
       fd.append('sizes', JSON.stringify(this.sizes))
       fd.append('filenames', JSON.stringify(this.deleteFilenames))
-      this.$store.dispatch('inventory/editProduct', {id: this.id, fd})
+      this.$store.dispatch('inventory/editProduct', { id: this.id, fd })
     }
   }
 }
