@@ -7,20 +7,16 @@
 export default {
   name: 'Tab',
   props: {
-    name: {
-      required: true
-    },
-    selected: {
-      default: false
-    }
+    name: { required: true },
+    selected: { required: false }
   },
   data() {
-    return {
-      isActive: false
-    }
+    return {}
   },
-  mounted() {
-    this.isActive = this.selected
+  computed: {
+    isActive() {
+      return this.selected
+    }
   }
 }
 </script>
