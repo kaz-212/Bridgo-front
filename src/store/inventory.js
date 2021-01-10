@@ -56,6 +56,9 @@ export default {
         product.size_price_qty.sort((a, b) => a.index - b.index)
       }
       return product
-    }
+    },
+    getPieces: state => state.products.filter(particular => particular.product.type === 'piece'),
+    getPrints: state => state.products.filter(particular => particular.product.type === 'print'),
+    getOther: state => state.products.filter(particular => particular.product.type === 'other')
   }
 }

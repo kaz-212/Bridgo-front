@@ -15,6 +15,38 @@
       <label for="description">Product Description: </label>
       <textarea id="description" rows="3" v-model="particular.product.description"></textarea>
 
+      <h3>Sizing and Pricing</h3>
+      <label for="sizing-applicable">Do you want to add sizes? </label>
+      <input type="checkbox" v-model="sizingApplicable" />
+
+      <div v-if="sizingApplicable">
+        <p>
+          Please order sizes from smallest to largest (or the order you wish them to appear in the
+          shop)
+        </p>
+        <div id="sizes" v-for="(size, index) in sizes" :key="index">
+          <em>Size {{ index + 1 }} <i @click="deleteSize(index)" class="far fa-trash-alt"></i></em>
+          <br />
+          <TextInput
+            id="size"
+            label="Size"
+            v-model="size.size.size"
+            placeholder="e.g. 'small' or '20 x 30'"
+          />
+          <TextInput id="price" label="Price (£)" v-model="size.price" placeholder="e.g. '12.99'" />
+          <TextInput id="qty" label="Quantity" v-model="size.qty" placeholder="e.g. '4'" />
+        </div>
+        <button @click.prevent="addSize">Add Size</button>
+      </div>
+      <div v-if="!sizingApplicable">
+        <TextInput
+          id="price"
+          label="Price (£)"
+          v-model="sizes[0].price"
+          placeholder="e.g. '12.99'"
+        />
+        <TextInput id="qty" label="Quantity" v-model="sizes[0].qty" placeholder="e.g. '4'" />
+      </div>
       <div id="images">
         <DeleteImage :images="particular.product.images" v-model="deleteFilenames" />
         <ImageUpload v-model="imgs" />
@@ -43,8 +75,14 @@ export default {
     id() {
       return this.$route.params.id
     },
+    product() {
+      return this.$store.inventory.products
+    },
     particular() {
       return this.$store.getters['inventory/getProductById'](this.id)
+    },
+    sizes() {
+      return this.particular.size_price_qty
     }
   },
   methods: {

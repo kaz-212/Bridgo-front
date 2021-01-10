@@ -30,6 +30,7 @@ import EditExhibition from '@/views/Admin/Exhibitions/EditExhibition.vue'
 import AdminInventory from '@/views/Admin/Inventory/Inventory.vue'
 import AllAdminProducts from '@/views/Admin/Inventory/AllProducts.vue'
 import EditProduct from '@/views/Admin/Inventory/EditProduct.vue'
+import EditSize from '@/views/Admin/Inventory/EditSize.vue'
 import NewProduct from '@/views/Admin/Inventory/NewProduct.vue'
 
 const routes = [
@@ -160,9 +161,14 @@ const routes = [
             component: NewProduct
           },
           {
-            path: 'edit/:id',
+            path: 'edit-product/:id',
             name: 'EditProduct',
             component: EditProduct
+          },
+          {
+            path: 'edit-size/:id',
+            name: 'EditSize',
+            component: EditSize
           }
         ]
       }

@@ -4,7 +4,7 @@
 
     <Tabs :tabs="tabs" @set-tab="setTab">
       <Tab ref="tab1" name="Pieces" :selected="selectedTab == 'Pieces'">
-        <h2>Inside Tab 1</h2>
+        <ProductTable />
       </Tab>
       <Tab ref="tab2" name="Prints" :selected="selectedTab == 'Prints'">
         <h2>Inside Tab 2</h2>
@@ -13,7 +13,6 @@
         <h2>Inside Tab 3</h2>
       </Tab>
     </Tabs>
-
     <router-link :to="{ name: 'NewProduct' }"><button>New Product</button></router-link>
   </div>
 </template>
@@ -21,10 +20,12 @@
 <script>
 import Tab from '@/components/Tab/Tab.vue'
 import Tabs from '@/components/Tab/Tabs.vue'
+import ProductTable from '@/components/Inventory/ProductTable.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AllProducts',
-  components: { Tab, Tabs },
+  components: { Tab, Tabs, ProductTable },
   data() {
     return {
       tabs: [],
@@ -32,9 +33,11 @@ export default {
     }
   },
   computed: {
-    products() {
-      return this.$store.state.inventory.products
-    }
+    ...mapGetters({
+      pieces: 'inventory/getPieces',
+      prints: 'inventory/getPrints',
+      other: 'inventory/getOther'
+    })
   },
   methods: {
     setTab(tab) {
