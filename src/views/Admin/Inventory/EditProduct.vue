@@ -3,20 +3,20 @@
     <h1>Edit Product</h1>
     <form action="#">
       <h3>Product Details</h3>
-      <TextInput id="name" label="Product Name: " v-model="particular.product.name" />
+      <TextInput id="name" label="Product Name: " v-model="product.name" />
       <label for="type">Product Type: </label>
       <br />
-      <select id="type" v-model="particular.product.type">
-        <option value="print" :selected="particular.product.type === 'print'">Print</option>
+      <select id="type" v-model="product.type">
+        <option value="print" :selected="product.type === 'print'">Print</option>
         <option value="piece">Piece</option>
         <option value="other">Other</option>
       </select>
       <br />
       <label for="description">Product Description: </label>
-      <textarea id="description" rows="3" v-model="particular.product.description"></textarea>
+      <textarea id="description" rows="3" v-model="product.description"></textarea>
 
       <div id="images">
-        <DeleteImage :images="particular.product.images" v-model="deleteFilenames" />
+        <DeleteImage :images="product.images" v-model="deleteFilenames" />
         <ImageUpload v-model="imgs" />
       </div>
       <button @click.prevent="editProduct">Submit Changes</button>
@@ -45,24 +45,26 @@ export default {
     },
     particular() {
       return this.$store.getters['inventory/getProductById'](this.id)
+    },
+    product() {
+      return this.particular.product
     }
   },
   methods: {
     editProduct() {
       // delete images before sending to server
-      const updatedImages = this.particular.product.images.filter(
+      const updatedImages = this.product.images.filter(
         image => !this.deleteFilenames.includes(image.filename)
       )
-      this.particular.product.images = updatedImages
+      this.product.images = updatedImages
       const fd = new FormData()
       /* eslint-disable*/
       for (const img of this.imgs) {
         fd.append('imgs', img)
       }
-      fd.append('particular', JSON.stringify(this.particular))
-      fd.append('sizes', JSON.stringify(this.sizes))
+      fd.append('product', JSON.stringify(this.product))
       fd.append('filenames', JSON.stringify(this.deleteFilenames))
-      this.$store.dispatch('inventory/editProduct', { id: this.id, fd })
+      this.$store.dispatch('inventory/editProduct', { id: this.product._id, fd })
     }
   }
 }

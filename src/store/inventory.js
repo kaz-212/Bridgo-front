@@ -17,11 +17,21 @@ export default {
       router.push({ name: 'AllProducts' })
     },
 
-    DELETE_PRODUCT(state, product) {
+    EDIT_PRODUCT(state, product) {
       /* eslint-disable */
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i].product._id === product._id) {
+          state.products[i].product = product
+        }
+      }
+      router.push({ name: 'AllProducts' })
+    },
+
+    DELETE_PRODUCT(state, product) {
       for (let i = 0; i < state.products.length; i++) {
         if (state.products[i]._id === product) {
           state.products.splice(i, 1)
+          break
         }
       }
     }
@@ -47,10 +57,10 @@ export default {
         console.log(e)
       }
     },
-    async editProduct(state, payload) {
+    async editProduct({ commit }, payload) {
       try {
-        const { data } = await axios.put(`inventory/${payload.id}`, payload.fd)
-        console.log(data)
+        const { data } = await axios.put(`inventory/product/${payload.id}`, payload.fd)
+        commit('EDIT_PRODUCT', data)
       } catch (err) {
         console.log(err)
       }
