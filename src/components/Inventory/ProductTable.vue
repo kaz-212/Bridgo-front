@@ -6,18 +6,16 @@
           <th>Product</th>
           <th>Units Remaining</th>
           <th>Units Sold</th>
-          <th>Order</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(particular, index) in products" :key="particular._id">
+        <tr v-for="particular in products" :key="particular._id">
           <router-link :to="{ name: 'EditProduct', params: { id: particular._id } }"
             ><td>{{ particular.product.name }}</td></router-link
           >
           <td>6</td>
           <td>4</td>
-          <td>{{ index + 1 }}</td>
-          <td><i class="far fa-trash-alt"></i></td>
+          <td><i @click="deleteProduct(particular._id)" class="far fa-trash-alt"></i></td>
         </tr>
       </tbody>
     </table>
@@ -33,6 +31,14 @@ export default {
   computed: {
     products() {
       return this.$store.getters['inventory/getPrints']
+    }
+  },
+  methods: {
+    deleteProduct(id) {
+      /* eslint-disable */
+      if (confirm('Are you sure you want to delete? All the data will be lost!')) {
+        this.$store.dispatch('inventory/deleteProduct', id)
+      }
     }
   }
 }

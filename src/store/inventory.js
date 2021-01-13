@@ -11,9 +11,19 @@ export default {
     GET_PRODUCTS(state, products) {
       state.products = products
     },
+
     SUBMIT_PRODUCT(state, product) {
       state.products.push(product)
       router.push({ name: 'AllProducts' })
+    },
+
+    DELETE_PRODUCT(state, product) {
+      /* eslint-disable */
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i]._id === product) {
+          state.products.splice(i, 1)
+        }
+      }
     }
   },
 
@@ -40,6 +50,15 @@ export default {
     async editProduct(state, payload) {
       try {
         const { data } = await axios.put(`inventory/${payload.id}`, payload.fd)
+        console.log(data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async deleteProduct({ commit }, id) {
+      try {
+        const { data } = await axios.delete(`inventory/${id}`)
+        commit('DELETE_PRODUCT', data)
         console.log(data)
       } catch (err) {
         console.log(err)
