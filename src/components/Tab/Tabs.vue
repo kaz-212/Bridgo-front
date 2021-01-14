@@ -52,8 +52,4 @@ export default {
     }
   }
 }
-
-.tabs-details {
-  padding: 10px;
-}
 </style>

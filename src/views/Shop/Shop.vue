@@ -7,6 +7,8 @@
 <script>
 export default {
   name: 'Shop',
-  components: {}
+  created() {
+    this.$store.dispatch('inventory/getProducts')
+  }
 }
 </script>
