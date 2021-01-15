@@ -28,6 +28,7 @@
         <label for="price">Price</label>
         <h3>£{{ computedPrice }}</h3>
         <button @click="addToBasket">Add to Basket</button>
+        {{ basket }}
       </section>
     </div>
   </div>
@@ -54,6 +55,9 @@ export default {
     },
     computedPrice() {
       return (this.particular.size_price_qty[this.selectedSize].price * this.qtySelected).toFixed(2)
+    },
+    basket() {
+      return this.$store.state.basket.basket
     }
   },
   methods: {
@@ -64,7 +68,7 @@ export default {
         item.particular = this.particular
         item.qty = this.qtySelected
         item.size = this.particular.size_price_qty[this.selectedSize]._id
-        return console.log(item.particular)
+        return this.$store.dispatch('basket/addToBasket', item)
       }
       return alert(
         `Sorry, we only have ${this.particular.size_price_qty[this.selectedSize].qty} left in stock`
