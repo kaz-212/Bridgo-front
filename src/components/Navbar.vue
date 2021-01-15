@@ -19,6 +19,9 @@
       <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
         >Admin</router-link
       >
+      <router-link class="nav-link" :class="{ 'sixth-link': !hideLinks }" to="/shop"
+        ><i class="fas fa-shopping-cart"></i
+      ></router-link>
     </div>
 
     <div class="burger" :class="{ toggle: !hideLinks }" @click="navSlide">
@@ -62,7 +65,8 @@ body {
     z-index: 1000;
     // background-color: $navslider;
 
-    a {
+    a,
+    i {
       text-decoration: none;
       color: $navcolour;
     }
@@ -94,6 +98,11 @@ body {
       margin-left: auto;
 
       .nav-link {
+        i {
+          &:hover {
+            color: $navhover;
+          }
+        }
         &:hover {
           color: $navhover;
         }

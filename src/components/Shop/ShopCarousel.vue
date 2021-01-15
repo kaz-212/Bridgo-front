@@ -1,5 +1,5 @@
 <template>
-  <div v-if="product" class="grid-container">
+  <div v-if="product" class="grid-box">
     <div class="img-thumbs">
       <div
         class="side-img"
@@ -34,9 +34,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.grid-container {
+.grid-box {
   display: grid;
-  grid-template-columns: 8% 40% 1fr;
+  grid-template-columns: 17% auto;
+  grid-gap: 5px;
 
   .img-thumbs {
     display: flex;
