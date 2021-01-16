@@ -13,6 +13,16 @@ export default {
     },
     ADD_TO_BASKET(state, item) {
       state.basket.push(item)
+      // ======== CHECK IF PRODUCT WITH SAME SIZE IS ALREADY IN ========
+    },
+    UPDATE_QUANTITY(state, payload) {
+      /* eslint-disable */
+      for (const item of state.basket) {
+        if (item.particular._id === payload.item.particular._id) {
+          console.log('YUUUP')
+          item.qty = payload.qty
+        }
+      }
     }
   },
 
@@ -29,6 +39,9 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    updateQuantity({ commit }, payload) {
+      commit('UPDATE_QUANTITY', payload)
     }
   },
 

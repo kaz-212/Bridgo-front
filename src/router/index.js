@@ -13,6 +13,7 @@ import ShowExhibition from '@/views/Exhibitions/ShowExhibition.vue'
 import Shop from '@/views/Shop/Shop.vue'
 import ShopFront from '@/views/Shop/ShopFront.vue'
 import ShowItem from '@/views/Shop/ShowItem.vue'
+import Basket from '@/views/Shop/Basket.vue'
 
 import Admin from '@/router/admin'
 
@@ -78,6 +79,11 @@ const routes = [
         path: ':id',
         name: 'ShowItem',
         component: ShowItem
+      },
+      {
+        path: 'basket',
+        name: 'Basket',
+        component: Basket
       }
     ]
   },

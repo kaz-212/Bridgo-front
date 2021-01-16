@@ -19,7 +19,7 @@
       <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
         >Admin</router-link
       >
-      <router-link class="nav-link" :class="{ 'sixth-link': !hideLinks }" to="/shop"
+      <router-link class="nav-link" :class="{ 'sixth-link': !hideLinks }" :to="{ name: 'Basket' }"
         ><i class="fas fa-shopping-cart"></i
       ></router-link>
     </div>

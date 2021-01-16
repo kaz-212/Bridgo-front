@@ -25,6 +25,7 @@ export default {
   },
   beforeUnmount() {
     // when leaving the store route, stop listening to the basket
+    console.log('leaving')
     this.unsubscribe()
   }
 }

@@ -67,7 +67,7 @@ export default {
         const item = {}
         item.particular = this.particular
         item.qty = this.qtySelected
-        item.size = this.particular.size_price_qty[this.selectedSize]._id
+        item.info = this.particular.size_price_qty[this.selectedSize]
         return this.$store.dispatch('basket/addToBasket', item)
       }
       return alert(
