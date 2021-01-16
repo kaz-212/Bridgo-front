@@ -28,7 +28,6 @@
         <label for="price">Price</label>
         <h3>£{{ computedPrice }}</h3>
         <button @click="addToBasket">Add to Basket</button>
-        {{ basket }}
       </section>
     </div>
   </div>

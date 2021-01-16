@@ -5,7 +5,6 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Size</th>
           <th>Quantity</th>
           <th>Price</th>
         </tr>
@@ -23,14 +22,15 @@
               :name="`${index}-qty`"
               :id="`${index}-qty`"
               :value="item.qty"
+              min="1"
+              max="10"
             />
           </td>
-          <td>{{ item.info.price }}</td>
-          <td><i class="far fa-trash-alt"></i></td>
+          <td>£ {{ item.info.price * item.qty }}</td>
+          <td><i @click="removeItem(item)" class="far fa-trash-alt"></i></td>
         </tr>
       </tbody>
     </table>
-    {{ basketItems }}
   </div>
 </template>
 
@@ -48,6 +48,12 @@ export default {
   methods: {
     changeQuantity(item, event) {
       this.$store.dispatch('basket/updateQuantity', { qty: event.target.value, item })
+    },
+    removeItem(item) {
+      /* eslint-disable */
+      if (confirm('Are you sure you want to remove this from your basket?')) {
+        this.$store.dispatch('basket/removeItem', item)
+      }
     }
   }
 }

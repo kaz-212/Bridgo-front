@@ -23,6 +23,13 @@ export default {
           item.qty = payload.qty
         }
       }
+    },
+    REMOVE_ITEM(state, item) {
+      for (let i = 0; i < state.basket.length; i++) {
+        if (state.basket[i].particular._id == item.particular._id) {
+          state.basket.splice(i, 1)
+        }
+      }
     }
   },
 
@@ -42,6 +49,9 @@ export default {
     },
     updateQuantity({ commit }, payload) {
       commit('UPDATE_QUANTITY', payload)
+    },
+    removeItem({ commit }, item) {
+      commit('REMOVE_ITEM', item)
     }
   },
 
