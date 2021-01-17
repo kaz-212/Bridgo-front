@@ -11,14 +11,25 @@ export default {
     SET_BASKET(state, basket) {
       state.basket = basket
     },
-    ADD_TO_BASKET(state, item) {
-      state.basket.push(item)
+    ADD_TO_BASKET(state, updateItem) {
+      /* eslint-disable */
+      for (const item of state.basket) {
+        if (
+          item.particular._id === updateItem.particular._id &&
+          item.info._id === updateItem.info._id
+        ) {
+          return (item.qty += 1)
+        }
+      }
+      return state.basket.push(updateItem)
       // ======== CHECK IF PRODUCT WITH SAME SIZE IS ALREADY IN ========
     },
     UPDATE_QUANTITY(state, payload) {
-      /* eslint-disable */
       for (const item of state.basket) {
-        if (item.particular._id === payload.item.particular._id) {
+        if (
+          item.particular._id === payload.item.particular._id &&
+          item.info._id === payload.item.info._id
+        ) {
           console.log('YUUUP')
           item.qty = payload.qty
         }

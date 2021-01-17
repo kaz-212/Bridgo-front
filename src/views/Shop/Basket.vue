@@ -26,8 +26,13 @@
               max="10"
             />
           </td>
-          <td>£ {{ item.info.price * item.qty }}</td>
+          <td>£ {{ (item.info.price * item.qty).toFixed(2) }}</td>
           <td><i @click="removeItem(item)" class="far fa-trash-alt"></i></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><strong>Total</strong></td>
+          <td>£ {{ totalPrice.toFixed(2) }}</td>
         </tr>
       </tbody>
     </table>
@@ -46,14 +51,21 @@ export default {
   computed: {
     basketItems() {
       return this.$store.state.basket.basket
+    },
+    totalPrice() {
+      let sum = 0
+      /* eslint-disable */
+      for (const item of this.basketItems) {
+        sum += item.info.price * item.qty
+      }
+      return sum
     }
   },
   methods: {
     changeQuantity(item, event) {
-      this.$store.dispatch('basket/updateQuantity', { qty: event.target.value, item })
+      this.$store.dispatch('basket/updateQuantity', { qty: parseInt(event.target.value, 10), item })
     },
     removeItem(item) {
-      /* eslint-disable */
       if (confirm('Are you sure you want to remove this from your basket?')) {
         this.$store.dispatch('basket/removeItem', item)
       }
