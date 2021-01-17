@@ -14,6 +14,7 @@ import Shop from '@/views/Shop/Shop.vue'
 import ShopFront from '@/views/Shop/ShopFront.vue'
 import ShowItem from '@/views/Shop/ShowItem.vue'
 import Basket from '@/views/Shop/Basket.vue'
+import Checkout from '@/views/Shop/Checkout.vue'
 
 import Admin from '@/router/admin'
 
@@ -84,6 +85,11 @@ const routes = [
         path: 'basket',
         name: 'Basket',
         component: Basket
+      },
+      {
+        path: 'checkout',
+        name: 'Checkout',
+        component: Checkout
       }
     ]
   },

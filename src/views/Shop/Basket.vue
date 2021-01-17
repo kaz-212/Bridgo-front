@@ -31,6 +31,9 @@
         </tr>
       </tbody>
     </table>
+    <div class="checkout">
+      <router-link :to="{ name: 'Checkout' }"><button>Continue to Checkout</button></router-link>
+    </div>
   </div>
 </template>
 
@@ -59,4 +62,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+i {
+  cursor: pointer;
+}
+</style>
