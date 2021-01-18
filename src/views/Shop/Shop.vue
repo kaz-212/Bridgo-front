@@ -7,7 +7,6 @@
 <script>
 export default {
   name: 'Shop',
-  data() {},
   created() {
     this.$store.dispatch('inventory/getProducts')
     /* eslint-disable */

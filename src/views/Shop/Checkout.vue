@@ -6,6 +6,8 @@
       <TextInput id="address" label="Address" v-model="shipAddress.address" />
       <TextInput id="city" label="City" v-model="shipAddress.city" />
       <TextInput id="post-code" label="Post Code" v-model="shipAddress.postCode" />
+      <label for="amount">Amount to pay:</label>
+      <h3>£ {{ amount }}</h3>
       <div class="stripe-container">
         <div class="stripe-input">
           <div class="stripe-component" ref="card"></div>
@@ -17,9 +19,9 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { loadStripe } from '@stripe/stripe-js'
 import TextInput from '@/components/form/TextInput.vue'
-// import axios from 'axios'
 
 // 4000058260000005
 
@@ -55,18 +57,39 @@ export default {
         address: '',
         city: '',
         postCode: ''
-      }
+      },
+      amount: ''
+    }
+  },
+  computed: {
+    basketItems() {
+      return this.$store.state.basket.basket
     }
   },
   methods: {
     async purchase() {
       try {
-        const res = await stripe.createToken(card)
-        console.log(res)
+        const token = await stripe.createToken(card)
+        const payload = { shipAddress, token }
+        this.$store.dispatch('basket/makePayment', payload)
       } catch (err) {
         console.log(err)
         this.$forceUpdate()
       }
+    },
+    async fetchPaymentIntent() {
+      const res = await axios.post(
+        'payment-intent',
+        { items: this.basketItems },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      )
+      // set cookie with client_secret, id and amount to be paid
+      this.$cookie.setCookie('intent', res.data)
+      this.amount = (res.data.amount / 100).toFixed(2)
+      console.log(this.$cookie.getCookie('intent'))
     }
   },
   mounted() {
@@ -74,6 +97,7 @@ export default {
     if (typeof card == 'undefined') {
       card = elements.create('card', cardStyle)
     }
+    this.fetchPaymentIntent()
     card.mount(this.$refs.card)
   }
 }
