@@ -1,8 +1,13 @@
 <template>
   <div>
     <h1>Checkout</h1>
-    <h2>Please enter your address for delivery</h2>
     <form action="#">
+      <h2>Please enter your contact details</h2>
+      <TextInput id="firstName" label="First Name" v-model="contactDetails.firstName" />
+      <TextInput id="lastname" label="Last Name" v-model="contactDetails.lastName" />
+      <TextInput id="email" label="Email" v-model="contactDetails.email" />
+
+      <h2>Please enter your address for delivery</h2>
       <TextInput id="address" label="Address" v-model="shipAddress.address" />
       <TextInput id="city" label="City" v-model="shipAddress.city" />
       <TextInput id="post-code" label="Post Code" v-model="shipAddress.postCode" />
@@ -58,6 +63,11 @@ export default {
         city: '',
         postCode: ''
       },
+      contactDetails: {
+        firstName: '',
+        lastName: '',
+        email: ''
+      },
       amount: ''
     }
   },
@@ -69,27 +79,47 @@ export default {
   methods: {
     async purchase() {
       try {
-        const token = await stripe.createToken(card)
-        const payload = { shipAddress, token }
-        this.$store.dispatch('basket/makePayment', payload)
+        const res = await stripe.confirmCardPayment(
+          this.$cookie.getCookie('intent').client_secret,
+          {
+            payment_method: {
+              card
+            },
+            shipping: {
+              address: {
+                city: this.shipAddress.city,
+                line1: this.shipAddress.address,
+                postal_code: this.shipAddress.postCode
+              },
+              name: `${this.contactDetails.firstName} ${this.contactDetails.lastName}`
+            },
+            receipt_email: this.contactDetails.email
+          }
+        )
+        console.log(res)
       } catch (err) {
+        // TODO proper error handle
         console.log(err)
-        this.$forceUpdate()
       }
     },
+
     async fetchPaymentIntent() {
-      const res = await axios.post(
-        'payment-intent',
-        { items: this.basketItems },
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true
-        }
-      )
-      // set cookie with client_secret, id and amount to be paid
-      this.$cookie.setCookie('intent', res.data)
-      this.amount = (res.data.amount / 100).toFixed(2)
-      console.log(this.$cookie.getCookie('intent'))
+      try {
+        const res = await axios.post(
+          'payment-intent',
+          { items: this.basketItems },
+          {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+          }
+        )
+        // set cookie with client_secret, id and amount to be paid
+        this.$cookie.setCookie('intent', res.data)
+        this.amount = (res.data.amount / 100).toFixed(2)
+      } catch (err) {
+        // TODO handle error
+        console.log(err)
+      }
     }
   },
   mounted() {
