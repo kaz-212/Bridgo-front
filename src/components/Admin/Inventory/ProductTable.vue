@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr v-for="product in products" :key="product._id">
-          <router-link :to="{ name: 'EditProduct', params: { id: product._id } }"
+          <router-link :to="{ name: 'ShowProductDetails', params: { id: product._id } }"
             ><td>{{ product.name }}</td></router-link
           >
           <td>{{ totalRemaining(product.particulars) }}</td>

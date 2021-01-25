@@ -1,5 +1,5 @@
 <template>
-  <div id="edit-product" v-if="particular">
+  <div id="edit-product" v-if="product">
     <h1>Edit Product</h1>
     <form action="#">
       <h3>Product Details</h3>
@@ -30,7 +30,7 @@ import ImageUpload from '@/components/form/ImageUpload.vue'
 import DeleteImage from '@/components/form/DeleteImage.vue'
 
 export default {
-  name: 'Edit Product',
+  name: 'ShowProductDetails',
   components: { TextInput, ImageUpload, DeleteImage },
   data() {
     return {
@@ -43,11 +43,8 @@ export default {
     id() {
       return this.$route.params.id
     },
-    particular() {
-      return this.$store.getters['inventory/getProductById'](this.id)
-    },
     product() {
-      return this.particular.product
+      return this.$store.getters['inventory/getProductById'](this.id)
     }
   },
   methods: {

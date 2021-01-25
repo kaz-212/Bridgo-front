@@ -18,8 +18,7 @@ import EditExhibition from '@/views/Admin/Exhibitions/EditExhibition.vue'
 // inventory
 import AdminInventory from '@/views/Admin/Inventory/Inventory.vue'
 import AllAdminProducts from '@/views/Admin/Inventory/AllProducts.vue'
-import EditProduct from '@/views/Admin/Inventory/EditProduct.vue'
-import EditSize from '@/views/Admin/Inventory/EditSize.vue'
+import ShowProductDetails from '@/views/Admin/Inventory/ShowProductDetails.vue'
 import NewProduct from '@/views/Admin/Inventory/NewProduct.vue'
 
 export default {
@@ -97,14 +96,9 @@ export default {
           component: NewProduct
         },
         {
-          path: 'edit-product/:id',
-          name: 'EditProduct',
-          component: EditProduct
-        },
-        {
-          path: 'edit-size/:id',
-          name: 'EditSize',
-          component: EditSize
+          path: ':id',
+          name: 'ShowProductDetails',
+          component: ShowProductDetails
         }
       ]
     }

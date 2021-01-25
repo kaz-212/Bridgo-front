@@ -41,7 +41,6 @@ export default {
     async getProducts({ commit }) {
       try {
         const { data } = await axios.get('admin/inventory')
-        console.log('Products: ', data)
         commit('GET_PRODUCTS', data)
       } catch (e) {
         console.log(e)

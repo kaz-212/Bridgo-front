@@ -50,7 +50,6 @@ export default {
   },
   mounted() {
     this.tabs = [this.$refs.tab1, this.$refs.tab2, this.$refs.tab3]
-    console.log(this.prints)
   }
 }
 </script>
