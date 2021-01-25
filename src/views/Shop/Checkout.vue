@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="basketItems.length > 0">
     <h1>Checkout</h1>
     <form action="#">
       <h2>Please enter your contact details</h2>
@@ -21,6 +21,9 @@
       </div>
     </form>
   </div>
+  <div v-else>
+    <h1>pls add some items to your basket</h1>
+  </div>
 </template>
 
 <script>
@@ -30,6 +33,7 @@ import TextInput from '@/components/form/TextInput.vue'
 
 // 4000058260000005
 
+// TODO when basket empty, display 'pls put items in basket' page
 let stripe
 let elements
 let card
@@ -52,7 +56,6 @@ const cardStyle = {
   }
 }
 
-// ======== CHANGE TO SHOW ERROR MESSAGE WHEN BASKET EMPTY ========
 export default {
   name: 'Checkout',
   components: { TextInput },
@@ -97,6 +100,12 @@ export default {
           }
         )
         console.log(res)
+        // clear cookie and delete basket
+        this.$store.commit('basket/CLEAR_BASKET')
+        this.$cookie.removeCookie('intent')
+        this.$router.push({ name: 'Exhibitions' })
+        //TODO do the business logic for the order i.e. subtract from quantity add to orders schema, also add order number to paymentIntent's metadata
+        // TODO thank you for your purchase
       } catch (err) {
         // TODO proper error handle
         console.log(err)
@@ -123,12 +132,15 @@ export default {
     }
   },
   mounted() {
-    // if statement so it doesn't re-create card every time mounted
-    if (typeof card == 'undefined') {
-      card = elements.create('card', cardStyle)
+    // only do this if there are items in the basket
+    if (this.basketItems.length > 0) {
+      // stripe doesn't like you re-creating card element
+      if (typeof card == 'undefined') {
+        card = elements.create('card', cardStyle)
+      }
+      this.fetchPaymentIntent()
+      card.mount(this.$refs.card)
     }
-    this.fetchPaymentIntent()
-    card.mount(this.$refs.card)
   }
 }
 </script>

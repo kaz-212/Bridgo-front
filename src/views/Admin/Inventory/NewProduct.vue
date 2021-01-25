@@ -24,17 +24,22 @@
           Please order sizes from smallest to largest by putting a number in the 'Size order' box.
           (e.g. smallest = 1, largest = 3)
         </p>
-        <div id="sizes" v-for="(size, index) in product.sizes" :key="index">
+        <div id="sizes" v-for="(detail, index) in product.details" :key="index">
           <em>Size {{ index + 1 }} <i @click="deleteSize(index)" class="far fa-trash-alt"></i></em>
           <br />
           <TextInput
             id="size"
             label="Size"
-            v-model="size.size"
+            v-model="detail.size"
             placeholder="e.g. 'small' or '20 x 30'"
           />
-          <TextInput id="price" label="Price (£)" v-model="size.price" placeholder="e.g. '12.99'" />
-          <TextInput id="qty" label="Quantity" v-model="size.qty" placeholder="e.g. '4'" />
+          <TextInput
+            id="price"
+            label="Price (£)"
+            v-model="detail.price"
+            placeholder="e.g. '12.99'"
+          />
+          <TextInput id="qty" label="Quantity" v-model="detail.qty" placeholder="e.g. '4'" />
         </div>
         <button @click.prevent="addSize">Add Size</button>
       </div>
@@ -42,13 +47,13 @@
         <TextInput
           id="price"
           label="Price (£)"
-          v-model="product.sizes[0].price"
+          v-model="product.details[0].price"
           placeholder="e.g. '12.99'"
         />
         <TextInput
           id="qty"
           label="Quantity"
-          v-model="product.sizes[0].qty"
+          v-model="product.details[0].qty"
           placeholder="e.g. '4'"
         />
       </div>
@@ -74,7 +79,7 @@ export default {
         name: 'Tasty Print',
         type: 'print',
         description: 'Good Good Print',
-        sizes: [
+        details: [
           {
             size: '',
             price: '12.99',
@@ -89,35 +94,35 @@ export default {
   },
   methods: {
     addSize() {
-      this.product.sizes.push({
+      this.product.details.push({
         size: '',
         price: '',
-        qty: '',
-        index: this.product.sizes.length
+        unitsRemaining: ''
+        // index: this.product.details.length
       })
     },
     deleteSize(index) {
-      this.product.sizes.splice(index, 1)
+      this.product.details.splice(index, 1)
     },
     submitProduct() {
-      // if sizes not applicable, replace sizes array with below
+      // if details not applicable, replace details array with below
       /* eslint-disable */
       if (!this.product.sizingApplicable) {
-        const size = [
+        const details = [
           {
             size: 'unisize',
-            price: this.product.sizes[0].price,
-            qty: this.product.sizes[0].qty,
+            price: this.product.details[0].price,
+            qty: this.product.details[0].qty,
             index: 0
           }
         ]
-        this.product.sizes = size
+        this.product.details = details
       } else {
         // make sure all size index's are unique
         const valuesSoFar = []
-        for (const size of this.product.sizes) {
-          if (!valuesSoFar.includes(size.index)) {
-            valuesSoFar.push(size.index)
+        for (const detail of this.product.details) {
+          if (!valuesSoFar.includes(detail.index)) {
+            valuesSoFar.push(detail.index)
           } else {
             return alert("Please make sure the numbers in 'Size Order' are all unique")
           }

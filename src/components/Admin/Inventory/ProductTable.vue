@@ -13,8 +13,8 @@
           <router-link :to="{ name: 'EditProduct', params: { id: product._id } }"
             ><td>{{ product.name }}</td></router-link
           >
-          <td>6</td>
-          <td>4</td>
+          <td>{{ totalRemaining(product.particulars) }}</td>
+          <td>{{ totalSold(product.particulars) }}</td>
           <td><i @click="deleteProduct(product._id)" class="far fa-trash-alt"></i></td>
         </tr>
       </tbody>
@@ -31,12 +31,29 @@ export default {
   data() {
     return {}
   },
+  computed: {},
   methods: {
     deleteProduct(id) {
       /* eslint-disable */
       if (confirm('Are you sure you want to delete? All the data will be lost!')) {
         this.$store.dispatch('inventory/deleteProduct', id)
       }
+    },
+    totalRemaining(particulars) {
+      /* eslint-disable */
+      let total = 0
+      for (const particular of particulars) {
+        total += particular.unitsRemaining
+      }
+      return total
+    },
+    totalSold(particulars) {
+      /* eslint-disable */
+      let total = 0
+      for (const particular of particulars) {
+        total += particular.unitsSold
+      }
+      return total
     }
   }
 }

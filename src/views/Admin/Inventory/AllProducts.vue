@@ -4,10 +4,10 @@
 
     <Tabs :tabs="tabs" @set-tab="setTab">
       <Tab ref="tab1" name="Pieces" :selected="selectedTab == 'Pieces'">
-        <ProductTable />
+        <ProductTable :products="pieces" />
       </Tab>
       <Tab ref="tab2" name="Prints" :selected="selectedTab == 'Prints'">
-        <h2>Inside Tab 2</h2>
+        <ProductTable :products="prints" />
       </Tab>
       <Tab ref="tab3" name="Other" :selected="selectedTab == 'Other'">
         <h2>Inside Tab 3</h2>
@@ -20,7 +20,7 @@
 <script>
 import Tab from '@/components/Tab/Tab.vue'
 import Tabs from '@/components/Tab/Tabs.vue'
-import ProductTable from '@/components/Inventory/ProductTable.vue'
+import ProductTable from '@/components/Admin/Inventory/ProductTable.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -50,6 +50,7 @@ export default {
   },
   mounted() {
     this.tabs = [this.$refs.tab1, this.$refs.tab2, this.$refs.tab3]
+    console.log(this.prints)
   }
 }
 </script>

@@ -40,8 +40,8 @@ export default {
   actions: {
     async getProducts({ commit }) {
       try {
-        const { data } = await axios.get('inventory')
-        console.log(data)
+        const { data } = await axios.get('admin/inventory')
+        console.log('Products: ', data)
         commit('GET_PRODUCTS', data)
       } catch (e) {
         console.log(e)
@@ -50,7 +50,7 @@ export default {
 
     async submitProduct({ commit }, fd) {
       try {
-        const { data } = await axios.post('inventory', fd)
+        const { data } = await axios.post('admin/inventory', fd)
         // console.log(data)
         commit('SUBMIT_PRODUCT', data)
       } catch (e) {
@@ -67,7 +67,7 @@ export default {
     },
     async deleteProduct({ commit }, id) {
       try {
-        const { data } = await axios.delete(`inventory/${id}`)
+        const { data } = await axios.delete(`admin/inventory/${id}`)
         commit('DELETE_PRODUCT', data)
         console.log(data)
       } catch (err) {
@@ -79,15 +79,15 @@ export default {
   getters: {
     /* eslint-disable no-underscore-dangle */
     getProductById: state => id => {
-      const product = state.products.find(particular => particular._id === id)
-      // below to stop error cannot get size_type_qty of undefined
-      if (product) {
-        product.size_price_qty.sort((a, b) => a.index - b.index)
-      }
+      const product = state.products.find(item => item._id === id)
+      // // below to stop error cannot get size_type_qty of undefined
+      // if (product) {
+      //   product.size_price_qty.sort((a, b) => a.index - b.index)
+      // }
       return product
     },
-    getPieces: state => state.products.filter(particular => particular.product.type === 'piece'),
-    getPrints: state => state.products.filter(particular => particular.product.type === 'print'),
-    getOther: state => state.products.filter(particular => particular.product.type === 'other')
+    getPieces: state => state.products.filter(item => item.type === 'piece'),
+    getPrints: state => state.products.filter(item => item.type === 'print'),
+    getOther: state => state.products.filter(item => item.type === 'other')
   }
 }

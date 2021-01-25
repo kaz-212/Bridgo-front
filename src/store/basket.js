@@ -23,6 +23,10 @@ export default {
       return state.basket.push(updateItem)
       // ======== CHECK IF PRODUCT WITH SAME SIZE IS ALREADY IN ========
     },
+    CLEAR_BASKET(state) {
+      state.basket = []
+    },
+
     UPDATE_QUANTITY(state, payload) {
       for (const item of state.basket) {
         if (
