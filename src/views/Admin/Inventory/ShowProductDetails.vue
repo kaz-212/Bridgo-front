@@ -56,13 +56,21 @@
           </tr>
         </thead>
         <tbody>
+          <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
           <tr v-for="particular in product.particulars" :key="particular._id">
-            <td>{{ particular.size.name }}</td>
-            <td>£{{ particular.price }}</td>
-            <td>{{ particular.unitsRemaining }}</td>
-            <td>{{ particular.unitsSold }}</td>
-            <td><i class="fas fa-edit"></i></td>
-            <td><i class="far fa-trash-alt"></i></td>
+            <td v-if="editSize != particular._id">{{ particular.size.name }}</td>
+            <td v-else><input type="text" v-model="particular.size.name" /></td>
+            <td v-if="editSize != particular._id">£{{ particular.price }}</td>
+            <td v-else><input type="text" v-model="particular.price" /></td>
+            <td v-if="editSize != particular._id">{{ particular.unitsRemaining }}</td>
+            <td v-else><input type="text" v-model="particular.unitsRemaining" /></td>
+            <td v-if="editSize != particular._id">{{ particular.unitsSold }}</td>
+            <td v-else><input type="text" v-model="particular.unitsSold" /></td>
+            <td v-if="editSize != particular._id">
+              <i @click="editSize = particular._id" class="fas fa-edit"></i>
+            </td>
+            <td v-if="editSize != particular._id"><i class="far fa-trash-alt"></i></td>
+            <td v-else><button @click="editParticular(particular)">Submit Changes</button></td>
           </tr>
         </tbody>
       </table>
@@ -81,6 +89,7 @@ export default {
   data() {
     return {
       editingProduct: false,
+      editSize: '',
       imgs: '',
       deleteFilenames: [],
       sizingApplicable: false
@@ -111,6 +120,10 @@ export default {
       this.$store
         .dispatch('inventory/editProduct', { id: this.product._id, fd })
         .then((this.editingProduct = false))
+    },
+    editParticular(particular) {
+      this.$store.dispatch('inventory/editParticular', particular)
+      this.editSize = ''
     }
   }
 }

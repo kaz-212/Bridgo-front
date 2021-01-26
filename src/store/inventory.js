@@ -63,6 +63,16 @@ export default {
         console.log(err)
       }
     },
+
+    async editParticular(commit, particular) {
+      try {
+        const { data } = await axios.put(`admin/inventory/particular/${particular._id}`, particular)
+        console.log(data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
     async deleteProduct({ commit }, id) {
       try {
         const { data } = await axios.delete(`admin/inventory/${id}`)
