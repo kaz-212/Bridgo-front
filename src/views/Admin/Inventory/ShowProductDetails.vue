@@ -32,11 +32,19 @@
           <br />
           <label for="description">Product Description: </label>
           <textarea id="description" rows="3" v-model="product.description"></textarea>
-
+          <label for="on-show">Show Product In Shop?</label>
+          <input
+            type="checkbox"
+            name="on-show"
+            id="on-show"
+            :checked="product.onShow"
+            v-model="product.onShow"
+          />
           <div id="images">
             <DeleteImage :images="product.images" v-model="deleteFilenames" />
             <ImageUpload v-model="imgs" />
           </div>
+          <br />
           <button @click.prevent="editProduct">Submit Changes</button>
           <button @click.prevent="cancelProductChanges">Cancel Changes</button>
         </form>
@@ -75,6 +83,21 @@
             </td>
             <td v-else><button @click="editParticular(particular)">Submit Changes</button></td>
           </tr>
+          <tr class="new-particular">
+            <td v-if="!addSize"></td>
+            <td v-else><input type="text" v-model="newSize.size" /></td>
+            <td v-if="!addSize"></td>
+            <td v-else><input type="text" v-model="newSize.price" /></td>
+            <td v-if="!addSize"></td>
+            <td v-else><input type="text" v-model="newSize.unitsRemaining" /></td>
+            <td v-if="!addSize"></td>
+            <td v-else><input type="text" v-model="newSize.unitsSold" /></td>
+            <td v-if="!addSize"><button @click="addSize = true">Add Size</button></td>
+            <td v-else>
+              <button @click="addParticular">Submit</button
+              ><button @click="cancelParticular">Cancel</button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -95,7 +118,14 @@ export default {
       editSize: '',
       imgs: '',
       deleteFilenames: [],
-      sizingApplicable: false
+      sizingApplicable: false,
+      addSize: false,
+      newSize: {
+        size: '',
+        price: '',
+        unitsRemaining: '',
+        unitsSold: ''
+      }
     }
   },
   computed: {
@@ -134,9 +164,31 @@ export default {
     },
     delParticular(id) {
       this.$store.dispatch('inventory/deleteParticular', id)
+    },
+    addParticular() {
+      this.$store.dispatch('inventory/addParticular', {
+        particular: this.newSize,
+        productId: this.id
+      })
+      this.newSize.size = ''
+      this.newSize.price = ''
+      this.newSize.unitsRemaining = ''
+      this.newSize.unitsSold = ''
+      this.addSize = false
+    },
+    cancelParticular() {
+      this.newSize.size = ''
+      this.newSize.price = ''
+      this.newSize.unitsRemaining = ''
+      this.newSize.unitsSold = ''
+      this.addSize = false
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+i {
+  cursor: pointer;
+}
+</style>

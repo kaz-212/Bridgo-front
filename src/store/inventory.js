@@ -22,6 +22,7 @@ export default {
       for (let i = 0; i < state.products.length; i++) {
         if (state.products[i]._id === product._id) {
           state.products[i] = product
+          console.log(product)
         }
       }
     },
@@ -44,15 +45,6 @@ export default {
               console.log(particular)
             }
           }
-        }
-      }
-    },
-    DELETE_PARTICULAR(state, particular) {
-      for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i]._id === particular.product) {
-          state.products[i].particulars = state.products[i].particulars.filter(
-            p => p._id != particular._id
-          )
         }
       }
     }
@@ -108,7 +100,17 @@ export default {
     async deleteParticular({ commit }, id) {
       try {
         const { data } = await axios.delete(`admin/inventory/particular/${id}`)
-        commit('DELETE_PARTICULAR', data)
+        console.log('1')
+        commit('EDIT_PRODUCT', data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    async addParticular({ commit }, payload) {
+      try {
+        const { data } = await axios.post(`admin/inventory/particular`, payload)
+        commit('EDIT_PRODUCT', data)
         console.log(data)
       } catch (err) {
         console.log(err)
