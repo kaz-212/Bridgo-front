@@ -24,7 +24,6 @@ export default {
           state.products[i].product = product
         }
       }
-      router.push({ name: 'AllProducts' })
     },
 
     DELETE_PRODUCT(state, product) {
@@ -58,8 +57,8 @@ export default {
     },
     async editProduct({ commit }, payload) {
       try {
-        const { data } = await axios.put(`inventory/product/${payload.id}`, payload.fd)
-        commit('EDIT_PRODUCT', data)
+        const { data } = await axios.put(`admin/inventory/product/${payload.id}`, payload.fd)
+        return commit('EDIT_PRODUCT', data)
       } catch (err) {
         console.log(err)
       }
