@@ -20,8 +20,8 @@ export default {
     EDIT_PRODUCT(state, product) {
       /* eslint-disable */
       for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i].product._id === product._id) {
-          state.products[i].product = product
+        if (state.products[i]._id === product._id) {
+          state.products[i] = product
         }
       }
     },
@@ -31,6 +31,28 @@ export default {
         if (state.products[i]._id === product) {
           state.products.splice(i, 1)
           break
+        }
+      }
+    },
+
+    EDIT_PARTICULAR(state, particular) {
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i]._id === particular.product) {
+          for (let j = 0; j < state.products[i].particulars; j++) {
+            if (state.products[i].particulars[j]._id == particular._id) {
+              state.products[i].particulars[j] = particular
+              console.log(particular)
+            }
+          }
+        }
+      }
+    },
+    DELETE_PARTICULAR(state, particular) {
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i]._id === particular.product) {
+          state.products[i].particulars = state.products[i].particulars.filter(
+            p => p._id != particular._id
+          )
         }
       }
     }
@@ -64,10 +86,10 @@ export default {
       }
     },
 
-    async editParticular(commit, particular) {
+    async editParticular({ commit }, particular) {
       try {
         const { data } = await axios.put(`admin/inventory/particular/${particular._id}`, particular)
-        console.log(data)
+        commit('EDIT_PARTICULAR', data)
       } catch (err) {
         console.log(err)
       }
@@ -75,8 +97,18 @@ export default {
 
     async deleteProduct({ commit }, id) {
       try {
-        const { data } = await axios.delete(`admin/inventory/${id}`)
+        const { data } = await axios.delete(`admin/inventory/product/${id}`)
         commit('DELETE_PRODUCT', data)
+        console.log(data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    async deleteParticular({ commit }, id) {
+      try {
+        const { data } = await axios.delete(`admin/inventory/particular/${id}`)
+        commit('DELETE_PARTICULAR', data)
         console.log(data)
       } catch (err) {
         console.log(err)

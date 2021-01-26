@@ -83,8 +83,8 @@ export default {
           {
             size: '',
             price: '12.99',
-            qty: '4',
-            index: 0
+            qty: '4'
+            // index: 0
           }
         ],
         sizingApplicable: false
@@ -112,21 +112,11 @@ export default {
           {
             size: 'unisize',
             price: this.product.details[0].price,
-            qty: this.product.details[0].qty,
-            index: 0
+            qty: this.product.details[0].qty
+            // index: 0
           }
         ]
         this.product.details = details
-      } else {
-        // make sure all size index's are unique
-        const valuesSoFar = []
-        for (const detail of this.product.details) {
-          if (!valuesSoFar.includes(detail.index)) {
-            valuesSoFar.push(detail.index)
-          } else {
-            return alert("Please make sure the numbers in 'Size Order' are all unique")
-          }
-        }
       }
       const fd = new FormData()
       for (const img of this.imgs) {

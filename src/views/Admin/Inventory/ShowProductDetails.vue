@@ -38,6 +38,7 @@
             <ImageUpload v-model="imgs" />
           </div>
           <button @click.prevent="editProduct">Submit Changes</button>
+          <button @click.prevent="cancelProductChanges">Cancel Changes</button>
         </form>
       </div>
 
@@ -60,7 +61,7 @@
           <tr v-for="particular in product.particulars" :key="particular._id">
             <td v-if="editSize != particular._id">{{ particular.size.name }}</td>
             <td v-else><input type="text" v-model="particular.size.name" /></td>
-            <td v-if="editSize != particular._id">£{{ particular.price }}</td>
+            <td v-if="editSize != particular._id">£{{ particular.price.toFixed(2) }}</td>
             <td v-else><input type="text" v-model="particular.price" /></td>
             <td v-if="editSize != particular._id">{{ particular.unitsRemaining }}</td>
             <td v-else><input type="text" v-model="particular.unitsRemaining" /></td>
@@ -69,7 +70,9 @@
             <td v-if="editSize != particular._id">
               <i @click="editSize = particular._id" class="fas fa-edit"></i>
             </td>
-            <td v-if="editSize != particular._id"><i class="far fa-trash-alt"></i></td>
+            <td v-if="editSize != particular._id">
+              <i @click="delParticular(particular._id)" class="far fa-trash-alt"></i>
+            </td>
             <td v-else><button @click="editParticular(particular)">Submit Changes</button></td>
           </tr>
         </tbody>
@@ -121,9 +124,16 @@ export default {
         .dispatch('inventory/editProduct', { id: this.product._id, fd })
         .then((this.editingProduct = false))
     },
+    cancelProductChanges() {
+      this.$store.dispatch('inventory/getProducts')
+      this.editingProduct = false
+    },
     editParticular(particular) {
       this.$store.dispatch('inventory/editParticular', particular)
       this.editSize = ''
+    },
+    delParticular(id) {
+      this.$store.dispatch('inventory/deleteParticular', id)
     }
   }
 }
