@@ -103,7 +103,9 @@ export default {
         // clear cookie and delete basket
         this.$store.commit('basket/CLEAR_BASKET')
         this.$cookie.removeCookie('intent')
+        // this.$store.diapatch('basket/processedPayment')
         this.$router.push({ name: 'Exhibitions' })
+
         //TODO do the business logic for the order i.e. subtract from quantity add to orders schema, also add order number to paymentIntent's metadata
         // TODO thank you for your purchase
       } catch (err) {
@@ -123,8 +125,22 @@ export default {
           }
         )
         // set cookie with client_secret, id and amount to be paid
-        this.$cookie.setCookie('intent', res.data)
-        this.amount = (res.data.amount / 100).toFixed(2)
+        const { issue } = res.data
+        if (!issue) {
+          this.$cookie.setCookie('intent', res.data)
+          this.amount = (res.data.amount / 100).toFixed(2)
+        } else {
+          if (issue.size !== 'unisize') {
+            alert(
+              `I'm sorry, I only have ${issue.remaining} ${issue.name}'s left in stock in size: ${issue.size}. Please select a quantity lower than this for this item.`
+            )
+          } else {
+            alert(
+              `I'm sorry, I only have ${issue.remaining} ${issue.name}'s left in stock. Please select a quantity lower than this for this item.`
+            )
+          }
+          this.$router.push({ name: 'Basket' })
+        }
       } catch (err) {
         // TODO handle error
         console.log(err)

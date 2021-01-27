@@ -12,8 +12,8 @@
       <tbody>
         <tr v-for="(item, index) in basketItems" :key="item.particular._id">
           <td>
-            {{ item.particular.product.name }}
-            {{ item.info.size.size != 'unisize' ? item.info.size.size : '' }}
+            {{ item.product.name }}
+            {{ item.particular.size != 'unisize' ? item.particular.size : '' }}
           </td>
           <td>
             <input
@@ -26,7 +26,7 @@
               max="10"
             />
           </td>
-          <td>£ {{ (item.info.price * item.qty).toFixed(2) }}</td>
+          <td>£ {{ (item.particular.price * item.qty).toFixed(2) }}</td>
           <td><i @click="removeItem(item)" class="far fa-trash-alt"></i></td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@ export default {
       let sum = 0
       /* eslint-disable */
       for (const item of this.basketItems) {
-        sum += item.info.price * item.qty
+        sum += item.particular.price * item.qty
       }
       return sum
     }
