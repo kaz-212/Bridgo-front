@@ -5,11 +5,7 @@
       <Tabs :tabs="tabs" @set-tab="setTab">
         <Tab ref="tab1" name="Prints" :selected="selectedTab == 'Prints'">
           <section class="shop-container">
-            <ProductWindow
-              v-for="particular in prints"
-              :key="particular._id"
-              :particular="particular"
-            />
+            <ProductWindow v-for="product in prints" :key="product._id" :product="product" />
           </section>
         </Tab>
         <Tab ref="tab2" name="Pieces" :selected="selectedTab == 'Pieces'">

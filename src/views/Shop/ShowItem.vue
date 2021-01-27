@@ -1,25 +1,32 @@
 <template>
-  <div v-if="particular">
+  <div v-if="product">
     <router-link :to="{ name: 'ShopFront' }"
       ><button><i class="fas fa-sm fa-chevron-left"></i> Back</button></router-link
     >
     <div class="grid-container">
       <section class="carousel">
-        <ShopCarousel :product="particular.product" />
+        <ShopCarousel :product="product" />
       </section>
       <section class="product-details">
-        <h2>{{ particular.product.name }}</h2>
-        <p>{{ particular.product.description }}</p>
-        <label for="size-select">Choose Size</label>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <label v-if="product.particulars[0].size.name != 'unisize'" for="size-select"
+          >Choose Size</label
+        >
 
-        <select name="size-select" id="size-select" v-model="selectedSize">
+        <select
+          v-if="product.particulars[0].size.name != 'unisize'"
+          name="size-select"
+          id="size-select"
+          v-model="selectedSize"
+        >
           <option
-            v-for="(size, index) in particular.size_price_qty"
-            :key="size._id"
+            v-for="(particular, index) in product.particulars"
+            :key="particular._id"
             :value="index"
             :selected="index == 0"
           >
-            {{ size.size.size }}
+            {{ particular.size.name }}
           </option>
         </select>
         <br />
@@ -49,11 +56,11 @@ export default {
     id() {
       return this.$route.params.id
     },
-    particular() {
+    product() {
       return this.$store.getters['inventory/getProductById'](this.id)
     },
     computedPrice() {
-      return (this.particular.size_price_qty[this.selectedSize].price * this.qtySelected).toFixed(2)
+      return (this.product.particulars[this.selectedSize].price * this.qtySelected).toFixed(2)
     },
     basket() {
       return this.$store.state.basket.basket
@@ -62,16 +69,19 @@ export default {
   methods: {
     addToBasket() {
       /* eslint-disable */
-      if (this.particular.size_price_qty[this.selectedSize].qty >= this.qtySelected) {
-        const item = {}
-        item.particular = this.particular
-        item.qty = this.qtySelected
-        item.info = this.particular.size_price_qty[this.selectedSize]
-        return this.$store.dispatch('basket/addToBasket', item)
+      const item = {}
+      item.product = {
+        _id: this.product._id,
+        name: this.product.name,
+        images: this.product.images
       }
-      return alert(
-        `Sorry, we only have ${this.particular.size_price_qty[this.selectedSize].qty} left in stock`
-      )
+      item.qty = this.qtySelected
+      item.particular = {
+        _id: this.product.particulars[this.selectedSize]._id,
+        size: this.product.particulars[this.selectedSize].size.name,
+        price: this.product.particulars[this.selectedSize].price
+      }
+      return this.$store.dispatch('basket/addToBasket', item)
     }
   }
 }

@@ -1,13 +1,13 @@
 <template>
   <article class="card">
-    <router-link :to="{ name: 'ShowItem', params: { id: particular._id } }">
+    <router-link :to="{ name: 'ShowItem', params: { id: product._id } }">
       <div class="image-container">
-        <img :src="particular.product.images[0].thumbnail" :alt="particular.product.name" />
+        <img :src="product.images[0].thumbnail" :alt="product.name" />
       </div>
     </router-link>
     <div class="product-info">
-      <h3>{{ particular.product.name }}</h3>
-      <p>£{{ particular.size_price_qty[0].price }}</p>
+      <h3>{{ product.name }}</h3>
+      <p>£{{ product.particulars[0].price }}</p>
     </div>
   </article>
 </template>
@@ -15,7 +15,7 @@
 <script>
 export default {
   name: 'ProductWindow',
-  props: { particular: Object }
+  props: { product: Object }
 }
 </script>
 

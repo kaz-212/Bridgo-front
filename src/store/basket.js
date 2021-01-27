@@ -12,27 +12,22 @@ export default {
     },
     ADD_TO_BASKET(state, updateItem) {
       /* eslint-disable */
+      // check if same item size is not already in basket
       for (const item of state.basket) {
-        if (
-          item.particular._id === updateItem.particular._id &&
-          item.info._id === updateItem.info._id
-        ) {
-          return (item.qty += 1)
+        if (item.particular._id === updateItem.particular._id) {
+          return (item.qty += parseInt(updateItem.qty))
         }
       }
       return state.basket.push(updateItem)
-      // ======== CHECK IF PRODUCT WITH SAME SIZE IS ALREADY IN ========
     },
+
     CLEAR_BASKET(state) {
       state.basket = []
     },
 
     UPDATE_QUANTITY(state, payload) {
       for (const item of state.basket) {
-        if (
-          item.particular._id === payload.item.particular._id &&
-          item.info._id === payload.item.info._id
-        ) {
+        if (item.particular._id === payload.item.particular._id) {
           console.log('YUUUP')
           item.qty = payload.qty
         }
