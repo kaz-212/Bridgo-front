@@ -16,7 +16,6 @@ export default {
       // if there is a mutation to the state e.g. basket/addToBasket' then update local storage
       if (mutation.type.slice(0, 6) == 'basket') {
         localStorage.setItem('basket', JSON.stringify(state.basket))
-        console.log('Success')
       }
     })
 

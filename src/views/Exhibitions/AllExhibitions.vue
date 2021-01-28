@@ -1,5 +1,5 @@
 <template>
-  <div id="all-exhibitions">
+  <div id="all-exhibitions" v-if="pastExhibitions">
     <h1>Exhibitions</h1>
     <h2>Upcoming</h2>
     <div v-for="exhibition in upcomingExhibitions" :key="exhibition._id">

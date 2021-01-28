@@ -111,9 +111,21 @@ export default {
       try {
         const { data } = await axios.post(`admin/inventory/particular`, payload)
         commit('EDIT_PRODUCT', data)
-        console.log(data)
+        console.log(data) // TODO error handle
       } catch (err) {
         console.log(err)
+      }
+    },
+
+    async updateInventory({ dispatch }, intent) {
+      try {
+        const { data } = await axios.post(`payment-intent/process`, intent, {
+          withCredentials: true
+        })
+        dispatch('getProducts')
+        console.log(data)
+      } catch (err) {
+        console.log(err) // TODO error handle
       }
     }
   },

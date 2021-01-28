@@ -82,32 +82,48 @@ export default {
   methods: {
     async purchase() {
       try {
-        const res = await stripe.confirmCardPayment(
-          this.$cookie.getCookie('intent').client_secret,
-          {
-            payment_method: {
-              card
-            },
-            shipping: {
-              address: {
-                city: this.shipAddress.city,
-                line1: this.shipAddress.address,
-                postal_code: this.shipAddress.postCode
+        const success = this.fetchPaymentIntent()
+        if (!success) {
+          // if we fetch the payment intent and now theres not enough stock, we need to stop the payment
+          // fetching payment intent also checks stock available
+          return
+        }
+        try {
+          const res = await stripe.confirmCardPayment(
+            this.$cookie.getCookie('intent').client_secret,
+            {
+              payment_method: {
+                card
               },
-              name: `${this.contactDetails.firstName} ${this.contactDetails.lastName}`
-            },
-            receipt_email: this.contactDetails.email
-          }
-        )
-        console.log(res)
-        // clear cookie and delete basket
-        this.$store.commit('basket/CLEAR_BASKET')
-        this.$cookie.removeCookie('intent')
-        // this.$store.diapatch('basket/processedPayment')
-        this.$router.push({ name: 'Exhibitions' })
+              shipping: {
+                address: {
+                  city: this.shipAddress.city,
+                  line1: this.shipAddress.address,
+                  postal_code: this.shipAddress.postCode
+                },
+                name: `${this.contactDetails.firstName} ${this.contactDetails.lastName}`
+              },
+              receipt_email: this.contactDetails.email
+            }
+          )
+          console.log(res)
+          // clear cookie and delete basket
 
-        //TODO do the business logic for the order i.e. subtract from quantity add to orders schema, also add order number to paymentIntent's metadata
-        // TODO thank you for your purchase
+          if (res.paymentIntent) {
+            await this.$store.dispatch('inventory/updateInventory', res.paymentIntent) // subtract from inventory using items stored in session
+            this.$store.commit('basket/CLEAR_BASKET')
+            this.$cookie.removeCookie('intent')
+            this.$router.push({ name: 'Exhibitions' })
+          } else {
+            throw res.error
+          }
+
+          //TODO do the business logic for the order i.e. subtract from quantity add to orders schema, also add order number to paymentIntent's metadata
+          // TODO thank you for your purchase
+        } catch (err) {
+          // TODO proper error handle
+          console.log('WOOOOPS', err)
+        }
       } catch (err) {
         // TODO proper error handle
         console.log(err)
@@ -129,6 +145,7 @@ export default {
         if (!issue) {
           this.$cookie.setCookie('intent', res.data)
           this.amount = (res.data.amount / 100).toFixed(2)
+          return true
         } else {
           if (issue.size !== 'unisize') {
             alert(
@@ -140,6 +157,7 @@ export default {
             )
           }
           this.$router.push({ name: 'Basket' })
+          return false
         }
       } catch (err) {
         // TODO handle error

@@ -28,7 +28,6 @@ export default {
     UPDATE_QUANTITY(state, payload) {
       for (const item of state.basket) {
         if (item.particular._id === payload.item.particular._id) {
-          console.log('YUUUP')
           item.qty = payload.qty
         }
       }

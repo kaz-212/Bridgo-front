@@ -109,6 +109,8 @@ import TextInput from '@/components/form/TextInput.vue'
 import ImageUpload from '@/components/form/ImageUpload.vue'
 import DeleteImage from '@/components/form/DeleteImage.vue'
 
+// TODO text input should be number input
+
 export default {
   name: 'ViewProductDetails',
   components: { TextInput, ImageUpload, DeleteImage },
