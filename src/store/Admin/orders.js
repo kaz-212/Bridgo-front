@@ -10,7 +10,7 @@ export default {
   mutations: {
     GET_ORDERS(state, orders) {
       state.orders = orders
-      console.log(orders)
+      console.log()
     }
   },
 
@@ -23,5 +23,10 @@ export default {
         console.log(e)
       }
     }
+  },
+
+  getters: {
+    getOrders: state => state.orders.filter(order => order.dispatched === false),
+    getPastOrders: state => state.orders.filter(order => order.dispatched)
   }
 }
