@@ -2,6 +2,9 @@
   <nav id="nav">
     <h1>Admin</h1>
     <div class="nav-links">
+      <router-link class="nav-link" :class="{ active: ordersRoute }" :to="{ name: 'Orders' }"
+        >Orders</router-link
+      >
       <router-link class="nav-link" :class="{ active: projectRoute }" to="/admin/projects"
         >Projects</router-link
       >
@@ -18,32 +21,18 @@
 <script>
 export default {
   name: 'AdminNav',
-  data() {
-    return {
-      projectRoute: false,
-      inventoryRoute: false,
-      exhibitionRoute: false
-    }
-  },
-  created() {
-    try {
-      if (this.$route.matched[1].name === 'AdminProjects') {
-        this.projectRoute = true
-        this.inventoryRoute = false
-        this.exhibitionRoute = false
-      } else if (this.$route.matched[1].name === 'AdminInventory') {
-        this.projectRoute = false
-        this.inventoryRoute = true
-        this.exhibitionRoute = false
-      } else if (this.$route.matched[1].name === 'AdminPortfolio') {
-        this.projectRoute = false
-        this.inventoryRoute = false
-        this.exhibitionRoute = true
-      }
-    } catch {
-      this.projectRoute = false
-      this.inventoryRoute = false
-      this.exhibitionRoute = false
+  computed: {
+    projectRoute() {
+      return this.$route.matched[1].name === 'Projects'
+    },
+    inventoryRoute() {
+      return this.$route.matched[1].name === 'Inventory'
+    },
+    exhibitionRoute() {
+      return this.$route.matched[1].name === 'AdminExhibitions'
+    },
+    ordersRoute() {
+      return this.$route.matched[1].name === 'Orders'
     }
   }
 }

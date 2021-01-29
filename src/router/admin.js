@@ -21,6 +21,10 @@ import AllAdminProducts from '@/views/Admin/Inventory/AllProducts.vue'
 import ShowProductDetails from '@/views/Admin/Inventory/ShowProductDetails.vue'
 import NewProduct from '@/views/Admin/Inventory/NewProduct.vue'
 
+// orders
+import Orders from '@/views/Admin/Orders/Orders.vue'
+import AllOrders from '@/views/Admin/Orders/AllOrders.vue'
+
 export default {
   path: '/admin',
   name: 'Admin',
@@ -99,6 +103,18 @@ export default {
           path: ':id',
           name: 'ShowProductDetails',
           component: ShowProductDetails
+        }
+      ]
+    },
+    {
+      path: 'orders',
+      name: 'Orders',
+      component: Orders,
+      children: [
+        {
+          path: '',
+          name: 'AllOrders',
+          component: AllOrders
         }
       ]
     }

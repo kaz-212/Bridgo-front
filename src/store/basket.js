@@ -15,7 +15,7 @@ export default {
       // check if same item size is not already in basket
       for (const item of state.basket) {
         if (item.particular._id === updateItem.particular._id) {
-          return (item.qty += parseInt(updateItem.qty))
+          return (item.qty = parseInt(item.qty) + parseInt(updateItem.qty))
         }
       }
       return state.basket.push(updateItem)
@@ -23,6 +23,7 @@ export default {
 
     CLEAR_BASKET(state) {
       state.basket = []
+      localStorage.removeItem('basket')
     },
 
     UPDATE_QUANTITY(state, payload) {
