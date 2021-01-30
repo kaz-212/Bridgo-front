@@ -1,8 +1,6 @@
 <template>
   <div v-if="product">
-    <router-link :to="{ name: 'ShopFront' }"
-      ><button><i class="fas fa-sm fa-chevron-left"></i> Back</button></router-link
-    >
+    <BackButton whereTo="ShopFront" />
     <div class="grid-container">
       <section class="carousel">
         <ShopCarousel :product="product" />
@@ -42,10 +40,11 @@
 
 <script>
 import ShopCarousel from '@/components/Shop/ShopCarousel.vue'
+import BackButton from '@/components/Buttons/BackButton.vue'
 
 export default {
   name: 'ShowItem',
-  components: { ShopCarousel },
+  components: { ShopCarousel, BackButton },
   data() {
     return {
       selectedSize: 0,
