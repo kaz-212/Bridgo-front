@@ -11,13 +11,11 @@ export default {
     GET_ORDERS(state, orders) {
       state.orders = orders
     },
-    DISPATCHED(state, order) {
+    UPDATE_ORDER(state, order) {
       /* eslint-disable */
       for (let i = 0; i < state.orders.length; i++) {
-        console.log(state.orders[i], order)
         if (state.orders[i]._id == order._id) {
           state.orders[i] = order
-          console.log('POP')
         }
       }
     }
@@ -32,11 +30,21 @@ export default {
         console.log(e)
       }
     },
-    async dispatched({ commit }, id) {
+    async toggleDispatched({ commit }, id) {
       try {
         const { data } = await axios.put(`admin/orders/dispatch/${id}`)
         console.log(data)
-        commit('DISPATCHED', data)
+        commit('UPDATE_ORDER', data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async editDetails({ commit }, payload) {
+      try {
+        const { data } = await axios.put(`admin/orders/details/${payload.id}`, {
+          details: payload.details
+        })
+        commit('UPDATE_ORDER', data)
       } catch (err) {
         console.log(err)
       }
@@ -45,6 +53,7 @@ export default {
 
   getters: {
     getOrders: state => state.orders.filter(order => order.dispatched === false),
-    getPastOrders: state => state.orders.filter(order => order.dispatched)
+    getPastOrders: state => state.orders.filter(order => order.dispatched),
+    getOrderById: state => id => state.orders.find(order => order._id === id)
   }
 }

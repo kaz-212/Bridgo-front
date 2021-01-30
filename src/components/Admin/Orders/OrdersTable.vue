@@ -42,7 +42,7 @@ export default {
 
   methods: {
     dispatched(id) {
-      this.$store.dispatch('orders/dispatched', id)
+      this.$store.dispatch('orders/toggleDispatched', id)
     }
   }
 }
