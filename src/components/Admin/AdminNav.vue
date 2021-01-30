@@ -23,16 +23,16 @@ export default {
   name: 'AdminNav',
   computed: {
     projectRoute() {
-      return this.$route.matched[1].name === 'Projects'
+      return this.$route.matched[1] ? this.$route.matched[1].name === 'Projects' : false
     },
     inventoryRoute() {
-      return this.$route.matched[1].name === 'Inventory'
+      return this.$route.matched[1] ? this.$route.matched[1].name === 'Inventory' : false
     },
     exhibitionRoute() {
-      return this.$route.matched[1].name === 'AdminExhibitions'
+      return this.$route.matched[1] ? this.$route.matched[1] === 'AdminExhibitions' : false
     },
     ordersRoute() {
-      return this.$route.matched[1].name === 'Orders'
+      return this.$route.matched[1] ? this.$route.matched[1].name === 'Orders' : false
     }
   }
 }
