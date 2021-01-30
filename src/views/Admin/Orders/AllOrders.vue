@@ -3,14 +3,12 @@
     <h1>All Orders</h1>
     <Tabs :tabs="tabs" @set-tab="setTab">
       <Tab ref="tab1" name="Orders" :selected="selectedTab == 'Orders'">
-        Inside orders
+        <OrdersTable :orders="orders" />
       </Tab>
       <Tab ref="tab2" name="Past" :selected="selectedTab == 'Past'">
-        inside past
+        <OrdersTable :orders="pastOrders" />
       </Tab>
     </Tabs>
-    <OrdersTable />
-    order: {{ orders }} past: {{ pastOrders }}
   </div>
 </template>
 
@@ -28,6 +26,8 @@ export default {
       selectedTab: 'Orders'
     }
   },
+  // TODO on click take you to order details instead of all in table
+  // TODO add item name to items in orders schema so i dont have to populate (maybe other info too)
   computed: {
     orders() {
       return this.$store.getters['orders/getOrders']

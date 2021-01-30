@@ -64,7 +64,7 @@ export default {
       shipAddress: {
         address: '',
         city: '',
-        postCode: ''
+        postCode: '4000058260000005'
       },
       contactDetails: {
         firstName: '',
