@@ -54,6 +54,7 @@ export default {
   getters: {
     getOrders: state => state.orders.filter(order => order.dispatched === false),
     getPastOrders: state => state.orders.filter(order => order.dispatched),
-    getOrderById: state => id => state.orders.find(order => order._id === id)
+    getOrderById: state => id => state.orders.find(order => order._id === id),
+    getNumberOfNotifs: (state, getters) => getters.getOrders.length
   }
 }

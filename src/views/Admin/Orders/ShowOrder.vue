@@ -1,5 +1,6 @@
 <template>
   <div v-if="order">
+    <BackButton whereTo="AllOrders" />
     <h1>Order Details</h1>
     <h2>Order ID: {{ order.orderId }}</h2>
     <p>
@@ -20,8 +21,11 @@
 </template>
 
 <script>
+import BackButton from '@/components/Buttons/BackButton.vue'
+
 export default {
   name: 'ShowOrder',
+  components: { BackButton },
   computed: {
     id() {
       return this.$route.params.id

@@ -3,8 +3,9 @@
     <h1>Admin</h1>
     <div class="nav-links">
       <router-link class="nav-link" :class="{ active: ordersRoute }" :to="{ name: 'Orders' }"
-        >Orders</router-link
+        >Orders <span class="notification">{{ notifs }}</span></router-link
       >
+
       <router-link class="nav-link" :class="{ active: projectRoute }" to="/admin/projects"
         >Projects</router-link
       >
@@ -33,6 +34,9 @@ export default {
     },
     ordersRoute() {
       return this.$route.matched[1] ? this.$route.matched[1].name === 'Orders' : false
+    },
+    notifs() {
+      return this.$store.getters['orders/getNumberOfNotifs']
     }
   }
 }
@@ -71,6 +75,13 @@ export default {
       &.active {
         transform: scale(1.1);
         color: rgb(63, 52, 52);
+      }
+
+      .notification {
+        background-color: red;
+        width: 15px;
+        border-radius: 2px;
+        color: white;
       }
     }
   }
