@@ -6,10 +6,7 @@
 
 <script>
 export default {
-  name: 'inventory',
-  created() {
-    this.$store.dispatch('inventory/getProducts')
-  }
+  name: 'inventory'
 }
 </script>
 
