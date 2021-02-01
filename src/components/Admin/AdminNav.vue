@@ -2,7 +2,7 @@
   <nav id="nav">
     <h1>Admin</h1>
     <div class="nav-links">
-      <router-link class="nav-link" :class="{ active: ordersRoute }" :to="{ name: 'Orders' }"
+      <router-link class="nav-link" :class="{ active: ordersRoute }" :to="{ name: 'AllOrders' }"
         >Orders <span class="notification">{{ notifs }}</span></router-link
       >
 
