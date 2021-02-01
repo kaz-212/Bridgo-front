@@ -20,40 +20,30 @@
       <input type="checkbox" v-model="product.sizingApplicable" />
 
       <div v-if="product.sizingApplicable">
-        <p>
-          Please order sizes from smallest to largest by putting a number in the 'Size order' box.
-          (e.g. smallest = 1, largest = 3)
-        </p>
         <div id="sizes" v-for="(detail, index) in product.details" :key="index">
           <em>Size {{ index + 1 }} <i @click="deleteSize(index)" class="far fa-trash-alt"></i></em>
           <br />
           <TextInput
-            id="size"
+            :id="`size-${index}`"
             label="Size"
             v-model="detail.size"
             placeholder="e.g. 'small' or '20 x 30'"
           />
           <TextInput
-            id="price"
+            :id="`price-${index}`"
             label="Price (£)"
             v-model="detail.price"
             placeholder="e.g. '12.99'"
           />
           <TextInput
-            id="local"
-            label="Local Price (£)"
-            v-model="detail.local"
-            placeholder="e.g. '4.50'"
-          />
-          <TextInput
-            id="international"
-            label="International Price (£)"
-            v-model="detail.international"
+            :id="`shipping-cost-${index}`"
+            label="Shipping Cost(£)"
+            v-model="detail.shippingCost"
             placeholder="e.g. '10.50'"
           />
 
           <TextInput
-            id="qty"
+            :id="`qty-${index}`"
             label="Quantity"
             v-model="detail.unitsRemaining"
             placeholder="e.g. '4'"
@@ -68,17 +58,10 @@
           v-model="product.details[0].price"
           placeholder="e.g. '12.99'"
         />
-        <h3>Shiping</h3>
         <TextInput
-          id="local"
-          label="Local Price (£)"
-          v-model="product.details[0].local"
-          placeholder="e.g. '4.50'"
-        />
-        <TextInput
-          id="international"
-          label="International Price (£)"
-          v-model="product.details[0].international"
+          id="shipping-cost"
+          label="Shipping Cost (£)"
+          v-model="product.details[0].shippingCost"
           placeholder="e.g. '10.50'"
         />
         <TextInput
@@ -114,8 +97,7 @@ export default {
             size: '',
             price: '12.99',
             unitsRemaining: '4',
-            local: '4.50',
-            international: '10.50'
+            shippingCost: '10.50'
             // index: 0
           }
         ],
@@ -130,8 +112,7 @@ export default {
         size: '',
         price: '',
         unitsRemaining: '',
-        local: '',
-        international: ''
+        shippingCost: ''
         // index: this.product.details.length
       })
     },
@@ -147,8 +128,7 @@ export default {
             size: 'N/A',
             price: this.product.details[0].price,
             unitsRemaining: this.product.details[0].unitsRemaining,
-            local: this.product.details[0].local,
-            international: this.product.details[0].international
+            shippingCost: this.product.details[0].shippingCost
             // index: 0
           }
         ]

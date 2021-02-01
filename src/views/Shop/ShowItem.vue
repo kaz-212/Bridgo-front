@@ -59,7 +59,9 @@ export default {
       return this.$store.getters['inventory/getProductById'](this.id)
     },
     computedPrice() {
-      return (this.product.particulars[this.selectedSize].price * this.qtySelected).toFixed(2)
+      return ((this.product.particulars[this.selectedSize].price / 100) * this.qtySelected).toFixed(
+        2
+      )
     },
     basket() {
       return this.$store.state.basket.basket

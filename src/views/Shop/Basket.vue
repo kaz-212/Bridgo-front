@@ -1,41 +1,44 @@
 <template>
   <div v-if="basketItems">
     <h1>Basket</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Quantity</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in basketItems" :key="item.particular._id">
-          <td>
-            {{ item.product.name }}
-            {{ item.particular.size != 'N/A' ? item.particular.size : '' }}
-          </td>
-          <td>
-            <input
-              @change="changeQuantity(item, $event)"
-              type="number"
-              :name="`${index}-qty`"
-              :id="`${index}-qty`"
-              :value="item.qty"
-              min="1"
-              max="10"
-            />
-          </td>
-          <td>£ {{ (item.particular.price * item.qty).toFixed(2) }}</td>
-          <td><i @click="removeItem(item)" class="far fa-trash-alt"></i></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><strong>Total</strong></td>
-          <td>£ {{ totalPrice.toFixed(2) }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in basketItems" :key="item.particular._id">
+            <td>
+              {{ item.product.name }}
+              {{ item.particular.size != 'N/A' ? item.particular.size : '' }}
+            </td>
+            <td>
+              <input
+                @change="changeQuantity(item, $event)"
+                type="number"
+                :name="`${index}-qty`"
+                :id="`${index}-qty`"
+                :value="item.qty"
+                min="1"
+                max="10"
+              />
+            </td>
+            <td>£ {{ ((item.particular.price * item.qty) / 100).toFixed(2) }}</td>
+            <td><i @click="removeItem(item)" class="far fa-trash-alt"></i></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><strong>Total</strong></td>
+            <td>£ {{ (totalPrice / 100).toFixed(2) }}</td>
+            <td>+ shipping</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <div class="checkout">
       <router-link :to="{ name: 'Checkout' }"><button>Continue to Checkout</button></router-link>
     </div>
@@ -46,7 +49,9 @@
 export default {
   name: 'Basket',
   data() {
-    return {}
+    return {
+      shipping: ''
+    }
   },
   computed: {
     basketItems() {

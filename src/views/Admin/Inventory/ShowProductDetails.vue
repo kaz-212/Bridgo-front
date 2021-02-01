@@ -60,8 +60,7 @@
           <tr>
             <th>Size</th>
             <th>Price</th>
-            <th>Local Shipping</th>
-            <th>International Shipping</th>
+            <th>Shipping Cost</th>
             <th>Units Remaining</th>
             <th>Units Sold</th>
           </tr>
@@ -73,13 +72,9 @@
             <td v-if="editSize != particular._id">£{{ (particular.price / 100).toFixed(2) }}</td>
             <td v-else><input type="text" v-model="particular.price" /></td>
             <td v-if="editSize != particular._id">
-              £{{ (particular.shippingCost.local / 100).toFixed(2) }}
+              £{{ (particular.shippingCost / 100).toFixed(2) }}
             </td>
-            <td v-else><input type="text" v-model="particular.shippingCost.local" /></td>
-            <td v-if="editSize != particular._id">
-              £{{ (particular.shippingCost.international / 100).toFixed(2) }}
-            </td>
-            <td v-else><input type="text" v-model="particular.shippingCost.international" /></td>
+            <td v-else><input type="text" v-model="particular.shippingCost" /></td>
             <td v-if="editSize != particular._id">{{ particular.unitsRemaining }}</td>
             <td v-else><input type="text" v-model="particular.unitsRemaining" /></td>
             <td v-if="editSize != particular._id">{{ particular.unitsSold }}</td>
@@ -98,9 +93,7 @@
             <td v-if="!addSize"></td>
             <td v-else><input type="text" v-model="newSize.price" /></td>
             <td v-if="!addSize"></td>
-            <td v-else><input type="text" v-model="newSize.local" /></td>
-            <td v-if="!addSize"></td>
-            <td v-else><input type="text" v-model="newSize.international" /></td>
+            <td v-else><input type="text" v-model="newSize.shippingCost" /></td>
             <td v-if="!addSize"></td>
             <td v-else><input type="text" v-model="newSize.unitsRemaining" /></td>
             <td v-if="!addSize"></td>
@@ -140,8 +133,7 @@ export default {
         price: '',
         unitsRemaining: '',
         unitsSold: '',
-        local: '',
-        international: ''
+        shippingCost: ''
       }
     }
   },
@@ -176,6 +168,7 @@ export default {
       this.editingProduct = false
     },
     editParticular(particular) {
+      // TODO when you edit, its in p not £. do something son
       this.$store.dispatch('inventory/editParticular', particular)
       this.editSize = ''
     },
@@ -191,8 +184,7 @@ export default {
       this.newSize.price = ''
       this.newSize.unitsRemaining = ''
       this.newSize.unitsSold = ''
-      this.newSize.local
-      this.newSize.international
+      this.newSize.shippingCost = ''
       this.addSize = false
     },
     cancelParticular() {
@@ -200,8 +192,7 @@ export default {
       this.newSize.price = ''
       this.newSize.unitsRemaining = ''
       this.newSize.unitsSold = ''
-      this.newSize.local
-      this.newSize.international
+      this.newSize.shippingCost = ''
       this.addSize = false
     }
   }

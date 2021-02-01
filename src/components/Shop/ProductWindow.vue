@@ -7,7 +7,7 @@
     </router-link>
     <div class="product-info">
       <h3>{{ product.name }}</h3>
-      <p>£{{ product.particulars[0].price }}</p>
+      <p>£{{ (product.particulars[0].price / 100).toFixed(2) }}</p>
     </div>
   </article>
 </template>
