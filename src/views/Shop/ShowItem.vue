@@ -8,12 +8,12 @@
       <section class="product-details">
         <h2>{{ product.name }}</h2>
         <p>{{ product.description }}</p>
-        <label v-if="product.particulars[0].size.name != 'unisize'" for="size-select"
+        <label v-if="product.particulars[0].size.name != 'N/A'" for="size-select"
           >Choose Size</label
         >
 
         <select
-          v-if="product.particulars[0].size.name != 'unisize'"
+          v-if="product.particulars[0].size.name != 'N/A'"
           name="size-select"
           id="size-select"
           v-model="selectedSize"

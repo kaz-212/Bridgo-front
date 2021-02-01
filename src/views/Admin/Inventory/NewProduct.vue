@@ -39,7 +39,25 @@
             v-model="detail.price"
             placeholder="e.g. '12.99'"
           />
-          <TextInput id="qty" label="Quantity" v-model="detail.qty" placeholder="e.g. '4'" />
+          <TextInput
+            id="local"
+            label="Local Price (£)"
+            v-model="detail.local"
+            placeholder="e.g. '4.50'"
+          />
+          <TextInput
+            id="international"
+            label="International Price (£)"
+            v-model="detail.international"
+            placeholder="e.g. '10.50'"
+          />
+
+          <TextInput
+            id="qty"
+            label="Quantity"
+            v-model="detail.unitsRemaining"
+            placeholder="e.g. '4'"
+          />
         </div>
         <button @click.prevent="addSize">Add Size</button>
       </div>
@@ -50,10 +68,23 @@
           v-model="product.details[0].price"
           placeholder="e.g. '12.99'"
         />
+        <h3>Shiping</h3>
+        <TextInput
+          id="local"
+          label="Local Price (£)"
+          v-model="product.details[0].local"
+          placeholder="e.g. '4.50'"
+        />
+        <TextInput
+          id="international"
+          label="International Price (£)"
+          v-model="product.details[0].international"
+          placeholder="e.g. '10.50'"
+        />
         <TextInput
           id="qty"
           label="Quantity"
-          v-model="product.details[0].qty"
+          v-model="product.details[0].unitsRemaining"
           placeholder="e.g. '4'"
         />
       </div>
@@ -62,7 +93,6 @@
       </div>
       <button @click.prevent="submitProduct">Add Product</button>
     </form>
-    {{ imgs }}
   </div>
 </template>
 
@@ -83,7 +113,9 @@ export default {
           {
             size: '',
             price: '12.99',
-            qty: '4'
+            unitsRemaining: '4',
+            local: '4.50',
+            international: '10.50'
             // index: 0
           }
         ],
@@ -97,7 +129,9 @@ export default {
       this.product.details.push({
         size: '',
         price: '',
-        unitsRemaining: ''
+        unitsRemaining: '',
+        local: '',
+        international: ''
         // index: this.product.details.length
       })
     },
@@ -110,9 +144,11 @@ export default {
       if (!this.product.sizingApplicable) {
         const details = [
           {
-            size: 'unisize',
+            size: 'N/A',
             price: this.product.details[0].price,
-            qty: this.product.details[0].qty
+            unitsRemaining: this.product.details[0].unitsRemaining,
+            local: this.product.details[0].local,
+            international: this.product.details[0].international
             // index: 0
           }
         ]

@@ -147,7 +147,7 @@ export default {
           this.amount = (res.data.amount / 100).toFixed(2)
           return true
         } else {
-          if (issue.size !== 'unisize') {
+          if (issue.size !== 'N/A') {
             alert(
               `I'm sorry, I only have ${issue.remaining} ${issue.name}'s left in stock in size: ${issue.size}. Please select a quantity lower than this for this item.`
             )

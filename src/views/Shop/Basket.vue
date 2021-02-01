@@ -13,7 +13,7 @@
         <tr v-for="(item, index) in basketItems" :key="item.particular._id">
           <td>
             {{ item.product.name }}
-            {{ item.particular.size != 'unisize' ? item.particular.size : '' }}
+            {{ item.particular.size != 'N/A' ? item.particular.size : '' }}
           </td>
           <td>
             <input
