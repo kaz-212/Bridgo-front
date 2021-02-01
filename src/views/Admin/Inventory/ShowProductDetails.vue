@@ -60,17 +60,26 @@
           <tr>
             <th>Size</th>
             <th>Price</th>
+            <th>Local Shipping</th>
+            <th>International Shipping</th>
             <th>Units Remaining</th>
             <th>Units Sold</th>
           </tr>
         </thead>
         <tbody>
-          <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
           <tr v-for="particular in product.particulars" :key="particular._id">
             <td v-if="editSize != particular._id">{{ particular.size.name }}</td>
             <td v-else><input type="text" v-model="particular.size.name" /></td>
-            <td v-if="editSize != particular._id">£{{ particular.price.toFixed(2) }}</td>
+            <td v-if="editSize != particular._id">£{{ (particular.price / 100).toFixed(2) }}</td>
             <td v-else><input type="text" v-model="particular.price" /></td>
+            <td v-if="editSize != particular._id">
+              £{{ (particular.shippingCost.local / 100).toFixed(2) }}
+            </td>
+            <td v-else><input type="text" v-model="particular.shippingCost.local" /></td>
+            <td v-if="editSize != particular._id">
+              £{{ (particular.shippingCost.international / 100).toFixed(2) }}
+            </td>
+            <td v-else><input type="text" v-model="particular.shippingCost.international" /></td>
             <td v-if="editSize != particular._id">{{ particular.unitsRemaining }}</td>
             <td v-else><input type="text" v-model="particular.unitsRemaining" /></td>
             <td v-if="editSize != particular._id">{{ particular.unitsSold }}</td>
@@ -88,6 +97,10 @@
             <td v-else><input type="text" v-model="newSize.size" /></td>
             <td v-if="!addSize"></td>
             <td v-else><input type="text" v-model="newSize.price" /></td>
+            <td v-if="!addSize"></td>
+            <td v-else><input type="text" v-model="newSize.local" /></td>
+            <td v-if="!addSize"></td>
+            <td v-else><input type="text" v-model="newSize.international" /></td>
             <td v-if="!addSize"></td>
             <td v-else><input type="text" v-model="newSize.unitsRemaining" /></td>
             <td v-if="!addSize"></td>
@@ -126,7 +139,9 @@ export default {
         size: '',
         price: '',
         unitsRemaining: '',
-        unitsSold: ''
+        unitsSold: '',
+        local: '',
+        international: ''
       }
     }
   },
@@ -176,6 +191,8 @@ export default {
       this.newSize.price = ''
       this.newSize.unitsRemaining = ''
       this.newSize.unitsSold = ''
+      this.newSize.local
+      this.newSize.international
       this.addSize = false
     },
     cancelParticular() {
@@ -183,6 +200,8 @@ export default {
       this.newSize.price = ''
       this.newSize.unitsRemaining = ''
       this.newSize.unitsSold = ''
+      this.newSize.local
+      this.newSize.international
       this.addSize = false
     }
   }
