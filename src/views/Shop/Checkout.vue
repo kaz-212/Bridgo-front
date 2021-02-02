@@ -122,7 +122,7 @@ export default {
             await this.$store.dispatch('inventory/updateInventory', res.paymentIntent) // subtract from inventory using items stored in session
             this.$store.commit('basket/CLEAR_BASKET')
             this.$cookie.removeCookie('intent')
-            this.$router.push({ name: 'Exhibitions' })
+            this.$router.push({ name: 'OnShowExhibitions' })
           } else {
             throw res.error
           }

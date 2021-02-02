@@ -20,7 +20,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Exhibitions',
+  name: 'AllExhibitions',
   computed: {
     ...mapGetters('exhibition', {
       upcomingExhibitions: 'onShowUpcoming',
