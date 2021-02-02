@@ -6,13 +6,18 @@
       <TextInput id="firstName" label="First Name" v-model="contactDetails.firstName" />
       <TextInput id="lastname" label="Last Name" v-model="contactDetails.lastName" />
       <TextInput id="email" label="Email" v-model="contactDetails.email" />
+      <TextInput id="number" label="Mobile Number" v-model="contactDetails.phone" />
 
       <h2>Please enter your address for delivery</h2>
       <TextInput id="address" label="Address" v-model="shipAddress.address" />
       <TextInput id="city" label="City" v-model="shipAddress.city" />
       <TextInput id="post-code" label="Post Code" v-model="shipAddress.postCode" />
+      <label for="subtotal">Subtotal:</label>
+      <h3 id="subtotal">£ {{ (subtotal / 100).toFixed(2) }}</h3>
+      <label for="shipping-cost">Cost of Shipping:</label>
+      <h3 id="shipping-cost">£ {{ (shippingCost / 100).toFixed(2) }}</h3>
       <label for="amount">Amount to pay:</label>
-      <h3>£ {{ amount }}</h3>
+      <h3 id="amount">£ {{ amount }}</h3>
       <div class="stripe-container">
         <div class="stripe-input">
           <div class="stripe-component" ref="card"></div>
@@ -35,7 +40,6 @@ import TextInput from '@/components/form/TextInput.vue'
 
 // TODO when basket empty, display 'pls put items in basket' page
 let stripe
-let elements
 let card
 
 /* eslint-disable */
@@ -43,9 +47,8 @@ const stripePromise = async () => {
   stripe = await loadStripe(
     'pk_test_51I9q9BJX04kOz0bz68A6COMhppHJaV7wJ16J6PgdeR7lzwIj8sGiL8L3wXcp68XlFtILjLTrAOuBfpRfThITMcQW0085oKc7hS'
   )
-  elements = stripe.elements()
+  return stripe.elements()
 }
-stripePromise()
 
 // style the card input
 const cardStyle = {
@@ -69,14 +72,19 @@ export default {
       contactDetails: {
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        phone: ''
       },
-      amount: ''
+      subtotal: '',
+      shippingCost: ''
     }
   },
   computed: {
     basketItems() {
       return this.$store.state.basket.basket
+    },
+    amount() {
+      return ((this.subtotal + this.shippingCost) / 100).toFixed(2)
     }
   },
   methods: {
@@ -101,7 +109,8 @@ export default {
                   line1: this.shipAddress.address,
                   postal_code: this.shipAddress.postCode
                 },
-                name: `${this.contactDetails.firstName} ${this.contactDetails.lastName}`
+                name: `${this.contactDetails.firstName} ${this.contactDetails.lastName}`,
+                phone: this.contactDetails.phone
               },
               receipt_email: this.contactDetails.email
             }
@@ -117,8 +126,6 @@ export default {
           } else {
             throw res.error
           }
-
-          //TODO do the business logic for the order i.e. subtract from quantity add to orders schema, also add order number to paymentIntent's metadata
           // TODO thank you for your purchase
         } catch (err) {
           // TODO proper error handle
@@ -140,40 +147,46 @@ export default {
             withCredentials: true
           }
         )
+
         // set cookie with client_secret, id and amount to be paid
         const { issue } = res.data
         if (!issue) {
           this.$cookie.setCookie('intent', res.data)
-          this.amount = (res.data.amount / 100).toFixed(2)
+          this.subtotal = res.data.amount.itemsCost
+          this.shippingCost = res.data.amount.shippingCost
           return true
-        } else {
-          if (issue.size !== 'N/A') {
-            alert(
-              `I'm sorry, I only have ${issue.remaining} ${issue.name}'s left in stock in size: ${issue.size}. Please select a quantity lower than this for this item.`
-            )
-          } else {
-            alert(
-              `I'm sorry, I only have ${issue.remaining} ${issue.name}'s left in stock. Please select a quantity lower than this for this item.`
-            )
-          }
-          this.$router.push({ name: 'Basket' })
-          return false
         }
+        if (issue.size !== 'N/A') {
+          alert(
+            `I'm sorry, I only have ${issue.remaining} ${issue.name}'s left in stock in size: ${issue.size}. Please select a quantity lower than this for this item.`
+          )
+        } else {
+          alert(
+            `I'm sorry, I only have ${issue.remaining} ${issue.name}'s left in stock. Please select a quantity lower than this for this item.`
+          )
+        }
+        this.$router.push({ name: 'Basket' })
+        return false
       } catch (err) {
         // TODO handle error
-        console.log(err)
+        return console.log(err)
       }
     }
   },
   mounted() {
     // only do this if there are items in the basket
     if (this.basketItems.length > 0) {
-      // stripe doesn't like you re-creating card element
-      if (typeof card == 'undefined') {
-        card = elements.create('card', cardStyle)
+      if (typeof card === 'undefined') {
+        stripePromise().then(elements => {
+          // stripe doesn't like you re-creating card element
+          card = elements.create('card', cardStyle)
+          this.fetchPaymentIntent()
+          card.mount(this.$refs.card)
+        })
+      } else {
+        this.fetchPaymentIntent()
+        card.mount(this.$refs.card)
       }
-      this.fetchPaymentIntent()
-      card.mount(this.$refs.card)
     }
   }
 }
