@@ -19,6 +19,7 @@ export default {
     this.$store.dispatch('exhibition/getExhibitions')
     this.$store.dispatch('inventory/getProducts')
     this.$store.dispatch('project/getProjects')
+    this.$store.dispatch('adminProject/getThemes')
   }
 }
 </script>

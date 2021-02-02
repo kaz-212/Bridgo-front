@@ -40,7 +40,6 @@ export default {
     setTab(tab) {
       /* eslint-disable */
       this.selectedTab = tab.name
-      this.tabs = [this.$refs.tab1, this.$refs.tab2]
     }
   },
   mounted() {

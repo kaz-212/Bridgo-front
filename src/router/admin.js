@@ -8,6 +8,7 @@ import NewProject from '@/views/Admin/Projects/NewProject.vue'
 import ShowProject from '@/views/Admin/Projects/ShowProject.vue'
 import EditProject from '@/views/Admin/Projects/EditProject.vue'
 import AddPiece from '@/views/Admin/Projects/AddPiece.vue'
+import NewTheme from '@/views/Admin/Projects/NewTheme.vue'
 
 // exhibition
 import AdminExhibitions from '@/views/Admin/Exhibitions/Exhibitions.vue'
@@ -42,9 +43,14 @@ export default {
           component: AllProjects
         },
         {
-          path: 'new',
+          path: 'new-project',
           name: 'NewProject',
           component: NewProject
+        },
+        {
+          path: 'new-theme',
+          name: 'NewTheme',
+          component: NewTheme
         },
         {
           path: ':id',

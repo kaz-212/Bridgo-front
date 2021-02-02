@@ -4,6 +4,7 @@ import exhibitionModule from './exhibition'
 import inventoryModule from './inventory'
 import basketModule from './basket'
 import ordersModule from './Admin/orders'
+import adminProjectModule from './Admin/projects'
 
 export default createStore({
   modules: {
@@ -11,6 +12,7 @@ export default createStore({
     exhibition: exhibitionModule,
     inventory: inventoryModule,
     basket: basketModule,
-    orders: ordersModule
+    orders: ordersModule,
+    adminProject: adminProjectModule
   }
 })
