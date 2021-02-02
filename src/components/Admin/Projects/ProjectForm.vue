@@ -1,77 +1,62 @@
 <template>
   <form class="form" action="#">
-    <div class="form-holder form" id="project" v-if="status == 1">
-      <label class="form-item" for="name">Project Name</label>
-      <input id="name" v-model="project.name" type="text" required />
-      <label class="form-item" for="year">Year</label>
-      <input id="year" v-model="project.year" type="text" required />
+    <div class="form-holder form" id="project">
+      <label for="theme">Select theme</label>
+      <select name="theme" id="theme" v-model="selectedTheme">
+        <option v-for="theme in themes" :key="theme._id" :value="theme._id">{{
+          theme.name
+        }}</option>
+      </select>
+      <TextInput id="name" label="Project Name" v-model="project.name" />
       <label class="form-item" for="description">Description</label>
       <textarea id="description" v-model="project.description" rows="8" required />
+      <TextInput id="materials" label="Materials" v-model="project.materials" />
+      <TextInput id="year" label="Year" v-model="project.year" />
       <label for="yes">Show this project in portfoio?</label>
       <input class="check-box" v-model="project.onShow" id="yes" type="checkbox" checked />
-      <button @click.prevent="piecesForm">Add Pieces</button>
-      <button v-if="pieces.length > 0" @click.prevent="submitProject">Submit Project</button>
-    </div>
-    <div class="form-holder" id="pieces" v-if="status == 2">
-      <!-- <ProjectCard :project="project" @project-status="projectForm" /> -->
-      <PieceForm :pieces="pieces" @submit-piece="submitPiece" @cancel-piece="cancelPiece" />
-    </div>
-    <div class="form-holder" id="overview" v-if="status == 3">
-      {{ project }}
-      {{ pieces }}
-      <button @click.prevent="projectForm">Edit Project</button>
-      <button @click.prevent="piecesForm">Add New Piece</button>
-      <button v-if="pieces.length > 0" @click.prevent="submitProject">Submit Project</button>
+      <div>
+        <ImageUpload v-model="imgs" />
+      </div>
+      <button @click.prevent="submitProject">Submit Project</button>
     </div>
   </form>
 </template>
 
 <script>
-import PieceForm from '@/components/Admin/Projects/PieceForm.vue'
+import TextInput from '@/components/form/TextInput.vue'
+import ImageUpload from '@/components/form/ImageUpload.vue'
 
 export default {
   name: 'ProjectForm',
-  components: { PieceForm },
+  components: { TextInput, ImageUpload },
   data() {
     return {
-      status: 1,
       project: {
         name: '',
         year: '',
         description: '',
+        materials: '',
         onShow: true
       },
-      pieces: []
+      imgs: [],
+      selectedTheme: ''
+    }
+  },
+  computed: {
+    themes() {
+      return this.$store.state.adminProject.themes
     }
   },
   methods: {
-    piecesForm() {
-      this.status = 2
-    },
-    projectForm() {
-      this.status = 1
-    },
-
-    submitPiece(piece) {
-      this.pieces.push(piece)
-      this.status = 3
-    },
-
-    cancelPiece() {
-      this.status = 3
-    },
-
     submitProject() {
       const fd = new FormData()
-      // append images
-      for (let i = 0; i < this.pieces.length; i += 1) {
-        const { img } = this.pieces[i]
-        const { pieceName } = this.pieces[i]
-        fd.append('imgs', img, pieceName) // give img the same name as the piece
+      /* eslint-disable */
+      for (const img of this.imgs) {
+        fd.append('imgs', img) // add images
       }
       fd.append('project', JSON.stringify(this.project)) // append project object
-      fd.append('pieces', JSON.stringify(this.pieces)) // append pieces array
-      this.$store.dispatch('project/submitProject', fd)
+      fd.append('theme', JSON.stringify(this.selectedTheme)) // append project object
+      this.$store.dispatch('adminProject/submitProject', fd)
     }
   }
 }
