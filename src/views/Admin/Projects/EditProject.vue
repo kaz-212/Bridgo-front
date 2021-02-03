@@ -1,119 +1,45 @@
 <template>
-  <div class="main">
-    <h1>{{ project.name }} Edit</h1>
-    <h2>Project</h2>
+  <div class="main" v-if="project">
     <form class="form" action="#">
-      <div class="project-container" id="project">
-        <label class="form-item" for="name">Project Name</label>
-        <input id="name" v-model="project.name" type="text" required />
-        <label class="form-item" for="year">Year</label>
-        <input id="year" v-model="project.year" type="text" required />
+      <div class="form-holder form" id="project">
+        <label for="theme">Select theme</label>
+        <select name="theme" id="theme" v-model="project.theme">
+          <option
+            v-for="theme in allThemes"
+            :key="theme._id"
+            :selected="project.theme === theme._id"
+            :value="theme._id"
+            >{{ theme.name }}</option
+          >
+        </select>
+        <TextInput id="name" label="Project Name" v-model="project.name" />
         <label class="form-item" for="description">Description</label>
         <textarea id="description" v-model="project.description" rows="8" required />
-        <label for="yes">Show this project in portfoio? </label>
-        <input v-model="project.onShow" id="yes" type="checkbox" :checked="project.onShow" />
-      </div>
-      <h2>Main Piece</h2>
-      <ul class="main-piece">
-        <li v-for="(piece, index) in project.pieces" :key="piece._id">
-          <input
-            type="radio"
-            name="isMain"
-            :id="piece._id"
-            :checked="piece.isMain"
-            @click="toggleTrue(piece._id, index, piece.filename)"
-          />
-          {{ piece.name }}
-        </li>
-      </ul>
-
-      <h2>Pieces</h2>
-      <div
-        class="piece-container"
-        :class="{ delete: deletePieces.includes(index) }"
-        v-for="(piece, index) in project.pieces"
-        :key="piece._id"
-      >
-        <div class="piece-form">
-          <label class="form-item" for="pieceName">Piece Name</label>
-          <input
-            :class="{ changed: piece.changed }"
-            id="pieceName"
-            v-model="piece.name"
-            type="text"
-            required
-          />
-          <label class="form-item" for="pieceYear">Year</label>
-          <input
-            :class="{ changed: piece.changed }"
-            id="pieceYear"
-            v-model="piece.year"
-            type="text"
-            required
-          />
-          <label class="form-item" for="price">Price</label>
-          <input
-            :class="{ changed: piece.changed }"
-            id="price"
-            v-model="piece.price"
-            type="text"
-            required
-          />
-          <label class="form-item" for="size">Size</label>
-          <input
-            :class="{ changed: piece.changed }"
-            id="size"
-            v-model="piece.size"
-            type="text"
-            required
-          />
-          <label class="form-item" for="materials">Materials</label>
-          <input
-            :class="{ changed: piece.changed }"
-            id="materials"
-            v-model="piece.materials"
-            type="text"
-            required
-          />
-          <label class="form-item" for="PieceDescription">Description</label>
-          <textarea
-            :class="{ changed: piece.changed }"
-            id="PieceDescription"
-            v-model="piece.description"
-            rows="5"
-            required
-          />
-          <label for="show">Show this project in portfoio? </label>
-          <input v-model="piece.showInProj" id="show" type="checkbox" :checked="piece.showInProj" />
+        <TextInput id="materials" label="Materials" v-model="project.materials" />
+        <TextInput id="year" label="Year" v-model="project.year" />
+        <label for="yes">Show this project in portfoio?</label>
+        <input class="check-box" v-model="project.onShow" id="yes" type="checkbox" checked />
+        <DeleteImage :images="project.images" v-model="deleteFilenames" />
+        <div>
+          <ImageUpload v-model="imgs" />
         </div>
-
-        <div class="piece-image">
-          <img :src="piece.thumbnail" />
-          <button
-            v-if="!piece.isMain"
-            :class="{ delete: deletePieces.includes(index) }"
-            @click.prevent="deletePiece(index, piece.filename)"
-          >
-            Delete Piece
-          </button>
-        </div>
+        <button @click.prevent="submitChanges">Submit Changes</button>
       </div>
-      <button @click.prevent="submitChanges">Submit Changes</button>
     </form>
-    <router-link :to="`/admin/projects/${project._id}`"
-      ><button>Cancel Changes</button></router-link
-    >
   </div>
 </template>
-// Need to change piece.name to piece.pieceName etc.
 <script>
+import TextInput from '@/components/form/TextInput.vue'
+import ImageUpload from '@/components/form/ImageUpload.vue'
+import DeleteImage from '@/components/form/DeleteImage.vue'
+
 export default {
   name: 'EditProject',
-  components: {},
+  components: { TextInput, ImageUpload, DeleteImage },
   data() {
     return {
-      deletePieces: [],
-      deleteFilenames: []
+      deleteFilenames: [],
+      imgs: []
     }
   },
   computed: {
@@ -122,46 +48,27 @@ export default {
     },
 
     project() {
-      return this.$store.getters['project/getProjById'](this.id)
+      return this.$store.getters['adminProject/getProjById'](this.id)
+    },
+    allThemes() {
+      return this.$store.state.adminProject.themes
     }
   },
   methods: {
-    deletePiece(pieceIndex, filename) {
-      // not piece.index-index of piece in project from for loop(makes it easier to splice onSubmit)
-      const pieceI = this.deletePieces.indexOf(pieceIndex)
-      const filenameI = this.deleteFilenames.indexOf(filename)
-      /* eslint-disable */
-      if (pieceI >= 0) {
-        this.deletePieces.splice(pieceI, 1)
-        this.deleteFilenames.splice(filenameI, 1)
-      } else {
-        this.deletePieces.push(pieceIndex)
-        this.deleteFilenames.push(filename)
-      }
-    },
-
-    toggleTrue(id, pieceIndex, filename) {
-      for (let piece of this.project.pieces) {
-        piece._id === id ? (piece.isMain = true) : (piece.isMain = false)
-        // delete from deleted pieces if selected to be main image
-        const index = this.deletePieces.indexOf(pieceIndex)
-        console.log(index)
-        if (index >= 0) {
-          console.log('YOOOOOOO')
-          this.deletePiece(pieceIndex, filename) // if piece is in deletePieces, this will remove it
-        }
-      }
-    },
-
-    async submitChanges() {
+    submitChanges() {
       // delete pieces before sending off
-      for (let pieceIndex of this.deletePieces) {
-        this.project.pieces.splice(pieceIndex, 1)
+      /* eslint-disable */
+      const fd = new FormData()
+      const updatedImages = this.project.images.filter(
+        image => !this.deleteFilenames.includes(image.filename)
+      )
+      this.project.images = updatedImages
+      for (const img of this.imgs) {
+        fd.append('imgs', img)
       }
-      this.$store.dispatch('project/editProject', {
-        project: this.project,
-        filenames: this.deleteFilenames
-      })
+      fd.append('project', JSON.stringify(this.project))
+      fd.append('filenames', JSON.stringify(this.deleteFilenames))
+      this.$store.dispatch('adminProject/editProject', fd)
     }
   }
 }

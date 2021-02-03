@@ -3,11 +3,7 @@
     <div v-for="(image, index) in images" :key="image._id">
       <img :src="image.thumbnail" />
       <label :for="`image${index}`"> delete? </label>
-      <input
-        :id="`image${index}`"
-        type="checkbox"
-        @change="deleteImageArray(index, image.filename)"
-      />
+      <input :id="`image${index}`" type="checkbox" @change="deleteImageArray(image.filename)" />
     </div>
   </div>
 </template>
@@ -27,7 +23,7 @@ export default {
     }
   },
   methods: {
-    deleteImageArray(pieceIndex, filename) {
+    deleteImageArray(filename) {
       const filenameI = this.deleteFilenames.indexOf(filename)
       /* eslint-disable */
       if (filenameI >= 0) {

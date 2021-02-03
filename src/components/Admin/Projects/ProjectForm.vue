@@ -2,7 +2,7 @@
   <form class="form" action="#">
     <div class="form-holder form" id="project">
       <label for="theme">Select theme</label>
-      <select name="theme" id="theme" v-model="selectedTheme">
+      <select name="theme" id="theme" v-model="project.theme">
         <option v-for="theme in themes" :key="theme._id" :value="theme._id">{{
           theme.name
         }}</option>
@@ -36,10 +36,10 @@ export default {
         year: '',
         description: '',
         materials: '',
-        onShow: true
+        onShow: true,
+        theme: ''
       },
-      imgs: [],
-      selectedTheme: ''
+      imgs: []
     }
   },
   computed: {
@@ -55,7 +55,6 @@ export default {
         fd.append('imgs', img) // add images
       }
       fd.append('project', JSON.stringify(this.project)) // append project object
-      fd.append('theme', JSON.stringify(this.selectedTheme)) // append project object
       this.$store.dispatch('adminProject/submitProject', fd)
     }
   }

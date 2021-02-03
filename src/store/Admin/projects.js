@@ -54,8 +54,28 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+
+    async editProject({ commit }, fd) {
+      try {
+        const { data } = await axios.put('admin/projects/project', fd)
+        commit('EDIT_THEME', data)
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
 
-  getters: {}
+  getters: {
+    getProjById: state => id => {
+      for (const theme of state.themes) {
+        const found = theme.projects.find(project => project._id === id)
+        if (found) {
+          console.log(found)
+          return found
+        }
+      }
+      return null
+    }
+  }
 }
