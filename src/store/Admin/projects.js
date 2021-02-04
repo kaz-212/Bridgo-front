@@ -92,6 +92,9 @@ export default {
         }
       }
       return null
+    },
+    getThemeById: state => id => {
+      return state.themes.find(theme => theme._id === id)
     }
   }
 }

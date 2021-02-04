@@ -36,6 +36,7 @@ import DeleteImage from '@/components/form/DeleteImage.vue'
 export default {
   name: 'EditProject',
   components: { TextInput, ImageUpload, DeleteImage },
+  // TODO sort out ordering when you change themes
   data() {
     return {
       deleteFilenames: [],
