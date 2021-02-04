@@ -38,7 +38,7 @@ export default {
       this.projects.map((project, index) => {
         project.index = index
       })
-      // this.$store.diapatch('adminProject/updateOrder', projects)
+      this.$store.dispatch('adminProject/updateOrder', this.projects)
     }
   },
   methods: {}
