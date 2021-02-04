@@ -9,7 +9,7 @@
         :name="theme.name"
         :selected="selectedTab == theme.name"
       >
-        <DisplayProjects :projects="theme.projects" />
+        <DisplayProjects :prop-projects="theme.projects" />
       </Tab>
     </Tabs>
     <router-link :to="{ name: 'NewTheme' }"><button>New Theme</button></router-link>
