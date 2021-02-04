@@ -17,7 +17,7 @@ export default {
   props: { project: Object },
   computed: {
     mainUrl() {
-      const found = this.project.pieces.find(piece => piece.isMain)
+      const found = this.project.images.find(img => img.isMain)
       return found.imgURL
     }
   }
