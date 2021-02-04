@@ -1,7 +1,7 @@
 <template>
   <div id="carousel-main">
     <div class="wrapper">
-      <img :src="piece.imgURL" />
+      <img :src="image.imgURL" />
       <div class="arrow-overlay">
         <i
           v-if="selected !== 0"
@@ -21,7 +21,7 @@
 <script>
 export default {
   name: 'CarouselMain',
-  props: { piece: Object, selected: Number, length: Number },
+  props: { image: Object, selected: Number, length: Number },
   data() {
     return {}
   },
@@ -32,8 +32,7 @@ export default {
     prevSlide() {
       this.$emit('prev-slide')
     }
-  },
-  created() {}
+  }
 }
 </script>
 

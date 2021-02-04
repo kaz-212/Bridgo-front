@@ -1,14 +1,14 @@
 <template>
   <div id="carousel-description">
-    <h2>{{ piece.name }}</h2>
-    <p class="description">{{ piece.description }}</p>
+    <h2>{{ project.name }}</h2>
+    <p class="description">{{ project.description }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CarouselDescription',
-  props: { piece: Object },
+  props: { project: Object },
   data() {
     return {}
   },

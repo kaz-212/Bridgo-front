@@ -23,6 +23,16 @@ export default {
     }
   },
   getters: {
-    /* eslint-disable no-underscore-dangle */
+    /* eslint-disable no-underscore-dangle  */
+    /* eslint-disable no-restricted-syntax */
+    getProjById: state => id => {
+      for (const theme of state.themes) {
+        const found = theme.projects.find(project => project._id === id)
+        if (found) {
+          return found
+        }
+      }
+      return null
+    }
   }
 }

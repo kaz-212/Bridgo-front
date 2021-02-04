@@ -1,13 +1,13 @@
 <template>
   <div id="carousel-thumbnail">
-    <img :src="piece.thumbnail" />
+    <img :src="image.thumbnail" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'CarouselThumbnail',
-  props: { piece: Object },
+  props: { image: Object },
   data() {
     return {}
   },

@@ -4,21 +4,21 @@
     <div class="carousel-wrapper">
       <section class="img-desc">
         <CarouselMain
-          :piece="pieces[selected]"
+          :image="project.images[selected]"
           :selected="selected"
-          :length="pieces.length"
+          :length="project.images.length"
           @next-slide="nextSlide"
           @prev-slide="prevSlide"
         />
-        <CarouselDescription :piece="pieces[selected]" />
+        <CarouselDescription :project="project" />
       </section>
       <section class="carousel-thumbnails">
         <CarouselThumbnail
-          v-for="(piece, index) of pieces"
-          :key="piece._id"
-          :piece="piece"
+          v-for="(image, index) of project.images"
+          :key="image._id"
+          :image="image"
           :class="{ active: selected === index }"
-          @click="selectPiece(index)"
+          @click="selectImage(index)"
         />
       </section>
     </div>
@@ -44,10 +44,6 @@ export default {
     },
     project() {
       return this.$store.getters['project/getProjById'](this.id)
-    },
-    pieces() {
-      // array of pieces sorted by index
-      return this.project.pieces.filter(piece => piece.showInProj).sort((a, b) => a - b)
     }
   },
   methods: {
