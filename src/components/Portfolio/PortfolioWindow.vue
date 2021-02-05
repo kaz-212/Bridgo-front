@@ -17,8 +17,8 @@ export default {
   props: { project: Object },
   computed: {
     mainUrl() {
-      const found = this.project.images.find(img => img.isMain)
-      return found.imgURL
+      // images are ordered with the first one being the one to display
+      return this.project.images[0].imgURL
     }
   }
 }
