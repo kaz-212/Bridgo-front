@@ -59,7 +59,10 @@ export default {
     async editProject({ commit }, fd) {
       try {
         const { data } = await axios.put('admin/projects/project', fd)
-        commit('EDIT_THEME', data)
+        // FIXME doesnt refresh the draggable components. need to manually refresh the page
+        for (const theme of data) {
+          commit('EDIT_THEME', theme)
+        }
       } catch (err) {
         console.log(err)
       }

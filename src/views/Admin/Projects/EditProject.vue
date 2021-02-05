@@ -1,5 +1,6 @@
 <template>
   <div class="main" v-if="project">
+    <BackButton @click="resetProjectData" whereTo="AdminProjects" />
     <form class="form" action="#">
       <div class="form-holder form" id="project">
         <label for="theme">Select theme</label>
@@ -32,22 +33,29 @@
 import TextInput from '@/components/form/TextInput.vue'
 import ImageUpload from '@/components/form/ImageUpload.vue'
 import DeleteImage from '@/components/form/DeleteImage.vue'
+import BackButton from '@/components/Buttons/BackButton.vue'
+import axios from 'axios'
 
 export default {
   name: 'EditProject',
-  components: { TextInput, ImageUpload, DeleteImage },
-  // TODO sort out ordering when you change themes
+  components: {
+    TextInput,
+    ImageUpload,
+    DeleteImage,
+    BackButton
+  },
+
   data() {
     return {
       deleteFilenames: [],
-      imgs: []
+      imgs: [],
+      originalTheme: ''
     }
   },
   computed: {
     id() {
       return this.$route.params.id
     },
-
     project() {
       return this.$store.getters['adminProject/getProjById'](this.id)
     },
@@ -56,17 +64,26 @@ export default {
     }
   },
   methods: {
+    resetProjectData() {
+      // FIXME when back button pressed, it saves the changes even though resent get req
+      this.$store.dispatch('adminProject/getThemes')
+    },
     submitChanges() {
-      // delete pieces and change index ordering before sending off
       /* eslint-disable */
       const fd = new FormData()
+      // if theme changed, need to recalculate the index of edited project by adding 1 to value of last index of new theme
+      if (this.project.theme != this.originalTheme) {
+        const newTheme = this.allThemes.find(theme => (theme._id = this.project.theme))
+        this.project.index = newTheme.projects[newTheme.projects.length - 1].index + 1
+      }
+      console.log(this.project.index)
+      // delete pieces and change index ordering for images before sending off
       const updatedImages = this.project.images.filter(
         image => !this.deleteFilenames.includes(image.filename)
       )
       updatedImages.map((image, index) => {
         image.index = index
       })
-      console.log(updatedImages)
       this.project.images = updatedImages
       for (const img of this.imgs) {
         fd.append('imgs', img)
@@ -74,6 +91,15 @@ export default {
       fd.append('project', JSON.stringify(this.project))
       fd.append('filenames', JSON.stringify(this.deleteFilenames))
       this.$store.dispatch('adminProject/editProject', fd)
+    }
+  },
+  async mounted() {
+    if (this.project) {
+      this.originalTheme = this.project.theme
+    } else {
+      // TODO not nice but this.project = null on mounted if edit page refreshed
+      const { data } = await axios.get(`admin/projects/project/${this.id}`)
+      this.originalTheme = data.theme
     }
   }
 }
