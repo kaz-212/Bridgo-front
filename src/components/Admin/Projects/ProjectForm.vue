@@ -50,6 +50,7 @@ export default {
     calculatedIndex() {
       console.log('calleeeer')
       const theme = this.$store.getters['adminProject/getThemeById'](this.project.theme)
+      if (!theme.projects[theme.projects.length - 1]) return 0
       // get the index of the last project and add 1 to it
       // (projects are already sorted by index from server)
       return theme.projects[theme.projects.length - 1].index + 1
@@ -58,7 +59,6 @@ export default {
   methods: {
     submitProject() {
       this.project.index = this.calculatedIndex
-      console.log(typeof this.project.index)
       const fd = new FormData()
       /* eslint-disable */
       for (const img of this.imgs) {

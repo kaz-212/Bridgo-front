@@ -7,7 +7,7 @@
     </div> -->
     <Draggable v-model="imageArray" item-key="filename" class="list-group">
       <template #item="{ element }">
-        <div class="list-group-item" :class="{ 'not-draggable': !enabled }">
+        <div class="list-group-item">
           <img :src="element.thumbnail" />
           <label :for="`image${element.index}`"> delete? </label>
           <input

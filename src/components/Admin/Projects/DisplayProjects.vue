@@ -1,15 +1,8 @@
 <template>
   <div>
-    <Draggable
-      v-model="projects"
-      item-key="name"
-      class="list-group"
-      ghost-class="ghost"
-      @start="dragging = true"
-      @end="dragging = false"
-    >
+    <Draggable v-model="projects" item-key="name" class="list-group">
       <template #item="{ element }">
-        <div class="list-group-item" :class="{ 'not-draggable': !enabled }">
+        <div class="list-group-item">
           <router-link :to="{ name: 'EditProject', params: { id: element._id } }"
             ><img :src="element.images[0].thumbnail"
           /></router-link>
