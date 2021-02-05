@@ -1,6 +1,6 @@
 <template>
   <div>
-    <draggable
+    <Draggable
       v-model="projects"
       item-key="name"
       class="list-group"
@@ -16,17 +16,17 @@
           <h4>{{ element.name }}</h4>
         </div>
       </template>
-    </draggable>
+    </Draggable>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import Draggable from 'vuedraggable'
 
 export default {
   name: 'DisplayProjects',
   props: { propProjects: Array },
-  components: { draggable },
+  components: { Draggable },
   data() {
     return {
       projects: this.propProjects

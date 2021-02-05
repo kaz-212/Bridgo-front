@@ -19,7 +19,7 @@
         <TextInput id="year" label="Year" v-model="project.year" />
         <label for="yes">Show this project in portfoio?</label>
         <input class="check-box" v-model="project.onShow" id="yes" type="checkbox" checked />
-        <DeleteImage :images="project.images" v-model="deleteFilenames" />
+        <DeleteImage v-model:images="project.images" v-model:deleteFilenames="deleteFilenames" />
         <div>
           <ImageUpload v-model="imgs" />
         </div>
@@ -57,12 +57,16 @@ export default {
   },
   methods: {
     submitChanges() {
-      // delete pieces before sending off
+      // delete pieces and change index ordering before sending off
       /* eslint-disable */
       const fd = new FormData()
       const updatedImages = this.project.images.filter(
         image => !this.deleteFilenames.includes(image.filename)
       )
+      updatedImages.map((image, index) => {
+        image.index = index
+      })
+      console.log(updatedImages)
       this.project.images = updatedImages
       for (const img of this.imgs) {
         fd.append('imgs', img)

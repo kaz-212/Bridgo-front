@@ -87,7 +87,6 @@ export default {
       for (const theme of state.themes) {
         const found = theme.projects.find(project => project._id === id)
         if (found) {
-          console.log(found)
           return found
         }
       }
