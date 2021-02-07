@@ -61,7 +61,7 @@ export default {
       } else {
         this.filenames.push(filename)
       }
-      this.$emit('update:filenames', this.filenames)
+      this.$emit('update:deleteFilenames', this.filenames)
     }
   }
 }
