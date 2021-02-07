@@ -67,14 +67,7 @@ export default {
         console.log(err)
       }
     },
-    async editProject({ commit }, fd) {
-      try {
-        const { data } = await axios.put('admin/projects/project', fd)
-        commit('EDIT_THEME', data)
-      } catch (err) {
-        console.log(err)
-      }
-    },
+
     async updateOrder({ commit }, projects) {
       try {
         const { data } = await axios.patch('admin/projects/project', projects)

@@ -7,6 +7,7 @@
         :ref="setItemRef"
         :name="theme.name"
         :selected="selectedTab == theme.name"
+        :class="{'selected': selectedTab == theme.name}"
       >
         <PortfolioTab :projects="theme.projects" />
       </Tab>

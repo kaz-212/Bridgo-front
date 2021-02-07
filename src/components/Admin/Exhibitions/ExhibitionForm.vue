@@ -1,9 +1,8 @@
 <template>
   <div class="form" action="#">
-    <label class="form-item" for="name">Name</label>
-    <input id="Name" v-model="exhibition.name" type="text" required />
-    <label class="form-item" for="date">Date</label>
-    <textarea id="date" v-model="exhibition.date" rows="4" required />
+    <TextInput id="name" label="Name" v-model="exhibition.name" />
+    <TextInput id="date" label="Date" v-model="exhibition.date" />
+
     <label class="form-item" for="location">Location</label>
     <textarea id="location" v-model="exhibition.location" rows="4" required />
     <label class="form-item" for="description">Description</label>
@@ -41,9 +40,11 @@
 </template>
 
 <script>
+import TextInput from '@/components/form/TextInput.vue'
+
 export default {
   name: 'ExhibitionForm',
-  components: {},
+  components: { TextInput },
   props: {},
   data() {
     return {
@@ -80,6 +81,7 @@ export default {
     },
 
     async submitExhibition() {
+      // TODO add image indexes to order images
       const fd = new FormData()
       /* eslint-disable */
       for (const img of this.imgs) {

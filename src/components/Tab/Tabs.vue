@@ -33,7 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 .tabs {
-  border-bottom: 1px solid black;
+  // border-bottom: 1px solid black;
 
   ul {
     display: flex;
