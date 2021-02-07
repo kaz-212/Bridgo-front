@@ -20,7 +20,7 @@
 
     <div class="image-upload">
       <label for="image">Image(s)</label>
-      <DeleteImage :images="exhibition.images" v-model="deleteFilenames" />
+      <DeleteImage v-model:images="exhibition.images" v-model:deleteFilenames="deleteFilenames" />
       <ImageUpload v-model="imgs" />
     </div>
     <label for="Show">Show this exhibition?</label>
