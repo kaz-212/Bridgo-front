@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <div class="menu">
+    <div class="menu" v-if="leftSide.length + rightSide.length > 2">
       <div
         class="menu-point"
         v-for="n in leftSide.length"
