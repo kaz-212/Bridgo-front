@@ -1,31 +1,36 @@
 <template>
-  <div id="all-exhibitions" v-if="pastExhibitions">
+  <div id="all-exhibitions" v-if="exhibitions">
     <h1>Exhibitions</h1>
-    <h2>Upcoming</h2>
-    <div v-for="exhibition in upcomingExhibitions" :key="exhibition._id">
-      <router-link :to="{ name: 'ShowExhibition', params: { id: exhibition._id } }">{{
-        exhibition.name
-      }}</router-link>
-    </div>
-    <h2>Past</h2>
-    <div v-for="exhibition in pastExhibitions" :key="exhibition._id">
-      <router-link :to="{ name: 'ShowExhibition', params: { id: exhibition._id } }">{{
-        exhibition.name
-      }}</router-link>
+    <div class="exhibitions-container">
+      <div v-for="exhibition in exhibitions" :key="exhibition._id" class="exhibition-card">
+        <ExhibitionCard :exhibition="exhibition" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import ExhibitionCard from '@/components/Exhibitions/ExhibitionCard.vue'
 
 export default {
   name: 'AllExhibitions',
+  components: { ExhibitionCard },
   computed: {
-    ...mapGetters('exhibition', {
-      upcomingExhibitions: 'onShowUpcoming',
-      pastExhibitions: 'onShowPast'
-    })
+    exhibitions() {
+      return this.$store.state.exhibition.exhibitions
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.exhibitions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .exhibition-card {
+    margin-top: 2rem;
+  }
+}
+</style>
