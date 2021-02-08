@@ -15,7 +15,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('orders/getOrders')
-    this.$store.dispatch('exhibition/getExhibitions')
+    this.$store.dispatch('adminExhibition/getExhibitions')
     this.$store.dispatch('inventory/getProducts')
     this.$store.dispatch('adminProject/getThemes')
   }

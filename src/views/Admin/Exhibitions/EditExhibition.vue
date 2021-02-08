@@ -1,7 +1,7 @@
 <template>
-  <div id="new-exhibition">
+  <div id="new-exhibition" v-if="exhibition">
     <h1>Edit Exhibition</h1>
-    <EditExhibitionForm :id="id" />
+    <EditExhibitionForm :exhi="exhibition" />
   </div>
 </template>
 
@@ -17,9 +17,11 @@ export default {
   computed: {
     id() {
       return this.$route.params.id
+    },
+    exhibition() {
+      return this.$store.getters['adminExhibition/getExhibitionById'](this.id)
     }
-  },
-  created() {}
+  }
 }
 </script>
 
