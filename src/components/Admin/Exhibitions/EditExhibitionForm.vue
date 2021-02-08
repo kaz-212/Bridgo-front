@@ -1,11 +1,10 @@
 <template>
   <div v-if="exhibition" class="form" action="#">
-    <label class="form-item" for="name">Name</label>
-    <input id="Name" v-model="exhibition.name" type="text" required />
-    <label class="form-item" for="date">Date</label>
-    <input id="date" v-model="exhibition.date" type="text" required />
+    <TextInput id="name" label="Exhibition Name" v-model="exhibition.name" />
+    <TextInput id="date" label="date" v-model="exhibition.date" />
+    <TextInput id="gallery" label="Gallery" v-model="exhibition.gallery" />
     <label class="form-item" for="location">Location</label>
-    <input id="location" v-model="exhibition.location" type="text" required />
+    <textarea id="location" v-model="exhibition.location" rows="5" required />
     <label class="form-item" for="description">Description</label>
     <textarea id="description" v-model="exhibition.description" rows="5" required />
 
@@ -42,17 +41,17 @@
     />
     <button @click.prevent="editExhibition">Update</button>
     <button @click.prevent="deleteExhibition">Delete</button>
-    <button @click.prevent="cancel">Back</button>
   </div>
 </template>
 
 <script>
 import DeleteImage from '@/components/form/DeleteImage.vue'
 import ImageUpload from '@/components/form/ImageUpload.vue'
+import TextInput from '@/components/form/TextInput.vue'
 
 export default {
   name: 'EditExhibitionForm',
-  components: { DeleteImage, ImageUpload },
+  components: { DeleteImage, ImageUpload, TextInput },
   props: { id: String },
   data() {
     return {
@@ -90,6 +89,9 @@ export default {
       const updatedImages = this.exhibition.images.filter(
         image => !this.deleteFilenames.includes(image.filename)
       )
+      updatedImages.map((image, index) => {
+        image.index = index
+      })
       this.exhibition.images = updatedImages
       const fd = new FormData()
       for (const img of this.imgs) {

@@ -2,6 +2,7 @@
   <div class="form" action="#">
     <TextInput id="name" label="Name" v-model="exhibition.name" />
     <TextInput id="date" label="Date" v-model="exhibition.date" />
+    <TextInput id="gallery" label="Gallery" v-model="exhibition.gallery" />
 
     <label class="form-item" for="location">Location</label>
     <textarea id="location" v-model="exhibition.location" rows="4" required />
@@ -52,6 +53,7 @@ export default {
         name: '',
         date: '',
         description: '',
+        gallery: '',
         location: '',
         isUpcoming: true,
         onShow: true,

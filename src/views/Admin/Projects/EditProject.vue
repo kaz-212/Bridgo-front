@@ -76,7 +76,6 @@ export default {
         const newTheme = this.allThemes.find(theme => (theme._id = this.project.theme))
         this.project.index = newTheme.projects[newTheme.projects.length - 1].index + 1
       }
-      console.log(this.project.index)
       // delete pieces and change index ordering for images before sending off
       const updatedImages = this.project.images.filter(
         image => !this.deleteFilenames.includes(image.filename)
