@@ -57,6 +57,7 @@ a {
         max-height: 100%;
         max-width: 100%;
         display: block;
+        border: 3px solid #636145;
       }
       // }
     }
