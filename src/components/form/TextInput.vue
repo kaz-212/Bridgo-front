@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label for="id">{{ label }}</label>
+    <label :for="id">{{ label }}</label>
     <input
-      id="id"
+      :id="id"
       :type="type ? type : 'text'"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
