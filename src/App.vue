@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="this.$store.state.project.themes">
     <Navbar />
     <router-view />
   </div>
@@ -12,6 +12,12 @@ export default {
   name: 'App',
   components: {
     Navbar
+  },
+  mounted() {
+    // FIXME load everything when app loads. gets errors when we uncomment out below
+    // this.$store.dispatch('project/getThemes')
+    // this.$store.dispatch('exhibition/getExhibitions')
+    // this.$store.dispatch('basket/initialiseBasket')
   }
 }
 </script>
