@@ -1,43 +1,22 @@
 <template>
-  <div id="all-exhibitions">
+  <div id="all-exhibitions" v-if="exhibitions">
     <h1>Exhibitions</h1>
-    <h2>Upcoming</h2>
-    <div v-for="exhibition in upcomingExhibitions" :key="exhibition._id">
-      <router-link :to="{ name: 'EditExhibition', params: { id: exhibition._id } }">{{
-        exhibition.name
-      }}</router-link>
-    </div>
-    <h2>Past</h2>
-    <div v-for="exhibition in pastExhibitions" :key="exhibition._id">
-      <router-link :to="{ name: 'EditExhibition', params: { id: exhibition._id } }">{{
-        exhibition.name
-      }}</router-link>
-    </div>
-
-    <router-link :to="{ name: 'NewExhibition' }"><button>Add Exhibition</button></router-link>
+    <DraggableExhibitions :exhi="exhibitions" />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import DraggableExhibitions from '@/components/Admin/Exhibitions/DraggableExhibitions.vue'
 
 export default {
   name: 'exhibitions',
+  components: { DraggableExhibitions },
   computed: {
-    ...mapGetters('exhibition', {
-      upcomingExhibitions: 'getUpcomingExhibitions',
-      pastExhibitions: 'getPastExhibitions'
-    })
+    exhibitions() {
+      return this.$store.state.adminExhibition.exhibitions
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-html {
-  overflow: hidden;
-}
-
-#all-exhibitions {
-  width: 100%;
-}
-</style>
+<style lang="scss" scoped></style>
