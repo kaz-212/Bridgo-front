@@ -2,10 +2,9 @@
   <div class="form" action="#">
     <TextInput id="name" label="Name" v-model="exhibition.name" />
     <TextInput id="date" label="Date" v-model="exhibition.date" />
-    <TextInput id="gallery" label="Gallery" v-model="exhibition.gallery" />
 
-    <label class="form-item" for="location">Location</label>
-    <textarea id="location" v-model="exhibition.location" rows="4" required />
+    <TextInput id="location" label="Location" v-model="exhibition.location" />
+
     <label class="form-item" for="description">Description</label>
     <textarea id="description" v-model="exhibition.description" rows="5" required />
 
@@ -17,20 +16,7 @@
     </div>
     <button v-if="exhibition.links.length === 0" @click.prevent="addLink">Add Link</button>
     <button v-if="exhibition.links.length > 0" @click.prevent="addLink">Add Another Link</button>
-
-    <div class="image-upload">
-      <label for="image">Image(s)</label>
-      <input multiple type="file" id="image" ref="fileSelector" @change="onFileSelected" />
-    </div>
-
-    <div class="files">
-      <div v-for="(img, index) in imgs" :key="index" class="file-display">
-        {{ img.name }} <i @click="deleteImage(index)" class="far fa-trash-alt"></i>
-      </div>
-    </div>
-
-    <!-- proxy button to click -->
-    <button @click.prevent="$refs.fileSelector.click()">Choose Image(s)</button>
+    <ImageUpload v-model="imgs" />
     <label for="Show">Show this exhibition?</label>
     <input class="check-box" v-model="exhibition.onShow" id="show" type="checkbox" checked />
     <label for="Show">Is this an upcoming Exhibition?</label>
@@ -42,10 +28,11 @@
 
 <script>
 import TextInput from '@/components/form/TextInput.vue'
+import ImageUpload from '@/components/form/ImageUpload.vue'
 
 export default {
   name: 'ExhibitionForm',
-  components: { TextInput },
+  components: { TextInput, ImageUpload },
   props: {},
   data() {
     return {
@@ -53,16 +40,20 @@ export default {
         name: '',
         date: '',
         description: '',
-        gallery: '',
         location: '',
         isUpcoming: true,
         onShow: true,
+        index: null,
         links: []
       },
       imgs: ''
     }
   },
-  computed: {},
+  computed: {
+    computedIndex() {
+      return this.$store.getters['adminExhibition/getNewIndex']
+    }
+  },
   methods: {
     onFileSelected() {
       const { files } = this.$refs.fileSelector
@@ -83,14 +74,14 @@ export default {
     },
 
     async submitExhibition() {
-      // TODO add image indexes to order images
+      this.exhibition.index = this.computedIndex
       const fd = new FormData()
       /* eslint-disable */
       for (const img of this.imgs) {
         fd.append('imgs', img)
       }
       fd.append('exhibition', JSON.stringify(this.exhibition))
-      this.$store.dispatch('exhibition/submitExhibition', fd)
+      this.$store.dispatch('adminExhibition/submitExhibition', fd)
     }
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div v-if="exhibition" class="form" action="#">
+    <BackButton whereTo="AllExhibitions" />
     <TextInput id="name" label="Exhibition Name" v-model="exhibition.name" />
     <TextInput id="date" label="date" v-model="exhibition.date" />
     <TextInput id="gallery" label="Gallery" v-model="exhibition.gallery" />
@@ -48,22 +49,27 @@
 import DeleteImage from '@/components/form/DeleteImage.vue'
 import ImageUpload from '@/components/form/ImageUpload.vue'
 import TextInput from '@/components/form/TextInput.vue'
+import BackButton from '@/components/Buttons/BackButton.vue'
+
+// FIXME figure out why when something is edited and then cancelled - edited version displayed
 
 export default {
   name: 'EditExhibitionForm',
-  components: { DeleteImage, ImageUpload, TextInput },
-  props: { id: String },
+  components: {
+    DeleteImage,
+    ImageUpload,
+    TextInput,
+    BackButton
+  },
+  props: { exhi: Object },
   data() {
     return {
       imgs: '',
-      deleteFilenames: []
+      deleteFilenames: [],
+      exhibition: this.exhi
     }
   },
-  computed: {
-    exhibition() {
-      return this.$store.getters['exhibition/getExhibitionById'](this.id)
-    }
-  },
+
   methods: {
     addLink() {
       this.exhibition.links.push({ URL: '', name: '' })
@@ -73,14 +79,10 @@ export default {
       this.exhibition.links.splice(index, 1)
     },
 
-    cancel() {
-      this.$router.push({ name: 'AllExhibitions' })
-    },
-
     deleteExhibition() {
       /* eslint-disable */
       if (confirm('You sure brij? I liked this one!')) {
-        this.$store.dispatch('exhibition/deleteExhibition', this.id)
+        this.$store.dispatch('adminExhibition/deleteExhibition', this.exhibition._id)
       }
     },
 
@@ -99,7 +101,7 @@ export default {
       }
       fd.append('exhibition', JSON.stringify(this.exhibition))
       fd.append('filenames', JSON.stringify(this.deleteFilenames))
-      this.$store.dispatch('exhibition/editExhibition', { id: this.id, fd })
+      this.$store.dispatch('adminExhibition/editExhibition', { id: this.exhibition._id, fd })
     }
   }
 }
