@@ -57,7 +57,6 @@ a {
         max-height: 100%;
         max-width: 100%;
         display: block;
-        border: 3px solid #636145;
       }
       // }
     }
@@ -65,16 +64,16 @@ a {
     .exhibition-information {
       display: flex;
       justify-content: space-between;
-      margin-left: 10%;
+      margin-left: 8%;
       width: 20vw;
       padding: 5px 10px;
       background-color: rgba(31, 33, 34, 0);
       z-index: -1;
-      transform: translateX(-20vw);
+      // transform: translateX(-20vw);
       transition: transform ease-out 0.45s, background-color ease-out 0.4s;
 
       h3 {
-        color: #640075;
+        color: #29281d;
       }
 
       em {

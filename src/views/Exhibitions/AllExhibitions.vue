@@ -1,6 +1,12 @@
 <template>
   <div id="exhibitions" v-if="exhibitions">
-    <h1>Exhibitions</h1>
+    <div class="header-container">
+      <!-- <img
+        src="https://res.cloudinary.com/dqyymjqpg/image/upload/v1612899964/Bridgo/statics/4CE38005-BEC1-4ADE-AED6-91F05FE33E7E_ycfzao.jpg"
+        alt="exhibitions"
+      /> -->
+      <h1>EXHIBITIONS</h1>
+    </div>
     <div class="all-exhibitions">
       <div class="exhibitions-container">
         <div v-for="exhibition in leftSide" :key="exhibition._id" class="exhibition-card">
@@ -45,7 +51,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header-container {
+  width: 84%;
+  margin: 0 auto;
+  height: 25vh;
+  background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612899964/Bridgo/statics/4CE38005-BEC1-4ADE-AED6-91F05FE33E7E_ycfzao.jpg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin: 0;
+    // color: #98982b;
+    // color: #7b7b02ed;
+    // text-shadow: 5px 5px 3px #4e3535;
+    // this one with main color transparent
+    color: rgba(255, 255, 255, 0);
+    text-shadow: 0 0 2px #a9a538;
+  }
+}
+
 .all-exhibitions {
+  margin-top: 3vh;
   display: flex;
   justify-content: center;
 

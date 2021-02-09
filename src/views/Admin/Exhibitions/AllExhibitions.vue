@@ -7,7 +7,7 @@
 
 <script>
 import DraggableExhibitions from '@/components/Admin/Exhibitions/DraggableExhibitions.vue'
-
+// FIXME figure out why when refresh this page, doesnt load
 export default {
   name: 'exhibitions',
   components: { DraggableExhibitions },
