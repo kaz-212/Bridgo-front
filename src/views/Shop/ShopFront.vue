@@ -1,6 +1,8 @@
 <template>
   <div v-if="prints">
-    <h1>Shop Front</h1>
+    <div class="shop-banner">
+      <h1>Shop</h1>
+    </div>
     <section class="tab-body">
       <Tabs :tabs="tabs" @set-tab="setTab">
         <Tab ref="tab1" name="Prints" :selected="selectedTab == 'Prints'">
@@ -55,6 +57,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.shop-banner {
+  width: 100%;
+  margin: 0 auto;
+  height: 25vh;
+  // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612955104/Bridgo/statics/6A91EEF0-A9E9-4198-9601-63D8350F2886_wefe5t.jpg');
+  background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954940/Bridgo/statics/FDD1FA05-A350-4B8B-9483-60A282CF2E05_oh629l.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    margin: 0;
+  }
+}
+
 .shop-container {
   background: black;
   display: grid;
