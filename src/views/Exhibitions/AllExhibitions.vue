@@ -1,6 +1,6 @@
 <template>
   <div id="exhibitions" v-if="exhibitions">
-    <div class="header-container">
+    <div class="exhibition-banner">
       <!-- <img
         src="https://res.cloudinary.com/dqyymjqpg/image/upload/v1612899964/Bridgo/statics/4CE38005-BEC1-4ADE-AED6-91F05FE33E7E_ycfzao.jpg"
         alt="exhibitions"
@@ -51,12 +51,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-container {
+.exhibition-banner {
   width: 84%;
   margin: 0 auto;
   height: 25vh;
-  background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612899964/Bridgo/statics/4CE38005-BEC1-4ADE-AED6-91F05FE33E7E_ycfzao.jpg');
+  background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954180/Bridgo/statics/540A3F34-C815-4FD3-B272-44463C5D1990_slzuyp.jpg');
   background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
