@@ -68,7 +68,9 @@ export default {
     // text-shadow: 5px 5px 3px #4e3535;
     // this one with main color transparent
     color: rgba(255, 255, 255, 0);
-    text-shadow: 0 0 2px #a9a538;
+    font-size: 53px;
+    text-shadow: 0 0 2px #c3bf43;
+    font-weight: 300;
   }
 }
 

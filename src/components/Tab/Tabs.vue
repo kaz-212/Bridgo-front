@@ -1,7 +1,7 @@
 <template>
   <article>
     <header class="tabs">
-      <ul>
+      <ul v-if="!hide">
         <li v-for="tab in tabs" :key="tab.name">
           <div class="nav-item" :class="{ 'is-active': tab.isActive }" @click="setTab(tab)">
             {{ tab.name }}
@@ -18,7 +18,13 @@
 <script>
 export default {
   name: 'Tabs',
-  props: { tabs: Array },
+  props: {
+    tabs: Array,
+    hide: {
+      type: Boolean,
+      default: false
+    }
+  },
   emits: ['set-tab'],
   data() {
     return {}

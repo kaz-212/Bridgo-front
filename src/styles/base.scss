@@ -1,5 +1,8 @@
 @import './_include-media.scss';
-@import url('https://fonts.googleapis.com/css2?family=Cardo&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Cardo&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap');
+
 // ======== VARIABLES =========
 
 // nav
@@ -16,7 +19,9 @@ $navhover: rgb(31, 28, 28);
   box-sizing: border-box;
 
   &:not(i) {
-    font-family: 'Cardo', serif;
+    // font-family: 'Cardo', serif;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
   }
 }
 h1 {
