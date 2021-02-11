@@ -2,13 +2,13 @@
   <article class="card">
     <router-link :to="{ name: 'ShowItem', params: { id: product._id } }">
       <div class="image-container">
-        <img :src="product.images[0].thumbnail" :alt="product.name" />
+        <img :src="product.images[0].imgURL" :alt="product.name" />
       </div>
     </router-link>
-    <div class="product-info">
+    <!-- <div class="product-info">
       <h3>{{ product.name }}</h3>
       <p>£{{ (product.particulars[0].price / 100).toFixed(2) }}</p>
-    </div>
+    </div> -->
   </article>
 </template>
 
@@ -24,18 +24,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: black;
   flex-direction: column;
-  margin: 0 5px;
+  width: 285px;
+
   .image-container {
-    height: 190px;
-    width: 280px;
+    // height: 190px;
+    height: 260px;
+    width: 260px;
+    // width: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    // background-color: black;
 
     img {
-      // border: 1px solid springgreen;
       max-height: 100%;
       max-width: 100%;
     }
@@ -46,9 +50,9 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    h3,
-    p {
+    h3 {
       color: steelblue;
+      letter-spacing: 1px;
     }
   }
 }
