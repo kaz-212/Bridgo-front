@@ -71,9 +71,12 @@ export default {
 
 <style lang="scss" scoped>
 .shop-banner {
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
-  height: 25vh;
+  // margin-top: 7vh;
+  // border: 2px solid black;
+  // height: 25vh;
+  height: 33vh;
   background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612955104/Bridgo/statics/6A91EEF0-A9E9-4198-9601-63D8350F2886_wefe5t.jpg');
   // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954940/Bridgo/statics/FDD1FA05-A350-4B8B-9483-60A282CF2E05_oh629l.jpg');
   background-size: cover;
@@ -99,11 +102,11 @@ export default {
       font-size: 17px;
       font-weight: 300;
       cursor: pointer;
-      color: yellow;
+      color: black;
     }
     .selected {
-      // color: #ffff14d6;
-      text-decoration: underline;
+      color: #ffff14d6;
+      // text-decoration: underline;
     }
   }
 }
