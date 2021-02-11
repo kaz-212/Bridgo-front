@@ -1,5 +1,5 @@
 <template>
-  <nav id="nav">
+  <nav id="nav" :class="{ scrolling: scrolling }">
     <div class="logo">
       <h4><router-link to="/">BRIJ</router-link></h4>
     </div>
@@ -37,6 +37,7 @@ export default {
   name: 'Navbar',
   data() {
     return {
+      scrolling: false,
       hideLinks: true
     }
   },
@@ -44,6 +45,15 @@ export default {
     navSlide() {
       this.hideLinks = !this.hideLinks
     }
+  },
+  created() {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 1) {
+        this.scrolling = true
+      } else {
+        this.scrolling = false
+      }
+    })
   }
 }
 </script>
@@ -58,12 +68,19 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    min-height: 60px;
+    width: 100%;
     height: 6vh;
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 1000;
-    // background-color: $navslider;
+    transition: background 0.5s ease-out, height 0.5s ease-out;
+    &.scrolling {
+      background: white;
+      height: 5vh;
+    }
+    &:hover {
+      background: rgba(255, 255, 255, 0.548);
+    }
 
     a,
     i {
