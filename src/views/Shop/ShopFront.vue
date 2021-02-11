@@ -1,7 +1,7 @@
 <template>
   <div v-if="prints">
     <div class="fixed" :class="{ scrolling: scrolling }">
-      <div class="shop-banner">
+      <div class="shop-banner" :class="{ scrolling: scrolling }">
         <h1>SHOP</h1>
         <div class="tabs">
           <span
@@ -114,12 +114,18 @@ export default {
     // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954940/Bridgo/statics/FDD1FA05-A350-4B8B-9483-60A282CF2E05_oh629l.jpg');
     background-size: cover;
     background-position: center;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     transition: width 0.5s ease-out;
+    transition: all 0.5s ease-out;
+
+    &.scrolling {
+      border-radius: 0;
+    }
 
     h1 {
       margin: 0;

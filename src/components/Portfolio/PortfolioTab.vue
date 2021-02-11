@@ -72,6 +72,7 @@ export default {
     }
   },
   watch: {
+    // wait before old images have left screen before bringing in new ones
     slide(newVal) {
       if (newVal >= this.leftSide.length) {
         this.slide = 0
@@ -103,6 +104,7 @@ export default {
     }
   },
   mounted() {
+    // TODO need to remove event listener on unmount by saving below functin as a named function
     window.addEventListener(
       'wheel',
       this.throttle(event => {
