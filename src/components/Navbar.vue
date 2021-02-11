@@ -1,7 +1,7 @@
 <template>
   <nav id="nav" :class="{ scrolling: scrolling }">
     <div class="logo">
-      <h4><router-link to="/">BRIJ</router-link></h4>
+      <h4><router-link to="/">Bridget Simpson Art</router-link></h4>
     </div>
     <div class="nav-links" :class="{ 'nav-active': !hideLinks }">
       <router-link class="nav-link" :class="{ 'first-link': !hideLinks }" to="/about"
