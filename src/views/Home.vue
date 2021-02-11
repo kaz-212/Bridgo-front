@@ -1,6 +1,5 @@
 <template>
   <div id="home">
-    <h1>Bridget Simpson Art.</h1>
     <div id="img"></div>
   </div>
 </template>
