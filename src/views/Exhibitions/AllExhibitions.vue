@@ -54,6 +54,7 @@ export default {
 .exhibition-banner {
   width: 84%;
   margin: 0 auto;
+  margin-top: 7vh;
   height: 25vh;
   background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954180/Bridgo/statics/540A3F34-C815-4FD3-B272-44463C5D1990_slzuyp.jpg');
   background-size: cover;
