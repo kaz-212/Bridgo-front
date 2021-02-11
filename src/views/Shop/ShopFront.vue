@@ -64,6 +64,7 @@ export default {
     setTab(tab) {
       /* eslint-disable */
       this.selectedTab = tab.name
+      window.scrollTo(0, 2)
     }
   },
   mounted() {
@@ -78,7 +79,7 @@ export default {
       }
     })
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('scroll', () => {
       this.scrolling = false
     })
@@ -96,6 +97,7 @@ export default {
   top: 0;
   left: 8%;
   transition: all 0.5s ease-out;
+  z-index: 1000;
 
   &.scrolling {
     width: 100%;
