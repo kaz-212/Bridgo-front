@@ -9,7 +9,7 @@
         @click="changeSlide(n - 1)"
       ></div>
     </div>
-    <section class="section">
+    <section class="section" @wheel.prevent="animateSlide">
       <div class="left-side">
         <PortfolioWindow
           v-for="(project, index) in leftSide"
@@ -52,7 +52,8 @@ export default {
   data() {
     return {
       slide: 0,
-      delaySlide: 0
+      delaySlide: 0,
+      timeUp: true
     }
   },
   computed: {
@@ -89,41 +90,28 @@ export default {
       this.slide = n
     },
 
-    throttle(fn, delay) {
-      /* eslint-disable consistent-return */
-
-      let last = 0
-      return (...args) => {
-        const now = new Date().getTime()
-        if (now - last < delay) {
-          return
-        }
-        last = now
-        return fn(...args)
+    animateSlide(evt) {
+      if (!this.timeUp) return
+      this.timeUp = false
+      if (evt.deltaY < 0) {
+        this.slide -= 1
+      } else if (evt.deltaY > 0) {
+        this.slide += 1
       }
-    }
-  },
-  mounted() {
-    // TODO need to remove event listener on unmount by saving below functin as a named function
-    window.addEventListener(
-      'wheel',
-      this.throttle(event => {
-        if (event.deltaY < 0) {
-          this.slide -= 1
-        } else if (event.deltaY > 0) {
-          this.slide += 1
-        }
+      // throttle function call so doesnt get called for every mouse wheel
+      setTimeout(() => {
+        this.timeUp = true
       }, 2000)
-    )
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 #main {
-  overflow-y: hidden;
+  overflow: hidden;
+
   .section {
-    // height: 100vh;
     max-width: 100vw;
     left: 0;
     position: relative;
