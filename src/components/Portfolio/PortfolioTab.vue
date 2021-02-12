@@ -36,6 +36,7 @@
           :project="project"
         />
       </div>
+      <button @click="toggleScrollView">View All</button>
     </section>
   </div>
 </template>
@@ -49,6 +50,7 @@ export default {
     PortfolioWindow
   },
   props: { projects: Array },
+  emits: ['toggle-scroll-view'],
   data() {
     return {
       slide: 0,
@@ -102,6 +104,10 @@ export default {
       setTimeout(() => {
         this.timeUp = true
       }, 2000)
+    },
+
+    toggleScrollView() {
+      this.$emit('toggle-scroll-view')
     }
   }
 }
@@ -110,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 #main {
   overflow: hidden;
-
+  position: relative;
   .section {
     max-width: 100vw;
     left: 0;

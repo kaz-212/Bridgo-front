@@ -7,9 +7,15 @@
         :ref="setItemRef"
         :name="theme.name"
         :selected="selectedTab == theme.name"
-        :class="{'selected': selectedTab == theme.name}"
+        :class="{ selected: selectedTab == theme.name }"
       >
-        <PortfolioTab :projects="theme.projects" />
+        <div class="scroll-view" v-if="scrollView">
+          <PortfolioTab :projects="theme.projects" @toggle-scroll-view="scrollView = false" />
+        </div>
+        <div class="view-all" v-if="!scrollView">
+          <PortfolioViewAll :projects="theme.projects" @toggle-scroll-view="scrollView = true" />
+          <button @click="scrollView = true">Scroll View</button>
+        </div>
       </Tab>
     </Tabs>
   </div>
@@ -19,14 +25,21 @@
 import Tab from '@/components/Tab/Tab.vue'
 import Tabs from '@/components/Tab/Tabs.vue'
 import PortfolioTab from '@/components/Portfolio/PortfolioTab.vue'
+import PortfolioViewAll from '@/components/Portfolio/PortfolioViewAll.vue'
 
 export default {
   name: 'AllPortfolio',
-  components: { Tab, Tabs, PortfolioTab },
+  components: {
+    Tab,
+    Tabs,
+    PortfolioViewAll,
+    PortfolioTab
+  },
   data() {
     return {
       tabs: [],
-      selectedTab: ''
+      selectedTab: '',
+      scrollView: true
     }
   },
   computed: {
@@ -56,4 +69,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.main {
+  position: relative;
+  top: 6vh;
+}
+</style>
