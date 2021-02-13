@@ -16,16 +16,18 @@ export default {
 
 <style lang="scss" scoped>
 #home {
-  height: 100vh;
+  height: calc(100% - 50px);
   width: 100vw;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  // background: black;
+  position: absolute;
+  bottom: 0;
+  background: black;
   #back-video {
     max-height: 100%;
-    max-width: 100%;
+    min-width: 90%;
   }
 }
 </style>
