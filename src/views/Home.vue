@@ -1,6 +1,8 @@
 <template>
   <div id="home">
-    <div id="img"></div>
+    <video autoplay muted loop id="back-video">
+      <source src="../assets/bridget2.mp4" type="video/mp4" />
+    </video>
   </div>
 </template>
 
@@ -13,14 +15,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#img {
-  position: fixed;
-  top: 0;
-  z-index: -10;
-  min-height: 100vh;
-  min-width: 100vw;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.021), rgba(0, 0, 0, 0.411)),
-    url('../assets/main.jpg');
-  background-size: cover;
+#home {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background: black;
+  #back-video {
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
 </style>
