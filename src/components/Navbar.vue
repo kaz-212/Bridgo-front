@@ -69,10 +69,10 @@ body {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 6vh;
+    height: $navheight;
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 10000;
     transition: background 0.5s ease-out, height 0.5s ease-out;
     &.scrolling {
       background: white;
