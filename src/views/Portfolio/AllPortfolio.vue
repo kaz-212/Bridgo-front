@@ -1,13 +1,22 @@
 <template>
   <div class="main" :v-if="themes">
-    <Tabs :tabs="tabs" @set-tab="setTab">
+    <div class="tab-names">
+      <span
+        v-for="theme in themes"
+        :key="theme._id"
+        @click="selectedTab = theme.name"
+        :class="{ selected: theme.name === selectedTab }"
+        class="tab"
+        >{{ theme.name }}</span
+      >
+    </div>
+    <Tabs :hide="true" :tabs="tabs" @set-tab="setTab">
       <Tab
         v-for="theme in themes"
         :key="theme._id"
         :ref="setItemRef"
         :name="theme.name"
         :selected="selectedTab == theme.name"
-        :class="{ selected: selectedTab == theme.name }"
       >
         <div class="scroll-view" v-if="scrollView">
           <PortfolioTab :projects="theme.projects" @toggle-scroll-view="scrollView = false" />
@@ -55,7 +64,7 @@ export default {
   methods: {
     setItemRef(el) {
       // TODO something about this getting called when tab switches
-      console.log('called')
+      // console.log('called')
       if (el) {
         if (!this.tabs.includes(el)) {
           this.tabs.push(el)
@@ -73,5 +82,20 @@ export default {
 .main {
   position: relative;
   top: 6vh;
+  .tab-names {
+    position: relative;
+    top: 7vh;
+    left: calc(6% - 10px);
+    cursor: pointer;
+    z-index: 2;
+
+    .tab {
+      margin: 0 10px;
+      letter-spacing: 1px;
+      &.selected {
+        border-bottom: 1px solid black;
+      }
+    }
+  }
 }
 </style>

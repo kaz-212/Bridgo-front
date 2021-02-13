@@ -36,7 +36,7 @@
           :project="project"
         />
       </div>
-      <button @click="toggleScrollView">View All</button>
+      <h4 class="toggle-view" @click="toggleScrollView">View All</h4>
     </section>
   </div>
 </template>
@@ -149,7 +149,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 10%;
+      margin-right: 7%;
 
       .hide {
         animation: rightImageSwoop 0.5s ease-in 1 forwards;
@@ -161,6 +161,29 @@ export default {
 
       .destroy {
         display: none;
+      }
+    }
+
+    .toggle-view {
+      position: absolute;
+      bottom: 10vh;
+      right: 6vw;
+      border-bottom: 1px solid black;
+      border-left: 1px solid black;
+      padding: 5px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        // border-bottom: rgb(197, 197, 197);
+        // border-left: rgb(197, 197, 197);
+        // border-top: 1px solid black;
+        // border-right: 1px solid black;
+
+        box-shadow: 0 0.5em 0.5em -0.4em #2f302c;
+        transform: translateY(-0.15em);
+        cursor: pointer;
       }
     }
   }
@@ -203,7 +226,7 @@ export default {
 
   .menu {
     position: fixed;
-    right: 3rem;
+    right: 4%;
     top: 50%;
     transform: translateY(-50%);
     z-index: 1000;

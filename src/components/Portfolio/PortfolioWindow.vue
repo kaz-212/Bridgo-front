@@ -27,37 +27,37 @@ export default {
 <style lang="scss" scoped>
 a {
   margin: 0;
-}
-.img-box {
-  // border: solid rgb(0, 0, 0) 10px;
+  .img-box {
+    // border: solid rgb(0, 0, 0) 10px;
 
-  position: relative;
-  cursor: pointer;
-  max-width: 90%;
-  height: auto;
+    position: relative;
+    cursor: pointer;
+    max-width: 90%;
+    height: auto;
 
-  img {
-    max-height: 70vh;
-    max-width: 100%;
-    display: block;
-  }
+    img {
+      max-height: 70vh;
+      max-width: 100%;
+      display: block;
+    }
 
-  .img-info {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.596);
-    color: white;
-    position: absolute;
-    top: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    .img-info {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.596);
+      color: white;
+      position: absolute;
+      top: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-    &:hover {
-      opacity: 1;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
