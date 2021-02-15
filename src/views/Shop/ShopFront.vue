@@ -15,6 +15,7 @@
         </div>
       </div>
     </div>
+    <div class="spacer"></div>
     <section class="tab-body">
       <Tabs :tabs="tabs" :hide="true">
         <Tab ref="tab1" name="Prints" :selected="selectedTab == 'Prints'">
@@ -91,8 +92,9 @@ export default {
 .fixed {
   width: 84%;
   height: 28vh;
+  max-height: 250px;
   margin: 0 auto;
-  margin-top: 7vh;
+  margin-top: 70px;
   position: fixed;
   top: 0;
   left: 8%;
@@ -111,21 +113,14 @@ export default {
     width: 100%;
     height: 100%;
     background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612955104/Bridgo/statics/6A91EEF0-A9E9-4198-9601-63D8350F2886_wefe5t.jpg');
-    // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954940/Bridgo/statics/FDD1FA05-A350-4B8B-9483-60A282CF2E05_oh629l.jpg');
     background-size: cover;
     background-position: center;
-    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: width 0.5s ease-out;
     transition: all 0.5s ease-out;
-
-    &.scrolling {
-      border-radius: 0;
-    }
 
     h1 {
       margin: 0;
@@ -153,15 +148,20 @@ export default {
   }
 }
 
+.spacer {
+  margin-top: 70px;
+  height: 28vh;
+  max-height: 250px;
+}
+
 .shop-container {
-  padding-top: 8vh;
-  margin: 0 auto;
-  margin-top: 32vh;
+  margin: 7vh auto;
   width: 63vw;
+  max-width: 1000px;
   display: grid;
   grid-gap: 25px;
   grid-template-columns: repeat(3, auto);
 
-  min-height: 75vh;
+  // min-height: 75vh;
 }
 </style>
