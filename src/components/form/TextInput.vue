@@ -3,7 +3,7 @@
     <label :for="id">{{ label }}</label>
     <input
       :id="id"
-      :type="type ? type : 'text'"
+      :type="type"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       v-bind="$attrs"
@@ -19,7 +19,7 @@ export default {
     id: String,
     modelValue: String,
     label: String,
-    type: String
+    type: { type: String, default: 'text' }
   },
   emits: {
     'update:modelValue': String
