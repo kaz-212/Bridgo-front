@@ -13,13 +13,10 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-  position: absolute;
-  bottom: 10vh;
-  right: 6vw;
   border-bottom: 1px solid black;
   border-left: 1px solid black;
   padding: 5px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   cursor: pointer;
   transition: all 0.2s;
 

@@ -36,7 +36,7 @@
           :project="project"
         />
       </div>
-      <StandardButton @click="toggleScrollView" text="View All" />
+      <StandardButton class="toggle-view" @click="toggleScrollView" text="View All" />
     </section>
   </div>
 </template>
@@ -164,6 +164,11 @@ export default {
       .destroy {
         display: none;
       }
+    }
+    .toggle-view {
+      position: absolute;
+      bottom: 10vh;
+      right: 6vw;
     }
   }
 

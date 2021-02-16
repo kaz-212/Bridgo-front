@@ -49,15 +49,19 @@
               <td class="empty"></td>
               <td class="empty"></td>
               <td><strong>Total</strong></td>
-              <td class="total-price">£ {{ (totalPrice / 100).toFixed(2) }}</td>
+              <td class="total-price">
+                <strong>£ {{ (totalPrice / 100).toFixed(2) }}</strong>
+              </td>
               <td>+ shipping</td>
             </tr>
           </tbody>
         </table>
-        <div class="checkout">
-          <router-link :to="{ name: 'Checkout' }"
-            ><button>Continue to Checkout</button></router-link
-          >
+        <div class="checkout-container">
+          <div class="checkout">
+            <router-link :to="{ name: 'Checkout' }"
+              ><StandardButton text="Continue to Checkout"
+            /></router-link>
+          </div>
         </div>
       </form>
     </section>
@@ -65,8 +69,13 @@
 </template>
 
 <script>
+import StandardButton from '@/components/Buttons/StandardButton.vue'
+
 export default {
   name: 'Basket',
+  components: {
+    StandardButton
+  },
   data() {
     return {
       shipping: ''
@@ -109,6 +118,7 @@ h1 {
   background: white;
   border-radius: 10px;
   padding: 10px;
+  position: relative;
 
   table {
     width: 95%;
@@ -167,6 +177,17 @@ h1 {
     }
     .final-row {
       height: 40px;
+    }
+  }
+  .checkout-container {
+    width: 100%;
+    .checkout {
+      margin: 15px 2.5%;
+      width: 220px;
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
   }
 }
