@@ -78,11 +78,11 @@ a {
 
       em {
         text-decoration: none;
-        color: #636145;
+        color: $subInfo;
       }
       p {
         text-decoration: none;
-        color: #636145;
+        color: $subInfo;
       }
 
       h4 {
