@@ -11,6 +11,9 @@ $navslider: #56595de7;
 $navhover: rgb(31, 28, 28);
 $navheight: 50px;
 
+// info
+$subInfo: #636145;
+
 // ======== STYLES =========
 
 // configured in vue.config.js
@@ -27,8 +30,6 @@ $navheight: 50px;
 }
 h1 {
   letter-spacing: 3px;
-  margin-left: 5vw;
-  margin-top: 2vh;
 }
 
 body {
