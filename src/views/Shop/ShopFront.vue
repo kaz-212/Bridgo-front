@@ -1,7 +1,7 @@
 <template>
   <div v-if="prints">
     <div class="fixed" :class="{ scrolling: scrolling }">
-      <div class="shop-banner" :class="{ scrolling: scrolling }">
+      <div class="shop-banner">
         <h1>SHOP</h1>
         <div class="tabs">
           <span
