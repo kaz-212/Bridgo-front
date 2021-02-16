@@ -6,18 +6,16 @@
       </div>
     </div>
     <div class="spacer"></div>
-    <div class="all-exhibitions">
-      <div class="exhibitions-container">
-        <div v-for="exhibition in leftSide" :key="exhibition._id" class="exhibition-card">
-          <ExhibitionCard :exhibition="exhibition" />
-        </div>
+    <div class="exhibitions-container">
+      <div v-for="exhibition in exhibitions" :key="exhibition._id" class="exhibition-card">
+        <ExhibitionCard :exhibition="exhibition" />
       </div>
-      <div class="exhibitions-container">
+    </div>
+    <!-- <div class="exhibitions-container">
         <div v-for="exhibition in rightSide" :key="exhibition._id" class="exhibition-card">
           <ExhibitionCard :exhibition="exhibition" />
         </div>
-      </div>
-    </div>
+      </div> -->
   </div>
 </template>
 
@@ -35,21 +33,21 @@ export default {
   computed: {
     exhibitions() {
       return this.$store.state.exhibition.exhibitions
-    },
-    leftSide() {
-      const leftSide = []
-      for (let i = 0; i < this.exhibitions.length; i += 2) {
-        leftSide.push(this.exhibitions[i])
-      }
-      return leftSide
-    },
-    rightSide() {
-      const rightSide = []
-      for (let i = 1; i < this.exhibitions.length; i += 2) {
-        rightSide.push(this.exhibitions[i])
-      }
-      return rightSide
     }
+    // leftSide() {
+    //   const leftSide = []
+    //   for (let i = 0; i < this.exhibitions.length; i += 2) {
+    //     leftSide.push(this.exhibitions[i])
+    //   }
+    //   return leftSide
+    // },
+    // rightSide() {
+    //   const rightSide = []
+    //   for (let i = 1; i < this.exhibitions.length; i += 2) {
+    //     rightSide.push(this.exhibitions[i])
+    //   }
+    //   return rightSide
+    // }
   },
   created() {
     window.addEventListener('scroll', () => {
@@ -92,9 +90,6 @@ export default {
   .exhibition-banner {
     width: 100%;
     height: 100%;
-    // margin: 0 auto;
-    // margin-top: 7vh;
-    // height: 25vh;
     background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954180/Bridgo/statics/540A3F34-C815-4FD3-B272-44463C5D1990_slzuyp.jpg');
     background-size: cover;
     background-position: center;
@@ -103,10 +98,7 @@ export default {
     align-items: center;
     h1 {
       margin: 0;
-      // color: #98982b;
-      // color: #7b7b02ed;
-      // text-shadow: 5px 5px 3px #4e3535;
-      // this one with main color transparent
+
       color: rgba(255, 255, 255, 0);
       font-size: 53px;
       text-shadow: 0 0 2px #c3bf43;
@@ -114,24 +106,24 @@ export default {
     }
   }
 }
+
 .spacer {
   margin-top: 70px;
   height: 28vh;
   max-height: 250px;
 }
-.all-exhibitions {
-  margin-top: 7vh;
-  display: flex;
-  justify-content: center;
 
-  .exhibitions-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.exhibitions-container {
+  width: 84%;
+  margin: 7vh auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-direction: column;
+  align-items: center;
 
-    .exhibition-card {
-      margin: 1rem 1.5rem;
-    }
+  .exhibition-card {
+    margin: 1rem 0;
+    height: 100%;
   }
 }
 </style>
