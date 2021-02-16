@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-if="this.$store.state.project.themes">
+  <div id="base" v-if="this.$store.state.project.themes">
     <Navbar />
     <router-view />
   </div>
@@ -31,8 +31,8 @@ html {
     background-size: cover;
   }
 
-  #app {
-    height: 100vh;
+  #base {
+    min-height: 100vh;
   }
 }
 </style>
