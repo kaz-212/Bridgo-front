@@ -1,6 +1,6 @@
 <template>
   <div v-if="basketItems">
-    <h1>Your Items</h1>
+    <h1>Your Basket</h1>
     <section class="container">
       <form action="#">
         <table cellspacing="0">
@@ -18,6 +18,7 @@
                       item.product.name
                     }}</router-link></span
                   >
+                  <span class="unit-price">£ {{ (item.particular.price / 100).toFixed(2) }}</span>
                   <span class="size">
                     <em>{{ item.particular.size != 'N/A' ? item.particular.size : '' }}</em></span
                   >
@@ -42,7 +43,7 @@
                   <option :selected="item.qty === 10" value="10">10</option>
                 </select>
               </td>
-              <td>£ {{ (item.particular.price / 100).toFixed(2) }}</td>
+              <td>£ {{ ((item.particular.price * item.qty) / 100).toFixed(2) }}</td>
               <td><i @click="removeItem(item)" class="far fa-trash-alt"></i></td>
             </tr>
             <tr class="final-row">
@@ -109,7 +110,7 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
-  margin-top: 5em;
+  margin-top: 100px;
   margin-left: 10vw;
 }
 .container {
@@ -141,6 +142,9 @@ h1 {
             cursor: pointer;
             color: #66669c;
           }
+        }
+        .unit-price {
+          color: $subInfo;
         }
       }
 
