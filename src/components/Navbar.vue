@@ -78,9 +78,9 @@ body {
       background: white;
       height: 5vh;
     }
-    &:hover {
-      background: rgba(255, 255, 255, 0.548);
-    }
+    // &:hover {
+    //   background: rgba(255, 255, 255, 0.548);
+    // }
 
     a,
     i {
