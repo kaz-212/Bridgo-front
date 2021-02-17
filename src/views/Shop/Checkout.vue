@@ -1,30 +1,29 @@
 <template>
   <div v-if="basketItems.length > 0">
     <h1>Checkout</h1>
-    <form action="#">
-      <h2>Please enter your contact details</h2>
-      <TextInput id="firstName" label="First Name" v-model="contactDetails.firstName" />
-      <TextInput id="lastname" label="Last Name" v-model="contactDetails.lastName" />
-      <TextInput id="email" label="Email" v-model="contactDetails.email" />
-      <TextInput id="number" label="Mobile Number" v-model="contactDetails.phone" />
-
-      <h2>Please enter your address for delivery</h2>
-      <TextInput id="address" label="Address" v-model="shipAddress.address" />
-      <TextInput id="city" label="City" v-model="shipAddress.city" />
-      <TextInput id="post-code" label="Post Code" v-model="shipAddress.postCode" />
-      <label for="subtotal">Subtotal:</label>
-      <h3 id="subtotal">£ {{ (subtotal / 100).toFixed(2) }}</h3>
-      <label for="shipping-cost">Cost of Shipping:</label>
-      <h3 id="shipping-cost">£ {{ (shippingCost / 100).toFixed(2) }}</h3>
-      <label for="amount">Amount to pay:</label>
-      <h3 id="amount">£ {{ amount }}</h3>
-      <div class="stripe-container">
-        <div class="stripe-input">
-          <div class="stripe-component" ref="card"></div>
-          <button @click.prevent="purchase">Pay Now</button>
+    <section class="container">
+      <form action="#">
+        <StyledTextInput id="first-name" label="First Name" v-model="contactDetails.firstName" />
+        <StyledTextInput id="last-name" label="Last Name" v-model="contactDetails.lastName" />
+        <StyledTextInput id="email" label="Email" v-model="contactDetails.email" />
+        <StyledTextInput id="number" label="Mobile Number" v-model="contactDetails.phone" />
+        <StyledTextInput id="address" label="Address" v-model="shipAddress.address" />
+        <StyledTextInput id="city" label="City" v-model="shipAddress.city" />
+        <StyledTextInput id="post-code" label="Post Code" v-model="shipAddress.postCode" />
+        <label for="subtotal">Subtotal:</label>
+        <h3 id="subtotal">£ {{ (subtotal / 100).toFixed(2) }}</h3>
+        <label for="shipping-cost">Cost of Shipping:</label>
+        <h3 id="shipping-cost">£ {{ (shippingCost / 100).toFixed(2) }}</h3>
+        <label for="amount">Amount to pay:</label>
+        <h3 id="amount">£ {{ amount }}</h3>
+        <div class="stripe-container">
+          <div class="stripe-input">
+            <div class="stripe-component" ref="card"></div>
+            <button @click.prevent="purchase">Pay Now</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </section>
   </div>
   <div v-else>
     <h1>pls add some items to your basket</h1>
@@ -34,7 +33,7 @@
 <script>
 import axios from 'axios'
 import { loadStripe } from '@stripe/stripe-js'
-import TextInput from '@/components/form/TextInput.vue'
+import StyledTextInput from '@/components/form/StyledTextInput.vue'
 
 // 4000058260000005
 
@@ -61,7 +60,7 @@ const cardStyle = {
 
 export default {
   name: 'Checkout',
-  components: { TextInput },
+  components: { StyledTextInput },
   data() {
     return {
       shipAddress: {
@@ -193,20 +192,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.stripe-container {
-  height: 6rem;
-  width: 35vw;
-  background-color: cadetblue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .stripe-input {
-    background-color: white;
-    border-radius: 6px;
-    width: 30vw;
-    height: 2rem;
-    .stripe-component {
-      padding: 8px;
+h1 {
+  margin-top: 100px;
+  margin-left: 10vw;
+}
+.container {
+  width: 60%;
+  margin: 5vh auto;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  box-shadow: 0 0.5em 0.8em -0.2em #878c78;
+
+  .stripe-container {
+    height: 6rem;
+    width: 35vw;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .stripe-input {
+      background-color: white;
+      border-radius: 6px;
+      width: 30vw;
+      height: 2rem;
+      .stripe-component {
+        padding: 8px;
+      }
     }
   }
 }
