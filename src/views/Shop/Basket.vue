@@ -1,6 +1,6 @@
 <template>
-  <div v-if="basketItems">
-    <h1>Your Basket</h1>
+  <div class="page" v-if="basketItems">
+    <h1>Basket</h1>
     <section class="container">
       <form action="#">
         <table cellspacing="0">
@@ -60,8 +60,8 @@
         <div class="checkout-container">
           <div class="checkout">
             <router-link :to="{ name: 'Checkout' }"
-              ><StandardButton text="Continue to Checkout"
-            /></router-link>
+              ><StandardButton> Continue to Checkout </StandardButton></router-link
+            >
           </div>
         </div>
       </form>
@@ -109,93 +109,110 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  margin-top: 100px;
-  margin-left: 10vw;
-}
-.container {
-  width: 60%;
-  margin: 5vh auto;
-  background: white;
-  border-radius: 10px;
-  padding: 10px;
-  position: relative;
-
-  table {
-    width: 95%;
-    margin: 10px auto;
-    td {
-      text-align: center;
-      &:not(.empty) {
-        border-bottom: 1px solid #ddd;
-      }
-      &.details {
-        .name {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          .size {
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  h1 {
+    writing-mode: vertical-rl;
+    display: inline-block;
+    text-orientation: upright;
+    font-size: 56px;
+    margin-left: 10%;
+    margin-top: 2%;
+    // text-shadow: 11px 11px 1px #5899b36e;
+    // text-shadow: 4px 2px 2px #00ffcf;
+    text-shadow: 6px 4px 3px #5899b36e;
+  }
+  .container {
+    width: 60%;
+    margin: 5vh auto;
+    // background: white;
+    background: -webkit-linear-gradient(to bottom, #79d3e157, #c187ca4f);
+    background: linear-gradient(to bottom, #79d3e157, #c187ca4f);
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    box-shadow: 0 0.5em 0.8em -0.2em #878c78;
+    table {
+      width: 95%;
+      margin: 10px auto;
+      td {
+        text-align: center;
+        &:not(.empty) {
+          // border-bottom: 1px solid #ddd;
+          border-bottom: 1px solid #ffffff7a;
+        }
+        &.details {
+          .name {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .size {
+              color: $subInfo;
+            }
+            a {
+              // text-decoration: none;
+              cursor: pointer;
+              color: #66669c;
+            }
+          }
+          .unit-price {
             color: $subInfo;
           }
-          a {
-            // text-decoration: none;
-            cursor: pointer;
-            color: #66669c;
-          }
         }
-        .unit-price {
-          color: $subInfo;
-        }
-      }
 
-      &.image {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        // border-right: 1px solid grey;
-        .img-container {
-          height: 130px;
-          width: 130px;
-          margin: 10px 0;
+        &.image {
           display: flex;
           align-items: center;
           justify-content: center;
-          img {
-            max-width: 100%;
-            max-height: 100%;
+          // border-right: 1px solid grey;
+          .img-container {
+            height: 130px;
+            width: 130px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+              max-width: 100%;
+              max-height: 100%;
+            }
           }
         }
-      }
 
-      &.qty {
-        select {
-          padding: 2px;
-          border-radius: 4px;
-          background: white;
+        &.qty {
+          select {
+            padding: 2px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.219);
+            appearance: none;
+            cursor: pointer;
+          }
+        }
+
+        &.total-price {
+          min-width: 80px;
         }
       }
-
-      &.total-price {
-        min-width: 80px;
+      .final-row {
+        height: 40px;
       }
     }
-    .final-row {
-      height: 40px;
-    }
-  }
-  .checkout-container {
-    width: 100%;
-    .checkout {
-      margin: 15px 2.5%;
-      width: 220px;
-      a {
-        text-decoration: none;
-        color: black;
+    .checkout-container {
+      width: 100%;
+      .checkout {
+        margin: 15px 2.5%;
+        width: 215px;
+        a {
+          text-decoration: none;
+          color: black;
+        }
       }
     }
   }
 }
-
 i {
   cursor: pointer;
 }
