@@ -53,3 +53,33 @@ input[type='checkbox'] {
   display: inline;
   width: 15px;
 }
+
+.money {
+  letter-spacing: 1px;
+}
+
+// ANIMATIONS
+
+// basket/checkout
+
+@keyframes letterShade {
+  from {
+    text-shadow: none;
+  }
+  to {
+    // text-shadow: 11px 11px 1px #5899b36e;
+    // text-shadow: 4px 2px 2px #00ffcf;
+    text-shadow: 6px 4px 3px #5899b36e;
+  }
+}
+@keyframes boxShade {
+  from {
+    box-shadow: none;
+  }
+  to {
+    // box-shadow: 4px 4px 3px 1px #5899b36e;
+    // box-shadow: 25px 25px 10px 1px #556f796e;
+    // box-shadow: 0 0.5em 0.8em -0.2em #878c78;
+    box-shadow: 0.15em 0.6em 0.8em 0.05em #878c78;
+  }
+}

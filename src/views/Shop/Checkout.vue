@@ -235,9 +235,7 @@ h1 {
   font-size: 56px;
   margin-left: 10%;
   margin-top: 2%;
-  // text-shadow: 11px 11px 1px #5899b36e;
-  // text-shadow: 4px 2px 2px #00ffcf;
-  text-shadow: 6px 4px 3px #5899b36e;
+  animation: letterShade 2s ease forwards;
 }
 h3 {
   margin-left: -20px;
@@ -260,10 +258,9 @@ h3 {
     border-radius: 10px;
     padding: 60px 20px 0 80px;
     position: relative;
-    // box-shadow: 4px 4px 3px 1px #5899b36e;
-    // box-shadow: 25px 25px 10px 1px #556f796e;
-    box-shadow: 0 0.5em 0.8em -0.2em #878c78;
     display: flex;
+    animation: boxShade 2s ease forwards;
+
     form {
       width: 60%;
       .customer-info {

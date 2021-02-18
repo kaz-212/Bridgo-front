@@ -121,9 +121,10 @@ export default {
     font-size: 56px;
     margin-left: 10%;
     margin-top: 2%;
-    // text-shadow: 11px 11px 1px #5899b36e;
-    // text-shadow: 4px 2px 2px #00ffcf;
-    text-shadow: 6px 4px 3px #5899b36e;
+    // // text-shadow: 11px 11px 1px #5899b36e;
+    // // text-shadow: 4px 2px 2px #00ffcf;
+    // text-shadow: 6px 4px 3px #5899b36e;
+    animation: letterShade 2s ease forwards;
   }
   .container {
     width: 60%;
@@ -134,7 +135,8 @@ export default {
     border-radius: 10px;
     padding: 10px;
     position: relative;
-    box-shadow: 0 0.5em 0.8em -0.2em #878c78;
+    // box-shadow: 0 0.5em 0.8em -0.2em #878c78;
+    animation: boxShade 2s ease forwards;
     table {
       width: 95%;
       margin: 10px auto;
