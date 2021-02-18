@@ -233,8 +233,7 @@ h1 {
   display: inline-block;
   text-orientation: upright;
   font-size: 56px;
-  margin-left: 10%;
-  margin-top: 2%;
+  margin: auto 0 auto 10%;
   animation: letterShade 2s ease forwards;
 }
 h3 {

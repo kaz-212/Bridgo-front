@@ -119,23 +119,18 @@ export default {
     display: inline-block;
     text-orientation: upright;
     font-size: 56px;
-    margin-left: 10%;
-    margin-top: 2%;
-    // // text-shadow: 11px 11px 1px #5899b36e;
-    // // text-shadow: 4px 2px 2px #00ffcf;
-    // text-shadow: 6px 4px 3px #5899b36e;
+    margin: auto 0 auto 10%;
     animation: letterShade 2s ease forwards;
   }
   .container {
     width: 60%;
     margin: 5vh auto;
-    // background: white;
     background: -webkit-linear-gradient(to bottom, #79d3e157, #c187ca4f);
     background: linear-gradient(to bottom, #79d3e157, #c187ca4f);
+    // background: white;
     border-radius: 10px;
     padding: 10px;
     position: relative;
-    // box-shadow: 0 0.5em 0.8em -0.2em #878c78;
     animation: boxShade 2s ease forwards;
     table {
       width: 95%;
@@ -143,7 +138,6 @@ export default {
       td {
         text-align: center;
         &:not(.empty) {
-          // border-bottom: 1px solid #ddd;
           border-bottom: 1px solid #ffffff7a;
         }
         &.details {
