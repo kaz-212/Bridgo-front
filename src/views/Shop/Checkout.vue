@@ -1,6 +1,8 @@
 <template>
-  <div v-if="basketItems.length > 0">
+  <div class="page" v-if="basketItems.length > 0">
+    <!-- <div class="heading"> -->
     <h1>Checkout</h1>
+    <!-- </div> -->
     <section class="container">
       <form action="#">
         <h3>Delivery details:</h3>
@@ -41,15 +43,19 @@
         </div>
       </form>
       <div class="right-half">
-        <div class="order-info">
-          <label for="subtotal">Subtotal:</label>
-          <h3 id="subtotal">£ {{ (subtotal / 100).toFixed(2) }}</h3>
-          <label for="shipping-cost">Cost of Shipping:</label>
-          <h3 id="shipping-cost">£ {{ (shippingCost / 100).toFixed(2) }}</h3>
-          <label for="amount">Amount to pay:</label>
-          <h3 id="amount">£ {{ amount }}</h3>
+        <div class="wrapper">
+          <div class="order-info">
+            <h4 class="info-label">Subtotal:</h4>
+            <p class="money" id="subtotal">£{{ (subtotal / 100).toFixed(2) }}</p>
+            <h4 class="info-label">Shipping: <span class="plus">+</span></h4>
+            <p class="money" id="shipping-cost">£{{ (shippingCost / 100).toFixed(2) }}</p>
+            <h4 class="info-label">Total:</h4>
+            <p class="money" id="amount">
+              <strong>£{{ amount }}</strong>
+            </p>
+          </div>
+          <PayNowButton class="pay-now" :amount="amount" @click.prevent="purchase" />
         </div>
-        <PayNowButton @click.prevent="purchase" />
       </div>
     </section>
   </div>
@@ -218,101 +224,142 @@ export default {
     }
   }
 }
+// TODO when form validation, color button etc when everything filled in correctly
 </script>
 
 <style lang="scss" scoped>
 h1 {
-  margin-top: 100px;
-  margin-left: 10vw;
+  writing-mode: vertical-rl;
+  display: inline-block;
+  text-orientation: upright;
+  font-size: 56px;
+  margin-left: 10%;
+  margin-top: 2%;
+  // text-shadow: 11px 11px 1px #5899b36e;
+  // text-shadow: 4px 2px 2px #00ffcf;
+  text-shadow: 6px 4px 3px #5899b36e;
 }
 h3 {
   margin-left: -20px;
 }
-.container {
-  width: 60%;
-  max-width: 900px;
-  margin: 5vh auto;
-  background: #74ebd5;
-  background: -webkit-linear-gradient(to bottom, #74ebd5, #acb6e5);
-  background: linear-gradient(to bottom, #74ebd5, #acb6e5);
-  // background: white;
-  border-radius: 10px;
-  padding-top: 60px;
-  padding-left: 80px;
-  position: relative;
-  box-shadow: 0 0.5em 0.8em -0.2em #878c78;
+.page {
   display: flex;
-  form {
-    width: 60%;
-    .customer-info {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(4, 90px);
-      grid-column-gap: 24px;
-      grid-template-areas:
-        'first second'
-        'email number'
-        'address address'
-        'city post';
-      .first {
-        grid-area: first;
-      }
-      .second {
-        grid-area: second;
-      }
-      .email {
-        grid-area: email;
-      }
-      .number {
-        grid-area: number;
-      }
-      .address {
-        grid-area: address;
-      }
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 
-      .city {
-        grid-area: city;
-      }
-      .post-code {
-        grid-area: post;
-      }
-    }
-    .stripe-container {
-      height: 6rem;
-      width: 100%;
-      // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612955104/Bridgo/statics/6A91EEF0-A9E9-4198-9601-63D8350F2886_wefe5t.jpg');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 6px;
-      .stripe-input {
-        // background-color: white;
-        color: #595f6e;
-        border-radius: 6px;
-        // width: 30vw;
+  .container {
+    width: 63%;
+    max-width: 900px;
+    margin: 5vh auto;
+    background: white;
+    // background: -webkit-linear-gradient(to bottom, #74ebd5, #acb6e5);
+    // background: linear-gradient(to bottom, #74ebd5, #acb6e5);
+    background: -webkit-linear-gradient(to bottom, #79d3e157, #c187ca4f);
+    background: linear-gradient(to bottom, #79d3e157, #c187ca4f);
+    border-radius: 10px;
+    padding: 60px 20px 0 80px;
+    position: relative;
+    // box-shadow: 4px 4px 3px 1px #5899b36e;
+    // box-shadow: 25px 25px 10px 1px #556f796e;
+    box-shadow: 0 0.5em 0.8em -0.2em #878c78;
+    display: flex;
+    form {
+      width: 60%;
+      .customer-info {
         width: 100%;
-        height: 2rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 90px);
+        grid-column-gap: 24px;
+        grid-template-areas:
+          'first second'
+          'email number'
+          'address address'
+          'city post';
+        .first {
+          grid-area: first;
+        }
+        .second {
+          grid-area: second;
+        }
+        .email {
+          grid-area: email;
+        }
+        .number {
+          grid-area: number;
+        }
+        .address {
+          grid-area: address;
+        }
 
-        .stripe-component {
-          padding: 8px;
+        .city {
+          grid-area: city;
+        }
+        .post-code {
+          grid-area: post;
+        }
+      }
+      .stripe-container {
+        height: 6rem;
+        width: 100%;
+        // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612955104/Bridgo/statics/6A91EEF0-A9E9-4198-9601-63D8350F2886_wefe5t.jpg');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        .stripe-input {
+          // background-color: white;
+          color: #595f6e;
+          border-radius: 6px;
+          // width: 30vw;
+          width: 100%;
+          height: 2rem;
+
+          .stripe-component {
+            padding: 8px;
+          }
         }
       }
     }
-  }
-  .right-half {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 35%;
-    .order-info {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      margin-left: auto;
-      justify-content: center;
+    .right-half {
+      width: 40%;
+      .wrapper {
+        margin: auto auto auto auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px solid #595f6e4d;
+        border-radius: 20px;
+        width: 75%;
+        height: 90%;
+
+        .order-info {
+          width: 56%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          margin: 35% auto auto auto;
+          justify-content: center;
+          .info-label {
+            align-self: flex-start;
+            color: grey;
+            .plus {
+              padding-left: 32px;
+              color: black;
+            }
+          }
+
+          #shipping-cost {
+            border-bottom: 1px solid black;
+          }
+        }
+        .pay-now {
+          margin: auto auto 9% auto;
+        }
+      }
     }
   }
 }
