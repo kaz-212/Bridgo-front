@@ -3,26 +3,54 @@
     <h1>Checkout</h1>
     <section class="container">
       <form action="#">
-        <StyledTextInput id="first-name" label="First Name" v-model="contactDetails.firstName" />
-        <StyledTextInput id="last-name" label="Last Name" v-model="contactDetails.lastName" />
-        <StyledTextInput id="email" label="Email" v-model="contactDetails.email" />
-        <StyledTextInput id="number" label="Mobile Number" v-model="contactDetails.phone" />
-        <StyledTextInput id="address" label="Address" v-model="shipAddress.address" />
-        <StyledTextInput id="city" label="City" v-model="shipAddress.city" />
-        <StyledTextInput id="post-code" label="Post Code" v-model="shipAddress.postCode" />
-        <label for="subtotal">Subtotal:</label>
-        <h3 id="subtotal">£ {{ (subtotal / 100).toFixed(2) }}</h3>
-        <label for="shipping-cost">Cost of Shipping:</label>
-        <h3 id="shipping-cost">£ {{ (shippingCost / 100).toFixed(2) }}</h3>
-        <label for="amount">Amount to pay:</label>
-        <h3 id="amount">£ {{ amount }}</h3>
-        <div class="stripe-container">
-          <div class="stripe-input">
-            <div class="stripe-component" ref="card"></div>
-            <button @click.prevent="purchase">Pay Now</button>
+        <h3>Delivery details:</h3>
+        <div class="customer-info">
+          <div class="name">
+            <StyledTextInput
+              id="first-name"
+              label="First Name"
+              v-model="contactDetails.firstName"
+            />
+          </div>
+          <div class="name">
+            <StyledTextInput id="last-name" label="Last Name" v-model="contactDetails.lastName" />
+          </div>
+          <div class="email">
+            <StyledTextInput id="email" label="Email" v-model="contactDetails.email" />
+          </div>
+          <div class="number">
+            <StyledTextInput id="number" label="Mobile Number" v-model="contactDetails.phone" />
+          </div>
+          <div class="address">
+            <StyledTextInput id="address" label="Address" v-model="shipAddress.address" />
+          </div>
+          <div class="city">
+            <StyledTextInput id="city" label="City" v-model="shipAddress.city" />
+          </div>
+          <div class="post-code">
+            <StyledTextInput id="post-code" label="Post Code" v-model="shipAddress.postCode" />
+          </div>
+        </div>
+        <div class="payment-info">
+          <h3>Payment Details:</h3>
+          <div class="stripe-container">
+            <div class="stripe-input">
+              <div class="stripe-component" ref="card"></div>
+            </div>
           </div>
         </div>
       </form>
+      <div class="right-half">
+        <div class="order-info">
+          <label for="subtotal">Subtotal:</label>
+          <h3 id="subtotal">£ {{ (subtotal / 100).toFixed(2) }}</h3>
+          <label for="shipping-cost">Cost of Shipping:</label>
+          <h3 id="shipping-cost">£ {{ (shippingCost / 100).toFixed(2) }}</h3>
+          <label for="amount">Amount to pay:</label>
+          <h3 id="amount">£ {{ amount }}</h3>
+        </div>
+        <PayNowButton @click.prevent="purchase" />
+      </div>
     </section>
   </div>
   <div v-else>
@@ -34,6 +62,7 @@
 import axios from 'axios'
 import { loadStripe } from '@stripe/stripe-js'
 import StyledTextInput from '@/components/form/StyledTextInput.vue'
+import PayNowButton from '@/components/Buttons/PayNowButton.vue'
 
 // 4000058260000005
 
@@ -60,7 +89,7 @@ const cardStyle = {
 
 export default {
   name: 'Checkout',
-  components: { StyledTextInput },
+  components: { StyledTextInput, PayNowButton },
   data() {
     return {
       shipAddress: {
@@ -196,30 +225,94 @@ h1 {
   margin-top: 100px;
   margin-left: 10vw;
 }
+h3 {
+  margin-left: -20px;
+}
 .container {
   width: 60%;
+  max-width: 900px;
   margin: 5vh auto;
-  background: white;
+  background: #74ebd5;
+  background: -webkit-linear-gradient(to bottom, #74ebd5, #acb6e5);
+  background: linear-gradient(to bottom, #74ebd5, #acb6e5);
+  // background: white;
   border-radius: 10px;
-  padding: 10px;
+  padding-top: 60px;
+  padding-left: 80px;
   position: relative;
   box-shadow: 0 0.5em 0.8em -0.2em #878c78;
-
-  .stripe-container {
-    height: 6rem;
-    width: 35vw;
-    background-color: cadetblue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .stripe-input {
-      background-color: white;
-      border-radius: 6px;
-      width: 30vw;
-      height: 2rem;
-      .stripe-component {
-        padding: 8px;
+  display: flex;
+  form {
+    width: 60%;
+    .customer-info {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 90px);
+      grid-column-gap: 24px;
+      grid-template-areas:
+        'first second'
+        'email number'
+        'address address'
+        'city post';
+      .first {
+        grid-area: first;
       }
+      .second {
+        grid-area: second;
+      }
+      .email {
+        grid-area: email;
+      }
+      .number {
+        grid-area: number;
+      }
+      .address {
+        grid-area: address;
+      }
+
+      .city {
+        grid-area: city;
+      }
+      .post-code {
+        grid-area: post;
+      }
+    }
+    .stripe-container {
+      height: 6rem;
+      width: 100%;
+      // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612955104/Bridgo/statics/6A91EEF0-A9E9-4198-9601-63D8350F2886_wefe5t.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      .stripe-input {
+        // background-color: white;
+        color: #595f6e;
+        border-radius: 6px;
+        // width: 30vw;
+        width: 100%;
+        height: 2rem;
+
+        .stripe-component {
+          padding: 8px;
+        }
+      }
+    }
+  }
+  .right-half {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+    .order-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-left: auto;
+      justify-content: center;
     }
   }
 }
