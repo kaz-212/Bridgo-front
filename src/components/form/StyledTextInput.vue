@@ -31,6 +31,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// $activeColour: #5fa8d3;
+$activeColour: #299999;
+
 .input-box {
   position: relative;
   height: 50px;
@@ -44,16 +47,18 @@ export default {
     height: 100%;
     pointer-events: none;
     border-bottom: 1px solid black;
+    background: rgba(0, 0, 0, 0);
     &::after {
       content: '';
       position: absolute;
       height: 100%;
       width: 100%;
-      border-bottom: 1px solid #5fa8d3;
+      border-bottom: 1px solid $activeColour;
       left: 0;
       bottom: -1px;
       transform: translateX(-100%);
       transition: transform 0.3s;
+      background: rgba(0, 0, 0, 0);
     }
     .content-name {
       position: absolute;
@@ -70,12 +75,14 @@ export default {
     padding-top: 20px;
     border: none;
     outline: none;
+    background: rgba(0, 0, 0, 0);
+    font-size: 16px;
     &:focus + .label-name,
     &:valid + .label-name {
       .content-name {
         transform: translateY(-150%);
         font-size: 12px;
-        color: #5fa8d3;
+        color: $activeColour;
       }
       &::after {
         transform: translateX(0%);
