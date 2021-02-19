@@ -1,13 +1,14 @@
 <template>
   <div>
-    <h4 class="button">{{ text }}</h4>
+    <h4 class="button">
+      <slot></slot>
+    </h4>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'StandardButton',
-  props: { text: String }
+  name: 'StandardButton'
 }
 </script>
 
