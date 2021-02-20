@@ -28,7 +28,6 @@ export default {
   height: 285px;
   width: 285px;
   position: relative;
-  border-radius: 5px;
 
   .image-container {
     max-height: 260px;
