@@ -90,19 +90,28 @@ export default {
   .exhibition-banner {
     width: 100%;
     height: 100%;
-    background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954180/Bridgo/statics/540A3F34-C815-4FD3-B272-44463C5D1990_slzuyp.jpg');
+    // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612954180/Bridgo/statics/540A3F34-C815-4FD3-B272-44463C5D1990_slzuyp.jpg');
+    // background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1613760745/Bridgo/statics/3E5F571A-F969-4ECF-90CE-8C2E2B66B597_lvxoyh.jpg');
+    background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1613761494/Bridgo/statics/2B009483-DB4D-4C3B-88F8-A32ED2E7D41C_h46n4n.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     h1 {
-      margin: 0;
+      // margin: 0;
 
+      // color: rgba(255, 255, 255, 0);
+      // font-size: 53px;
+      // text-shadow: 0 0 2px #c3bf43;
+      // font-weight: 300;
+      margin: 0;
       color: rgba(255, 255, 255, 0);
-      font-size: 53px;
-      text-shadow: 0 0 2px #c3bf43;
-      font-weight: 300;
+      font-size: 63px;
+      color: white;
+      text-shadow: 0 0px 8px red;
+      font-weight: 600;
+      letter-spacing: 9px;
     }
   }
 }
