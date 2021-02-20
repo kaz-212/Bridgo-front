@@ -39,6 +39,7 @@ a {
       max-height: 70vh;
       max-width: 100%;
       display: block;
+      animation: imageFade 1s ease forwards;
     }
 
     .img-info {
@@ -59,6 +60,15 @@ a {
         opacity: 1;
       }
     }
+  }
+}
+
+@keyframes imageFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>
