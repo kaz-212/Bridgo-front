@@ -36,7 +36,7 @@
           :project="project"
         />
       </div>
-      <StandardButton class="toggle-view" @click="toggleScrollView" text="View All" />
+      <StandardButton class="toggle-view" @click="toggleScrollView">View All</StandardButton>
     </section>
   </div>
 </template>
@@ -86,7 +86,7 @@ export default {
       }
       setTimeout(() => {
         this.delaySlide = newVal
-      }, 350)
+      }, 500)
     }
   },
   methods: {
@@ -126,7 +126,8 @@ export default {
     // background-color: rgb(92, 92, 6);
     height: 91vh;
     display: flex;
-
+    box-shadow: 0 0 0 #000;
+    transform: translate3d(0, 0, 0);
     .left-side {
       width: 50%;
       display: flex;
@@ -135,7 +136,7 @@ export default {
       margin-left: 6%;
 
       .hide {
-        animation: leftImageSwoop 0.5s ease-in 1 forwards;
+        animation: leftImageSwoop 0.6s ease-in 1 forwards;
       }
 
       .show {
@@ -154,7 +155,7 @@ export default {
       margin-right: 7%;
 
       .hide {
-        animation: rightImageSwoop 0.5s ease-in 1 forwards;
+        animation: rightImageSwoop 0.6s ease-in 1 forwards;
       }
 
       .show {
@@ -175,24 +176,28 @@ export default {
   @keyframes rightImageSwoop {
     from {
       transform: translateX(0);
+      opacity: 1;
     }
     to {
-      transform: translateX(100vw);
+      transform: translateX(50vw);
+      opacity: 0;
     }
   }
 
   @keyframes leftImageSwoop {
     from {
       transform: translateX(0vw);
+      opacity: 1;
     }
     to {
-      transform: translateX(-100vw);
+      transform: translateX(-50vw);
+      opacity: 0;
     }
   }
 
   @keyframes topImageSwoop {
     from {
-      transform: translateY(-90vh);
+      transform: translateY(-30vh);
     }
     to {
       transform: translateY(0);
@@ -201,7 +206,7 @@ export default {
 
   @keyframes bottomImageSwoop {
     from {
-      transform: translateY(90vh);
+      transform: translateY(30vh);
     }
     to {
       transform: translateY(0);
