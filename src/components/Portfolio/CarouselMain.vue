@@ -13,7 +13,7 @@
           @click="nextSlide"
           class="chevvy right fas fa-2x fa-chevron-right"
         ></i>
-        <i class="full-screen fas fa-expand-alt fa-lg" @click="fullscreen"></i>
+        <i class="full-screen fas fa-expand-arrows-alt" @click="fullscreen"></i>
       </div>
     </div>
   </div>
@@ -44,8 +44,8 @@ export default {
 <style lang="scss" scoped>
 #carousel-main {
   margin: 5px;
-  width: 50%;
-  height: 60vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

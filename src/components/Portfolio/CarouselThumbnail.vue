@@ -17,18 +17,18 @@ export default {
 
 <style lang="scss" scoped>
 #carousel-thumbnail {
-  min-width: 160px;
-  height: 150px;
+  width: 160px;
+  height: 140px;
   // background-color: olive;
   // display: inline-block;
   margin: 0 10px;
-  background-color: olive;
+  // background-color: olive;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   &.active {
-    border: 2px solid red;
+    border: 2px solid #ffe0bf;
   }
 
   img {

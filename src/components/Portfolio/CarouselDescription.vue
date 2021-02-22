@@ -19,8 +19,8 @@ export default {
 <style lang="scss" scoped>
 #carousel-description {
   margin: 5px;
-  width: 50%;
-  height: 60vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
