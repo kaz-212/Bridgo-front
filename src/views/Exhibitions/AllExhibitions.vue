@@ -1,6 +1,6 @@
 <template>
   <div id="exhibitions" v-if="exhibitions">
-    <div class="fixed" :class="{ scrolling: scrolling }">
+    <div class="fixed">
       <div class="exhibition-banner">
         <h1>EXHIBITIONS</h1>
       </div>
@@ -34,20 +34,6 @@ export default {
     exhibitions() {
       return this.$store.state.exhibition.exhibitions
     }
-    // leftSide() {
-    //   const leftSide = []
-    //   for (let i = 0; i < this.exhibitions.length; i += 2) {
-    //     leftSide.push(this.exhibitions[i])
-    //   }
-    //   return leftSide
-    // },
-    // rightSide() {
-    //   const rightSide = []
-    //   for (let i = 1; i < this.exhibitions.length; i += 2) {
-    //     rightSide.push(this.exhibitions[i])
-    //   }
-    //   return rightSide
-    // }
   },
   created() {
     window.addEventListener('scroll', () => {
@@ -73,11 +59,12 @@ export default {
   max-height: 250px;
   margin: 0 auto;
   margin-top: 70px;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 8%;
   transition: all 0.5s ease-out;
   z-index: 1000;
+  box-shadow: 0 0 6px 3px #8c3a3a;
 
   &.scrolling {
     width: 100%;
@@ -99,12 +86,6 @@ export default {
     justify-content: center;
     align-items: center;
     h1 {
-      // margin: 0;
-
-      // color: rgba(255, 255, 255, 0);
-      // font-size: 53px;
-      // text-shadow: 0 0 2px #c3bf43;
-      // font-weight: 300;
       margin: 0;
       color: rgba(255, 255, 255, 0);
       font-size: 63px;
@@ -127,8 +108,10 @@ export default {
   margin: 7vh auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
   flex-direction: column;
   align-items: center;
+  grid-row-gap: 90px;
 
   .exhibition-card {
     margin: 1rem 0;
