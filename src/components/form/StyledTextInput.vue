@@ -32,7 +32,8 @@ export default {
 
 <style lang="scss" scoped>
 // $activeColour: #5fa8d3;
-$activeColour: #299999;
+// $activeColour: #299999;
+$activeColour: #397171;
 
 .input-box {
   position: relative;
@@ -71,7 +72,8 @@ $activeColour: #299999;
   input {
     height: 100%;
     width: 100%;
-    color: #595f6e;
+    // color: #595f6e;
+    color: black;
     padding-top: 20px;
     border: none;
     outline: none;
