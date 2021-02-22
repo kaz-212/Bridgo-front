@@ -1,11 +1,11 @@
 <template>
   <div class="page" v-if="basketItems.length > 0">
     <!-- <div class="heading"> -->
-    <h1>Checkout</h1>
+    <h1>CHECKOUT</h1>
     <!-- </div> -->
     <section class="container">
       <form action="#">
-        <h3>Delivery details:</h3>
+        <h3 class="title">Delivery details:</h3>
         <div class="customer-info">
           <div class="name">
             <StyledTextInput
@@ -235,6 +235,7 @@ h1 {
   font-size: 56px;
   margin: auto 0 auto 10%;
   animation: letterShade 2s ease forwards;
+  // text-shadow: 6px 4px 3px #5899b36e;
 }
 h3 {
   margin-left: -20px;
@@ -259,6 +260,9 @@ h3 {
     position: relative;
     display: flex;
     animation: boxShade 2s ease forwards;
+    .title {
+      margin-bottom: 25px;
+    }
 
     form {
       width: 60%;

@@ -1,6 +1,6 @@
 <template>
   <div class="page" v-if="basketItems">
-    <h1>Basket</h1>
+    <h1>BASKET</h1>
     <section class="container">
       <form action="#">
         <table cellspacing="0">
