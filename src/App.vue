@@ -27,8 +27,8 @@ html {
   overflow-x: hidden;
 
   body {
-    // background: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612965186/Bridgo/statics/A5AADBDA-339A-46B0-82E3-B696A9B826CB_vkvamo.jpg');
-    // background: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1613759104/Bridgo/statics/Background1_zqy8ai.jpg');
+    background-image: linear-gradient(rgba(249, 249, 249, 0.5), rgba(201, 201, 255, 0.13)),
+      url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1613992704/Bridgo/statics/E8B0536F-0EA4-4204-9875-94BA57DDD4CA_yvz2mc.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
