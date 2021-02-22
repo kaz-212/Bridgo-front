@@ -13,6 +13,7 @@
           @click="nextSlide"
           class="chevvy right fas fa-2x fa-chevron-right"
         ></i>
+        <i class="full-screen fas fa-expand-alt fa-lg" @click="fullscreen"></i>
       </div>
     </div>
   </div>
@@ -22,6 +23,7 @@
 export default {
   name: 'CarouselMain',
   props: { image: Object, selected: Number, length: Number },
+  emits: ['next-slide', 'prev-slide', 'fullscreen'],
   data() {
     return {}
   },
@@ -31,6 +33,9 @@ export default {
     },
     prevSlide() {
       this.$emit('prev-slide')
+    },
+    fullscreen() {
+      this.$emit('fullscreen')
     }
   }
 }
@@ -62,14 +67,14 @@ export default {
       position: absolute;
       color: white;
       opacity: 0;
-      background-color: rgba(0, 0, 0, 0.171);
+      background-color: rgba(0, 0, 0, 0.404);
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
-      transition: opacity 0.2s ease-out;
+      transition: opacity 0.5s ease-out;
       &:hover {
         opacity: 1;
       }
@@ -80,6 +85,12 @@ export default {
           margin-left: auto;
           margin-right: 5px;
         }
+      }
+      .full-screen {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        cursor: pointer;
       }
     }
 

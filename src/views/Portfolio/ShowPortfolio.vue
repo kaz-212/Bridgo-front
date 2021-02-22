@@ -1,14 +1,20 @@
 <template>
   <div v-if="project" class="main">
-    <h1>{{ project.name }}</h1>
+    <div class="fullscreen-display" v-show="showFullscreen">
+      <p @click="showFullscreen = false" class="close">X</p>
+      <div class="img-container">
+        <img :src="project.images[selected].imgURL" alt="fullscreen-image" />
+      </div>
+    </div>
     <div class="carousel-wrapper">
       <section class="img-desc">
         <CarouselMain
           :image="project.images[selected]"
           :selected="selected"
           :length="project.images.length"
-          @next-slide="nextSlide"
-          @prev-slide="prevSlide"
+          @next-slide="selected += 1"
+          @prev-slide="selected -= 1"
+          @fullscreen="showFullscreen = true"
         />
         <CarouselDescription :project="project" />
       </section>
@@ -18,7 +24,7 @@
           :key="image._id"
           :image="image"
           :class="{ active: selected === index }"
-          @click="selectImage(index)"
+          @click="selected = index"
         />
       </section>
     </div>
@@ -35,7 +41,8 @@ export default {
   components: { CarouselThumbnail, CarouselDescription, CarouselMain },
   data() {
     return {
-      selected: 0
+      selected: 0,
+      showFullscreen: false
     }
   },
   computed: {
@@ -49,18 +56,43 @@ export default {
   methods: {
     selectPiece(index) {
       this.selected = index
-    },
-    nextSlide() {
-      this.selected += 1
-    },
-    prevSlide() {
-      this.selected -= 1
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.fullscreen-display {
+  position: fixed;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.856);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .close {
+    color: white;
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    font-size: 23px;
+    cursor: pointer;
+  }
+
+  .img-container {
+    // max-height: 80vh;
+    // max-width: 80vw;
+    height: auto;
+    width: auto;
+
+    img {
+      max-width: 90vw;
+      max-height: 88vh;
+    }
+  }
+}
+
 .carousel-wrapper {
   width: 100%;
   display: flex;
