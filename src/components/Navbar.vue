@@ -82,10 +82,18 @@ body {
     //   background: rgba(255, 255, 255, 0.548);
     // }
 
-    a,
+    a {
+      text-decoration: none;
+      // color: $navcolour;
+      color: rgb(173, 85, 85);
+      text-shadow: 0 1px 1px black;
+      letter-spacing: 1px;
+    }
+
     i {
       text-decoration: none;
-      color: $navcolour;
+      text-shadow: none;
+      color: black;
     }
 
     .logo {
