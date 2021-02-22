@@ -50,39 +50,44 @@ export default {
     top: 0;
     left: 0;
     // background-color: red;
-    height: 100%;
-    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
 
-  .arrow-overlay {
-    position: absolute;
-    color: white;
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0.171);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    transition: opacity 0.2s ease-out;
-    &:hover {
-      opacity: 1;
-    }
-    .chevvy {
-      cursor: pointer;
-      &.right {
-        margin-left: auto;
+    .arrow-overlay {
+      position: absolute;
+      color: white;
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0.171);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      transition: opacity 0.2s ease-out;
+      &:hover {
+        opacity: 1;
+      }
+      .chevvy {
+        cursor: pointer;
+        margin-left: 5px;
+        &.right {
+          margin-left: auto;
+          margin-right: 5px;
+        }
       }
     }
-  }
 
-  img {
-    max-height: 100%;
-    max-width: 100%;
+    img {
+      max-height: 60vh;
+      max-width: 100%;
+      display: block;
+    }
   }
 }
 </style>
