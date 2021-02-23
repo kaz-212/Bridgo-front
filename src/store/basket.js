@@ -64,5 +64,11 @@ export default {
     }
   },
 
-  getters: {}
+  getters: {
+    numberOfItems: state => {
+      let totalItems = 0
+      state.basket.forEach(item => (totalItems += parseInt(item.qty)))
+      return totalItems
+    }
+  }
 }

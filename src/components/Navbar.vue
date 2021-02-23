@@ -20,7 +20,9 @@
         >Admin</router-link
       >
       <router-link class="nav-link" :class="{ 'sixth-link': !hideLinks }" :to="{ name: 'Basket' }"
-        ><i class="fas fa-shopping-cart"><span class="basket-items">3</span></i>
+        ><i class="fas fa-shopping-cart"
+          ><span v-if="basketItems > 0" class="basket-items">{{ basketItems }}</span></i
+        >
       </router-link>
     </div>
 
@@ -39,6 +41,11 @@ export default {
     return {
       scrolling: false,
       hideLinks: true
+    }
+  },
+  computed: {
+    basketItems() {
+      return this.$store.getters['basket/numberOfItems']
     }
   },
   methods: {
@@ -146,15 +153,13 @@ body {
             width: 16px;
             height: 16px;
             font-size: 12px;
+            font-family: 'Times New Roman', Times, serif;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             position: absolute;
             right: -8px;
             top: -8px;
-            padding-bottom: 3px;
-            padding-left: auto;
-            padding-right: auto;
           }
           &:hover {
             color: $navhover;
