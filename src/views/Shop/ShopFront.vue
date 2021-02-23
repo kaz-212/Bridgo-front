@@ -1,6 +1,6 @@
 <template>
   <div v-if="prints">
-    <div class="fixed" :class="{ scrolling: scrolling }">
+    <section class="header">
       <div class="shop-banner">
         <h1>SHOP</h1>
         <div class="tabs">
@@ -14,8 +14,8 @@
           >
         </div>
       </div>
-    </div>
-    <div class="spacer"></div>
+    </section>
+
     <section class="tab-body">
       <Tabs :tabs="tabs" :hide="true">
         <Tab ref="tab1" name="Prints" :selected="selectedTab == 'Prints'">
@@ -65,84 +65,63 @@ export default {
     setTab(tab) {
       /* eslint-disable */
       this.selectedTab = tab.name
-      window.scrollTo(0, 2)
     }
   },
   mounted() {
     this.tabs = [this.$refs.tab1, this.$refs.tab2, this.$refs.tab3]
-  },
-  created() {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 1) {
-        this.scrolling = true
-      } else {
-        this.scrolling = false
-      }
-    })
-  },
-  unmounted() {
-    window.removeEventListener('scroll', () => {
-      this.scrolling = false
-    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.fixed {
-  width: 84%;
-  height: 28vh;
-  max-height: 250px;
-  margin: 0 auto;
-  margin-top: 70px;
-  position: fixed;
-  top: 0;
-  left: 8%;
-  transition: all 0.5s ease-out;
-  z-index: 1000;
-
-  &.scrolling {
-    width: 100%;
-    height: 23vh;
-    left: 0;
-    top: 5vh;
-    margin: 0;
-  }
+.header {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .shop-banner {
-    width: 100%;
-    height: 100%;
-    background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1612955104/Bridgo/statics/6A91EEF0-A9E9-4198-9601-63D8350F2886_wefe5t.jpg');
-    background-size: cover;
-    background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    transition: all 0.5s ease-out;
+    // box-shadow: 0 0 6px 3px #b9bd45; // YELLOW
+    box-shadow: 0 0 6px 3px #652788;
+    width: 84%;
+    height: 70%;
+    margin: auto;
+    background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1614024082/Bridgo/statics/Exhibition_Header.jpg');
+    background-size: cover;
+    background-position: center;
 
     h1 {
       margin: 0;
       color: rgba(255, 255, 255, 0);
-      font-size: 60px;
-      text-shadow: 0 0 2px #c3bf43;
-      font-weight: 300;
+      font-size: 63px;
+      color: white;
+      // text-shadow: 0 4px 4px #a2a037; // YELLOW
+      text-shadow: 0 4px 6px #7f268c;
+      font-weight: 600;
+      letter-spacing: 9px;
     }
     .tabs {
       position: absolute;
-      bottom: 20px;
+      bottom: 32px;
 
       .tab-name {
         margin: 0 30px;
         font-size: 17px;
         font-weight: 300;
         cursor: pointer;
-        color: #ffff14d6;
+        color: white;
         letter-spacing: 2px;
+        padding: 10px;
+        border-radius: 20px;
       }
       .selected {
-        border-bottom: 1px solid #ffff14d6;
+        background-color: #6a006a45;
       }
     }
   }
