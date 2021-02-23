@@ -20,8 +20,8 @@
         >Admin</router-link
       >
       <router-link class="nav-link" :class="{ 'sixth-link': !hideLinks }" :to="{ name: 'Basket' }"
-        ><i class="fas fa-shopping-cart"></i
-      ></router-link>
+        ><i class="fas fa-shopping-cart"><span class="basket-items">3</span></i>
+      </router-link>
     </div>
 
     <div class="burger" :class="{ toggle: !hideLinks }" @click="navSlide">
@@ -74,9 +74,19 @@ body {
     top: 0;
     z-index: 10000;
     transition: background 0.5s ease-out, height 0.5s ease-out;
+    background: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1614101165/Bridgo/statics/6FD606E8-0E12-4D56-8834-48A13B0F7FB5_jt0zlm.jpg');
+    background-size: cover;
+    background-position: center;
+    // box-shadow: 0 0 6px 3px #8c3a3a;
+
     &.scrolling {
       background: white;
       height: 5vh;
+      a,
+      i {
+        color: $navcolour;
+        text-shadow: none;
+      }
     }
     // &:hover {
     //   background: rgba(255, 255, 255, 0.548);
@@ -84,9 +94,8 @@ body {
 
     a {
       text-decoration: none;
-      // color: $navcolour;
-      color: rgb(173, 85, 85);
-      text-shadow: 0 1px 1px black;
+      color: #d2d2d2;
+      text-shadow: 0 1px 3px black;
       letter-spacing: 1px;
     }
 
@@ -99,6 +108,7 @@ body {
     .logo {
       a {
         letter-spacing: 5px;
+        font-weight: 600;
 
         &:hover {
           color: $navhover;
@@ -124,12 +134,35 @@ body {
 
       .nav-link {
         i {
+          position: relative;
+          margin-right: 20px;
+          font-size: 18px;
+          .basket-items {
+            display: inline-block;
+            text-shadow: none;
+            color: black;
+            background-color: #dfdfdf;
+            border-radius: 8px;
+            width: 16px;
+            height: 16px;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            padding-bottom: 3px;
+            padding-left: auto;
+            padding-right: auto;
+          }
           &:hover {
             color: $navhover;
           }
         }
         &:hover {
           color: $navhover;
+          text-shadow: none;
         }
 
         &::after {
