@@ -102,7 +102,7 @@ export default {
       font-size: 63px;
       color: white;
       // text-shadow: 0 4px 4px #a2a037; // YELLOW
-      text-shadow: 0 4px 6px #7f268c;
+      // text-shadow: 0 4px 6px #7f268c;
       font-weight: 600;
       letter-spacing: 9px;
     }
@@ -121,16 +121,10 @@ export default {
         border-radius: 20px;
       }
       .selected {
-        background-color: #6a006a45;
+        background-color: #1c1c282b;
       }
     }
   }
-}
-
-.spacer {
-  margin-top: 70px;
-  height: 28vh;
-  max-height: 250px;
 }
 
 .shop-container {
@@ -140,7 +134,5 @@ export default {
   display: grid;
   grid-gap: 25px;
   grid-template-columns: repeat(3, auto);
-
-  // min-height: 75vh;
 }
 </style>
