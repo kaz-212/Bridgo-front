@@ -25,7 +25,7 @@
                 </div>
               </td>
               <td class="qty">
-                <select
+                <!-- <select
                   :name="`${index}-qty`"
                   :id="`${index}-qty`"
                   v-model="item.qty"
@@ -41,7 +41,13 @@
                   <option :selected="item.qty === 8" value="8">8</option>
                   <option :selected="item.qty === 9" value="9">9</option>
                   <option :selected="item.qty === 10" value="10">10</option>
-                </select>
+                </select> -->
+                <!-- i -->
+                <QtySelecta
+                  v-model:qty="item.qty"
+                  :index="index"
+                  @dispatch-qty="changeQuantity(item)"
+                />
               </td>
               <td>£ {{ ((item.particular.price * item.qty) / 100).toFixed(2) }}</td>
               <td><i @click="removeItem(item)" class="far fa-trash-alt"></i></td>
@@ -71,11 +77,13 @@
 
 <script>
 import StandardButton from '@/components/Buttons/StandardButton.vue'
+import QtySelecta from '@/components/form/QtySelecta.vue'
 
 export default {
   name: 'Basket',
   components: {
-    StandardButton
+    StandardButton,
+    QtySelecta
   },
   data() {
     return {
@@ -96,13 +104,13 @@ export default {
     }
   },
   methods: {
-    changeQuantity(item, event) {
-      this.$store.dispatch('basket/updateQuantity', { qty: parseInt(event.target.value, 10), item })
-    },
     removeItem(item) {
       if (confirm('Are you sure you want to remove this from your basket?')) {
         this.$store.dispatch('basket/removeItem', item)
       }
+    },
+    changeQuantity(item) {
+      this.$store.dispatch('basket/updateQuantity', { qty: parseInt(item.qty, 10), item })
     }
   }
 }
@@ -115,12 +123,12 @@ export default {
   align-items: center;
   min-height: 100vh;
   h1 {
+    animation: letterShade 2s ease forwards;
     writing-mode: vertical-rl;
     display: inline-block;
     text-orientation: upright;
     font-size: 56px;
     margin: auto 0 auto 10%;
-    animation: letterShade 2s ease forwards;
   }
   .container {
     width: 60%;
@@ -178,15 +186,15 @@ export default {
           }
         }
 
-        &.qty {
-          select {
-            padding: 2px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.219);
-            appearance: none;
-            cursor: pointer;
-          }
-        }
+        // &.qty {
+        //   select {
+        //     padding: 2px;
+        //     border-radius: 4px;
+        //     background: rgba(255, 255, 255, 0.219);
+        //     -moz-appearance: none;
+        //     cursor: pointer;
+        //   }
+        // }
 
         &.total-price {
           min-width: 80px;
