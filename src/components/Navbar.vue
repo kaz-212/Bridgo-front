@@ -45,6 +45,16 @@ export default {
   },
   computed: {
     basketItems() {
+      // get basket from local storage if shop page hasnt been loaded/dispatched
+      if (!this.$store.state.basket.basket.length) {
+        let totalItems = 0
+        const basket = JSON.parse(localStorage.getItem('basket'))
+        console.log(basket)
+        /* eslint-disable no-return-assign */
+        basket.basket.forEach(item => (totalItems += parseInt(item.qty, 10)))
+        return totalItems
+      }
+      // need this so that its responsive once it is dispatched
       return this.$store.getters['basket/numberOfItems']
     }
   },
@@ -145,6 +155,7 @@ body {
           margin-right: 20px;
           font-size: 18px;
           .basket-items {
+            outline: none;
             display: inline-block;
             text-shadow: none;
             color: black;
