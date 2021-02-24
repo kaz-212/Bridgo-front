@@ -36,8 +36,9 @@ export default {
 <style lang="scss" scoped>
 .grid-box {
   display: grid;
-  grid-template-columns: 17% auto;
+  grid-template-columns: 17% 1fr;
   grid-gap: 5px;
+  width: 50vw;
 
   .img-thumbs {
     display: flex;
@@ -56,20 +57,19 @@ export default {
     }
 
     .selected {
-      border: 5px solid red;
+      box-shadow: 0 0 2px 2px #910091;
     }
   }
 
   .main-img {
-    width: 40vw;
+    width: auto;
     height: 30vw;
-    // background: olive;
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: center;
 
     img {
-      max-width: 100%;
+      max-width: 40vw;
       max-height: 100%;
     }
   }
