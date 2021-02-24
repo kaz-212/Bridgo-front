@@ -39,6 +39,8 @@ export default {
     justify-content: center;
     position: relative;
     cursor: pointer;
+    // box-shadow: 0 0 10px 4px #1c1c2875;
+    box-shadow: 5px 5px 8px 2px #1c1c2845;
 
     img {
       max-height: 260px;
