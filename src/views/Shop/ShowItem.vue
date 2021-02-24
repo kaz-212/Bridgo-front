@@ -1,7 +1,7 @@
 <template>
-  <div v-if="product">
-    <BackButton whereTo="ShopFront" />
-    <div class="grid-container">
+  <div v-if="product" class="main">
+    <BackButton whereTo="ShopFront" class="back" />
+    <div class="page-container">
       <section class="carousel">
         <ShopCarousel :product="product" />
       </section>
@@ -29,7 +29,7 @@
         </select>
         <br />
         <label for="qty">Quantity</label> <br />
-        <input type="number" name="qty" id="qty" v-model="qtySelected" min="1" max="100" />
+        <QtySelecta v-model:qty="qtySelected" :index="0" />
         <label for="price">Price</label>
         <h3>£{{ computedPrice }}</h3>
         <button @click="addToBasket">Add to Basket</button>
@@ -41,10 +41,11 @@
 <script>
 import ShopCarousel from '@/components/Shop/ShopCarousel.vue'
 import BackButton from '@/components/Buttons/BackButton.vue'
+import QtySelecta from '@/components/form/QtySelecta.vue'
 
 export default {
   name: 'ShowItem',
-  components: { ShopCarousel, BackButton },
+  components: { ShopCarousel, BackButton, QtySelecta },
   data() {
     return {
       selectedSize: 0,
@@ -89,14 +90,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .back {
+    position: absolute;
+    top: 14%;
+    left: 8%;
+  }
+  .page-container {
+    .carousel {
+      position: absolute;
+      left: 5%;
+      top: 30%;
+    }
+    .product-details {
+      position: absolute;
+      right: 28%;
+      top: 40%;
 
-  .product-details {
-    h4 {
-      display: inline;
-      margin: 0 5px;
+      h4 {
+        display: inline;
+        margin: 0 5px;
+      }
     }
   }
 }

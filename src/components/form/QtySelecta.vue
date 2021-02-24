@@ -12,6 +12,7 @@
       <option :selected="qty === 9" value="9">9</option>
       <option :selected="qty === 10" value="10">10</option>
     </select>
+    <i class="fas fa-caret-down"></i>
   </div>
 </template>
 
@@ -36,6 +37,26 @@ export default {
 
 <style lang="scss" scoped>
 .custom-select {
-  width: 200px;
+  width: 40px;
+  position: relative;
+
+  select {
+    cursor: pointer;
+    appearance: none;
+    border: 1px solid black;
+    width: 100%;
+    height: 23px;
+    border-radius: 12px;
+    padding-left: 4px;
+    font-family: 'sans-serif';
+    background-color: rgba(255, 255, 255, 0.171);
+    outline: none;
+  }
+  i {
+    position: absolute;
+    right: 7px;
+    top: 4px;
+    pointer-events: none;
+  }
 }
 </style>

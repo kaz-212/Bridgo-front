@@ -1,14 +1,12 @@
 <template>
   <div id="exhibitions" v-if="exhibitions">
     <section class="header">
-      <!-- <div class="fixed"> -->
       <div class="exhibition-banner">
         <h1>EXHIBITIONS</h1>
+        <h2>EXHIBITIONS</h2>
       </div>
-      <!-- </div> -->
     </section>
     <section class="exhibitions">
-      <!-- <div class="spacer"></div> -->
       <div class="exhibitions-container">
         <div v-for="exhibition in exhibitions" :key="exhibition._id" class="exhibition-card">
           <ExhibitionCard :exhibition="exhibition" />
@@ -71,15 +69,28 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     h1 {
       margin: 0;
       color: rgba(255, 255, 255, 0);
       font-size: 63px;
       color: white;
       // text-shadow: 0 0px 8px #b14e4e;
-      text-shadow: 0 4px 6px #41884f;
+      // text-shadow: 0 0px 9px #83b58d, 0 50px #233340;
+      // text-shadow: 0 4px 6px #41884f;
       font-weight: 600;
       letter-spacing: 9px;
+      z-index: 2;
+    }
+    h2 {
+      position: absolute;
+      font-size: 64px;
+      letter-spacing: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0);
+      // text-shadow: 0 65px 1px #808080;
+      text-shadow: 0 65px 2px #80808087;
+      z-index: 1;
     }
   }
 }
@@ -104,6 +115,10 @@ export default {
     .exhibition-card {
       margin: 1rem 0;
       height: 100%;
+      &:nth-of-type(2n) {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 }
