@@ -89,7 +89,8 @@ export default {
       font-weight: 600;
       color: rgba(255, 255, 255, 0);
       // text-shadow: 0 65px 1px #808080;
-      text-shadow: 0 65px 2px #80808087;
+      // text-shadow: 0 65px 2px #80808087;
+      text-shadow: 0 65px 2px #8080805e;
       z-index: 1;
     }
   }
