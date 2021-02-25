@@ -10,11 +10,11 @@
       <router-link class="nav-link" :class="{ 'second-link': !hideLinks }" to="/portfolio"
         >Portfolio</router-link
       >
-      <router-link class="nav-link" :class="{ 'third-link': !hideLinks }" to="/shop"
-        >Shop</router-link
-      >
-      <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/exhibitions"
+      <router-link class="nav-link" :class="{ 'third-link': !hideLinks }" to="/exhibitions"
         >Exhibitions</router-link
+      >
+      <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/shop"
+        >Shop</router-link
       >
       <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
         >Admin</router-link
@@ -49,7 +49,6 @@ export default {
       if (!this.$store.state.basket.basket.length) {
         let totalItems = 0
         const basket = JSON.parse(localStorage.getItem('basket'))
-        console.log(basket)
         /* eslint-disable no-return-assign */
         basket.basket.forEach(item => (totalItems += parseInt(item.qty, 10)))
         return totalItems
@@ -98,7 +97,8 @@ body {
 
     &.scrolling {
       background: white;
-      height: 5vh;
+      // max-height: 40px;
+      height: 44px;
       a,
       i {
         color: $navcolour;
@@ -119,7 +119,7 @@ body {
     i {
       text-decoration: none;
       text-shadow: none;
-      color: black;
+      color: rgb(65, 53, 53);
     }
 
     .logo {
@@ -169,7 +169,7 @@ body {
             align-items: center;
             justify-content: center;
             position: absolute;
-            right: -8px;
+            right: -10px;
             top: -8px;
           }
           &:hover {
