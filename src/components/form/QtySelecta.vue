@@ -47,7 +47,7 @@ export default {
     width: 100%;
     height: 23px;
     border-radius: 12px;
-    padding-left: 4px;
+    padding-left: 7px;
     font-family: 'sans-serif';
     background-color: rgba(255, 255, 255, 0.171);
     outline: none;
