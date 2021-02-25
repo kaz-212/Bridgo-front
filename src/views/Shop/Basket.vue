@@ -25,24 +25,6 @@
                 </div>
               </td>
               <td class="qty">
-                <!-- <select
-                  :name="`${index}-qty`"
-                  :id="`${index}-qty`"
-                  v-model="item.qty"
-                  @change="changeQuantity(item, $event)"
-                >
-                  <option :selected="item.qty === 1" value="1">1</option>
-                  <option :selected="item.qty === 2" value="2">2</option>
-                  <option :selected="item.qty === 3" value="3">3</option>
-                  <option :selected="item.qty === 4" value="4">4</option>
-                  <option :selected="item.qty === 5" value="5">5</option>
-                  <option :selected="item.qty === 6" value="6">6</option>
-                  <option :selected="item.qty === 7" value="7">7</option>
-                  <option :selected="item.qty === 8" value="8">8</option>
-                  <option :selected="item.qty === 9" value="9">9</option>
-                  <option :selected="item.qty === 10" value="10">10</option>
-                </select> -->
-                <!-- i -->
                 <QtySelecta
                   v-model:qty="item.qty"
                   :index="index"
@@ -114,6 +96,8 @@ export default {
     }
   }
 }
+
+// TODO basket h1 is fixed and moves on scroll
 </script>
 
 <style lang="scss" scoped>
@@ -121,7 +105,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
+  margin-top: $navheight;
   h1 {
     animation: letterShade 2s ease forwards;
     writing-mode: vertical-rl;
