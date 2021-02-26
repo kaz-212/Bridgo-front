@@ -3,6 +3,7 @@
     <section class="header">
       <div class="shop-banner">
         <h1>SHOP</h1>
+        <h2>SHOP</h2>
         <div class="tabs">
           <span
             v-for="tab in tabs"
@@ -105,6 +106,17 @@ export default {
       // text-shadow: 0 4px 6px #7f268c;
       font-weight: 600;
       letter-spacing: 9px;
+    }
+    h2 {
+      position: absolute;
+      font-size: 64px;
+      letter-spacing: 11px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0);
+      // text-shadow: 0 65px 1px #808080;
+      // text-shadow: 0 65px 2px #80808087;
+      text-shadow: 0 65px 2px #8080805e;
+      z-index: 1;
     }
     .tabs {
       position: absolute;

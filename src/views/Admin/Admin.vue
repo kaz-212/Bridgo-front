@@ -24,6 +24,7 @@ export default {
 
 <style lang="scss" scoped>
 .admin {
-  height: 94vh;
+  min-height: calc(100vh - 70px);
+  margin-top: 70px;
 }
 </style>
