@@ -2,7 +2,7 @@
   <div class="page" v-if="basketItems">
     <h1>BASKET</h1>
     <section class="container">
-      <form action="#">
+      <form v-if="basketItems.length > 0" action="#">
         <table cellspacing="0">
           <tbody>
             <tr v-for="(item, index) in basketItems" :key="item.particular._id">
@@ -53,6 +53,7 @@
           </div>
         </div>
       </form>
+      <div v-else class="empty-basket"><h2>No items in your basket :(</h2></div>
     </section>
   </div>
 </template>
@@ -125,6 +126,15 @@ export default {
     padding: 10px;
     position: relative;
     animation: boxShade 2s ease forwards;
+    .empty-basket {
+      height: 30vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h2 {
+        font-size: 30px;
+      }
+    }
     table {
       width: 95%;
       margin: 10px auto;
