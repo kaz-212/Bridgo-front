@@ -12,12 +12,6 @@ export default {
   name: 'Admin',
   components: {
     AdminNav
-  },
-  mounted() {
-    this.$store.dispatch('orders/getOrders')
-    this.$store.dispatch('adminExhibition/getExhibitions')
-    this.$store.dispatch('inventory/getProducts')
-    this.$store.dispatch('adminProject/getThemes')
   }
 }
 </script>

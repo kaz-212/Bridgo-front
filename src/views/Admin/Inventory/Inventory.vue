@@ -6,7 +6,14 @@
 
 <script>
 export default {
-  name: 'inventory'
+  name: 'inventory',
+  async created() {
+    try {
+      await this.$store.dispatch('inventory/getProducts')
+    } catch (e) {
+      console.log(e.response.data)
+    }
+  }
 }
 </script>
 

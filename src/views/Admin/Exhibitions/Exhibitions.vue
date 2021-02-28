@@ -6,7 +6,14 @@
 
 <script>
 export default {
-  name: 'exhibitions'
+  name: 'exhibitions',
+  async created() {
+    try {
+      await this.$store.dispatch('adminExhibition/getExhibitions')
+    } catch (e) {
+      console.log(e.response.data)
+    }
+  }
 }
 </script>
 

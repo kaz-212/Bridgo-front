@@ -6,7 +6,14 @@
 
 <script>
 export default {
-  name: 'Projects'
+  name: 'Projects',
+  async created() {
+    try {
+      await this.$store.dispatch('adminProject/getThemes')
+    } catch (e) {
+      console.log(e.response.data)
+    }
+  }
 }
 </script>
 
