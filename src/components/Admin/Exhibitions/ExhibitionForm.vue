@@ -81,7 +81,11 @@ export default {
         fd.append('imgs', img)
       }
       fd.append('exhibition', JSON.stringify(this.exhibition))
-      this.$store.dispatch('adminExhibition/submitExhibition', fd)
+      try {
+        await this.$store.dispatch('adminExhibition/submitExhibition', fd)
+      } catch (e) {
+        console.log('ERROR', e.response.data)
+      }
     }
   }
 }

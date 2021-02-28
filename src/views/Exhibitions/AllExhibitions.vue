@@ -63,7 +63,7 @@ export default {
     width: 84%;
     height: 70%;
     margin: auto;
-    background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1614024082/Bridgo/statics/Exhibition_Header.jpg');
+    background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/w_auto,q_auto/v1614024082/Bridgo/statics/Exhibition_Header.jpg');
     background-size: cover;
     background-position: center;
     display: flex;

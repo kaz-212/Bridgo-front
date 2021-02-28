@@ -1,7 +1,14 @@
 <template>
   <div id="home">
     <video autoplay muted loop id="back-video">
-      <source src="../assets/bridget2.mp4" type="video/mp4" />
+      <!-- <source
+        src="https://res.cloudinary.com/dqyymjqpg/video/upload/v1614430828/Bridgo/statics/FullSizeRender_ae3orh.mp4"
+        type="video/mp4"
+      /> -->
+      <source
+        src="https://res.cloudinary.com/dqyymjqpg/video/upload/v1614431322/Bridgo/statics/FullSizeRender_2_ccdc57.mp4"
+        type="video/mp4"
+      />
     </video>
   </div>
 </template>
@@ -16,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 #home {
-  height: calc(100% - 50px);
+  height: calc(100vh - 50px);
   width: 100vw;
   overflow: hidden;
   display: flex;
@@ -24,10 +31,11 @@ export default {
   justify-content: center;
   position: absolute;
   bottom: 0;
-  background: black;
+  // background: black;
   #back-video {
-    max-height: 100%;
-    min-width: 90%;
+    height: 100%;
+    min-width: 100%;
+    object-fit: cover;
   }
 }
 </style>

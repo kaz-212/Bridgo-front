@@ -31,7 +31,7 @@ div {
     }
   }
   &:hover {
-    box-shadow: 0 0.5em 0.5em -0.4em #2f302c;
+    text-shadow: 0 0.8em 2px #2f302c;
     transform: translateY(-0.15em);
   }
 }

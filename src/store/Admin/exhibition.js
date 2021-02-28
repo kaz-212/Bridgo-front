@@ -37,43 +37,62 @@ export default {
 
   actions: {
     async getExhibitions({ commit }) {
-      try {
-        const res = await axios.get('admin/exhibitions')
-        commit('GET_EXHIBITIONS', res.data)
-      } catch (e) {
-        console.log(e)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await axios.get('admin/exhibitions')
+          commit('GET_EXHIBITIONS', res.data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     },
     async deleteExhibition({ commit }, id) {
-      const { data } = await axios.delete(`admin/exhibitions/${id}`)
-      commit('DELETE_EXHIBITION', data)
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.delete(`admin/exhibitions/${id}`)
+          commit('DELETE_EXHIBITION', data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     },
 
     async submitExhibition({ commit }, fd) {
-      try {
-        const { data } = await axios.post('admin/exhibitions', fd)
-        commit('ADD_NEW_EXHIBITION', data)
-      } catch (e) {
-        console.log(e)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await axios.post('admin/exhibitions', fd)
+          commit('ADD_NEW_EXHIBITION', res.data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     },
 
     async editExhibition({ commit }, payload) {
-      try {
-        const { data } = await axios.put(`admin/exhibitions/${payload.id}`, payload.fd)
-        commit('EDIT_EXHIBITION', data)
-      } catch (e) {
-        console.log(e)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.put(`admin/exhibitions/${payload.id}`, payload.fd)
+          commit('EDIT_EXHIBITION', data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     },
 
     async updateOrder({ commit }, exhibitions) {
-      try {
-        const { data } = await axios.patch('admin/exhibitions/order', exhibitions)
-        commit('GET_EXHIBITIONS', data)
-      } catch (err) {
-        console.log(err)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.patch('admin/exhibitions/order', exhibitions)
+          commit('GET_EXHIBITIONS', data)
+          resolve('success')
+        } catch (err) {
+          reject(e)
+        }
+      })
     }
   },
 
@@ -86,10 +105,8 @@ export default {
     },
     getNewIndex: state => {
       if (state.exhibitions.length > 0) {
-        console.log('hi')
         return state.exhibitions[0].index + 1
       }
-      console.log('hello')
       return 0
     }
   }

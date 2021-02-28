@@ -12,18 +12,13 @@ export default {
   name: 'Admin',
   components: {
     AdminNav
-  },
-  mounted() {
-    this.$store.dispatch('orders/getOrders')
-    this.$store.dispatch('adminExhibition/getExhibitions')
-    this.$store.dispatch('inventory/getProducts')
-    this.$store.dispatch('adminProject/getThemes')
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .admin {
-  height: 94vh;
+  min-height: calc(100vh - 70px);
+  margin-top: 70px;
 }
 </style>

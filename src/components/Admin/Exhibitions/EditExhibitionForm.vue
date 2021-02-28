@@ -79,15 +79,19 @@ export default {
       this.exhibition.links.splice(index, 1)
     },
 
-    deleteExhibition() {
+    async deleteExhibition() {
       /* eslint-disable */
       if (confirm('You sure brij? I liked this one!')) {
-        this.$store.dispatch('adminExhibition/deleteExhibition', this.exhibition._id)
+        try {
+          await this.$store.dispatch('adminExhibition/deleteExhibition', this.exhibition._id)
+        } catch (e) {
+          console.log(e.response.data)
+        }
       }
     },
 
     // ======== NEEDS EDITING TO PATCH ROUTE AND OHTER ========
-    editExhibition() {
+    async editExhibition() {
       const updatedImages = this.exhibition.images.filter(
         image => !this.deleteFilenames.includes(image.filename)
       )
@@ -101,7 +105,14 @@ export default {
       }
       fd.append('exhibition', JSON.stringify(this.exhibition))
       fd.append('filenames', JSON.stringify(this.deleteFilenames))
-      this.$store.dispatch('adminExhibition/editExhibition', { id: this.exhibition._id, fd })
+      try {
+        await this.$store.dispatch('adminExhibition/editExhibition', {
+          id: this.exhibition._id,
+          fd
+        })
+      } catch (e) {
+        console.log(e.response.data)
+      }
     }
   }
 }
