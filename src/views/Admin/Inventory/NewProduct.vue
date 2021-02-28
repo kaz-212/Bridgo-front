@@ -119,7 +119,7 @@ export default {
     deleteSize(index) {
       this.product.details.splice(index, 1)
     },
-    submitProduct() {
+    async submitProduct() {
       // if details not applicable, replace details array with below
       /* eslint-disable */
       if (!this.product.sizingApplicable) {
@@ -139,7 +139,11 @@ export default {
         fd.append('imgs', img)
       }
       fd.append('product', JSON.stringify(this.product))
-      return this.$store.dispatch('inventory/submitProduct', fd)
+      try {
+        await this.$store.dispatch('inventory/submitProduct', fd)
+      } catch (e) {
+        console.log(e.response.data)
+      }
     }
   }
 }

@@ -7,8 +7,12 @@
 <script>
 export default {
   name: 'Shop',
-  created() {
-    this.$store.dispatch('inventory/getProducts')
+  async created() {
+    try {
+      await this.$store.dispatch('inventory/getProducts')
+    } catch (e) {
+      console.log(e.response.data)
+    }
     /* eslint-disable */
 
     // store.subscribe returns an unsubscribe function to stop listening to mutations

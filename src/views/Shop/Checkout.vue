@@ -122,6 +122,7 @@ export default {
     }
   },
   methods: {
+    // TODO this mess (throw an error back end) wrap these in try catch etc.
     async purchase() {
       try {
         const success = this.fetchPaymentIntent()

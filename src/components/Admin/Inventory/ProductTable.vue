@@ -33,10 +33,14 @@ export default {
   },
   computed: {},
   methods: {
-    deleteProduct(id) {
+    async deleteProduct(id) {
       /* eslint-disable */
       if (confirm('Are you sure you want to delete? All the data will be lost!')) {
-        this.$store.dispatch('inventory/deleteProduct', id)
+        try {
+          await this.$store.dispatch('inventory/deleteProduct', id)
+        } catch (e) {
+          console.log(e.response.data)
+        }
       }
     },
     totalRemaining(particulars) {

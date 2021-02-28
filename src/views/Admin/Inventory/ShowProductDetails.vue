@@ -146,7 +146,7 @@ export default {
     }
   },
   methods: {
-    editProduct() {
+    async editProduct() {
       // delete images before sending to server
       const updatedImages = this.product.images.filter(
         image => !this.deleteFilenames.includes(image.filename)
@@ -159,34 +159,57 @@ export default {
       }
       fd.append('product', JSON.stringify(this.product))
       fd.append('filenames', JSON.stringify(this.deleteFilenames))
-      this.$store
-        .dispatch('inventory/editProduct', { id: this.product._id, fd })
-        .then((this.editingProduct = false))
-    },
-    cancelProductChanges() {
-      this.$store.dispatch('inventory/getProducts')
+      try {
+        await this.$store.dispatch('inventory/editProduct', { id: this.product._id, fd })
+      } catch (e) {
+        console.log(e.response.data)
+      }
       this.editingProduct = false
     },
-    editParticular(particular) {
+    async cancelProductChanges() {
+      try {
+        await this.$store.dispatch('inventory/getProducts')
+      } catch (e) {
+        console.log(e.response.data)
+      }
+      this.editingProduct = false
+    },
+
+    async editParticular(particular) {
       // TODO when you edit, its in p not £. do something son
-      this.$store.dispatch('inventory/editParticular', particular)
+      try {
+        await this.$store.dispatch('inventory/editParticular', particular)
+      } catch {
+        console.log(e.response.data)
+      }
       this.editSize = ''
     },
-    delParticular(id) {
-      this.$store.dispatch('inventory/deleteParticular', id)
+
+    async delParticular(id) {
+      try {
+        await this.$store.dispatch('inventory/deleteParticular', id)
+      } catch (e) {
+        console.log(e.response.data)
+      }
     },
-    addParticular() {
-      this.$store.dispatch('inventory/addParticular', {
-        particular: this.newSize,
-        productId: this.id
-      })
-      this.newSize.size = ''
-      this.newSize.price = ''
-      this.newSize.unitsRemaining = ''
-      this.newSize.unitsSold = ''
-      this.newSize.shippingCost = ''
-      this.addSize = false
+
+    async addParticular() {
+      try {
+        await this.$store.dispatch('inventory/addParticular', {
+          particular: this.newSize,
+          productId: this.id
+        })
+        this.newSize.size = ''
+        this.newSize.price = ''
+        this.newSize.unitsRemaining = ''
+        this.newSize.unitsSold = ''
+        this.newSize.shippingCost = ''
+        this.addSize = false
+      } catch (e) {
+        console.log(e.response.data)
+      }
     },
+
     cancelParticular() {
       this.newSize.size = ''
       this.newSize.price = ''
