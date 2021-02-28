@@ -40,11 +40,15 @@ export default {
   },
   watch: {
     /* eslint-disable */
-    exhibitions() {
+    async exhibitions() {
       this.exhibitions.map((exhibition, index) => {
         exhibition.index = this.exhibitions.length - index - 1 // greatest index first
       })
-      this.$store.dispatch('adminExhibition/updateOrder', this.exhibitions)
+      try {
+        await this.$store.dispatch('adminExhibition/updateOrder', this.exhibitions)
+      } catch (e) {
+        console.log(e.response.data)
+      }
     }
   }
 }
