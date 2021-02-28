@@ -58,7 +58,11 @@ export default {
   },
   watch: {
     themes(newValue) {
-      this.selectedTab = newValue[0].name
+      try {
+        this.selectedTab = newValue[0].name
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   methods: {
