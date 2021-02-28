@@ -25,6 +25,20 @@ export default {
         }
       }
       router.push({ name: 'AdminProjects' })
+    },
+
+    DELETE_PROJECT(state, project) {
+      for (let i = 0; i < state.themes.length; i++) {
+        if (state.themes[i]._id === project.theme) {
+          for (let j = 0; j < state.themes[i].projects.length; j++) {
+            if (state.themes[i].projects[j]._id === project._id) {
+              state.themes[i].projects.splice(j, 1)
+              router.push({ name: 'AdminProjects' })
+              return
+            }
+          }
+        }
+      }
     }
   },
 
@@ -75,6 +89,19 @@ export default {
           }
           resolve('success')
         } catch (e) {
+          reject(e)
+        }
+      })
+    },
+
+    async deleteProject({ commit }, id) {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.delete(`admin/projects/${id}`)
+          commit('DELETE_PROJECT', data)
+          resolve('success')
+        } catch (e) {
+          console.log(e)
           reject(e)
         }
       })

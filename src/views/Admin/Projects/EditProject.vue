@@ -25,6 +25,7 @@
           <ImageUpload v-model="imgs" />
         </div>
         <button @click.prevent="submitChanges">Submit Changes</button>
+        <button @click.prevent="deleteProject">Delete Project</button>
       </div>
     </form>
   </div>
@@ -97,6 +98,16 @@ export default {
         this.$store.dispatch('adminProject/editProject', fd)
       } catch (e) {
         console.log(e.response.data)
+      }
+    },
+    async deleteProject() {
+      /* eslint-disable */
+      if (confirm('You sure brij? I liked this one!')) {
+        try {
+          await this.$store.dispatch('adminProject/deleteProject', this.id)
+        } catch (e) {
+          console.log(e.response.data)
+        }
       }
     }
   },
