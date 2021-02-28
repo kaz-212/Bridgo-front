@@ -64,11 +64,15 @@ export default {
     }
   },
   methods: {
-    resetProjectData() {
+    async resetProjectData() {
       // FIXME when back button pressed, it saves the changes even though resent get req
-      this.$store.dispatch('adminProject/getThemes')
+      try {
+        await this.$store.dispatch('adminProject/getThemes')
+      } catch (e) {
+        console.log(e.response.data)
+      }
     },
-    submitChanges() {
+    async submitChanges() {
       /* eslint-disable */
       const fd = new FormData()
       // if theme changed, need to recalculate the index of edited project by adding 1 to value of last index of new theme
@@ -89,7 +93,11 @@ export default {
       }
       fd.append('project', JSON.stringify(this.project))
       fd.append('filenames', JSON.stringify(this.deleteFilenames))
-      this.$store.dispatch('adminProject/editProject', fd)
+      try {
+        this.$store.dispatch('adminProject/editProject', fd)
+      } catch (e) {
+        console.log(e.response.data)
+      }
     }
   },
   async mounted() {

@@ -27,11 +27,16 @@ export default {
   },
   watch: {
     /* eslint-disable */
-    projects: function() {
+    // TODO check if this still works
+    async projects() {
       this.projects.map((project, index) => {
         project.index = index
       })
-      this.$store.dispatch('adminProject/updateOrder', this.projects)
+      try {
+        await this.$store.dispatch('adminProject/updateOrder', this.projects)
+      } catch (e) {
+        console.log(e.response.data)
+      }
     }
   },
   methods: {}

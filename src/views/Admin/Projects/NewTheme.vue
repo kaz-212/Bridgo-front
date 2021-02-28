@@ -28,8 +28,12 @@ export default {
     }
   },
   methods: {
-    submitTheme() {
-      this.$store.dispatch('adminProject/submitTheme', this.theme)
+    async submitTheme() {
+      try {
+        this.$store.dispatch('adminProject/submitTheme', this.theme)
+      } catch (e) {
+        console.log(e.response.data)
+      }
     }
   }
 }

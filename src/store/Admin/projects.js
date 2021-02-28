@@ -30,51 +30,66 @@ export default {
 
   actions: {
     async getThemes({ commit }) {
-      try {
-        const { data } = await axios.get('admin/projects/theme')
-        commit('SET_THEMES', data)
-      } catch (err) {
-        console.log(err)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.get('admin/projects/theme')
+          commit('SET_THEMES', data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     },
 
     async submitTheme({ commit }, theme) {
-      try {
-        const { data } = await axios.post('admin/projects/theme', theme)
-        commit('ADD_THEME', data)
-      } catch (err) {
-        console.log(err)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.post('admin/projects/theme', theme)
+          commit('ADD_THEME', data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     },
 
     async submitProject({ commit }, fd) {
-      try {
-        const { data } = await axios.post('admin/projects/project', fd)
-        commit('EDIT_THEME', data)
-      } catch (err) {
-        console.log(err)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.post('admin/projects/project', fd)
+          commit('EDIT_THEME', data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     },
 
     async editProject({ commit }, fd) {
-      try {
-        const { data } = await axios.put('admin/projects/project', fd)
-        // FIXME doesnt refresh the draggable components. need to manually refresh the page
-        for (const theme of data) {
-          commit('EDIT_THEME', theme)
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.put('admin/projects/project', fd)
+          // FIXME doesnt refresh the draggable components. need to manually refresh the page
+          for (const theme of data) {
+            commit('EDIT_THEME', theme)
+          }
+          resolve('success')
+        } catch (e) {
+          reject(e)
         }
-      } catch (err) {
-        console.log(err)
-      }
+      })
     },
 
     async updateOrder({ commit }, projects) {
-      try {
-        const { data } = await axios.patch('admin/projects/project', projects)
-        commit('EDIT_THEME', data)
-      } catch (err) {
-        console.log(err)
-      }
+      return new Promise(async (resolve, reject) => {
+        try {
+          const { data } = await axios.patch('admin/projects/project', projects)
+          commit('EDIT_THEME', data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
     }
   },
 

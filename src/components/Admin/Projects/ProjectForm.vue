@@ -57,7 +57,7 @@ export default {
     }
   },
   methods: {
-    submitProject() {
+    async submitProject() {
       this.project.index = this.calculatedIndex
       const fd = new FormData()
       /* eslint-disable */
@@ -65,7 +65,11 @@ export default {
         fd.append('imgs', img) // add images
       }
       fd.append('project', JSON.stringify(this.project)) // append project object
-      this.$store.dispatch('adminProject/submitProject', fd)
+      try {
+        await this.$store.dispatch('adminProject/submitProject', fd)
+      } catch (e) {
+        console.log(e.response.data)
+      }
     }
   }
 }
