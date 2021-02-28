@@ -3,7 +3,6 @@
     <BackButton whereTo="AllExhibitions" />
     <TextInput id="name" label="Exhibition Name" v-model="exhibition.name" />
     <TextInput id="date" label="date" v-model="exhibition.date" />
-    <TextInput id="gallery" label="Gallery" v-model="exhibition.gallery" />
     <label class="form-item" for="location">Location</label>
     <textarea id="location" v-model="exhibition.location" rows="5" required />
     <label class="form-item" for="description">Description</label>
