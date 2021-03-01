@@ -4,22 +4,42 @@
       <h4><router-link to="/">Bridget Simpson Art</router-link></h4>
     </div>
     <div class="nav-links" :class="{ 'nav-active': !hideLinks }">
-      <router-link class="nav-link" :class="{ 'first-link': !hideLinks }" to="/about"
+      <router-link
+        @click="hideLinks = true"
+        class="nav-link"
+        :class="{ 'first-link': !hideLinks }"
+        to="/about"
         >About</router-link
       >
-      <router-link class="nav-link" :class="{ 'second-link': !hideLinks }" to="/portfolio"
+      <router-link
+        @click="hideLinks = true"
+        class="nav-link"
+        :class="{ 'second-link': !hideLinks }"
+        to="/portfolio"
         >Portfolio</router-link
       >
-      <router-link class="nav-link" :class="{ 'third-link': !hideLinks }" to="/exhibitions"
+      <router-link
+        @click="hideLinks = true"
+        class="nav-link"
+        :class="{ 'third-link': !hideLinks }"
+        to="/exhibitions"
         >Exhibitions</router-link
       >
-      <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/shop"
+      <router-link
+        @click="hideLinks = true"
+        class="nav-link"
+        :class="{ 'fourth-link': !hideLinks }"
+        to="/shop"
         >Shop</router-link
       >
       <!-- <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
         >Admin</router-link
       > -->
-      <router-link class="nav-link" :class="{ 'sixth-link': !hideLinks }" :to="{ name: 'Basket' }"
+      <router-link
+        @click="hideLinks = true"
+        class="nav-link basket"
+        :class="{ 'sixth-link': !hideLinks }"
+        :to="{ name: 'Basket' }"
         ><i class="fas fa-shopping-cart"
           ><span v-if="basketItems > 0" class="basket-items">{{ basketItems }}</span></i
         >
@@ -48,10 +68,14 @@ export default {
       // get basket from local storage if shop page hasnt been loaded/dispatched
       if (!this.$store.state.basket.basket.length) {
         let totalItems = 0
-        const basket = JSON.parse(localStorage.getItem('basket'))
-        /* eslint-disable no-return-assign */
-        basket.basket.forEach(item => (totalItems += parseInt(item.qty, 10)))
-        return totalItems
+        try {
+          const basket = JSON.parse(localStorage.getItem('basket'))
+          /* eslint-disable no-return-assign */
+          basket.basket.forEach(item => (totalItems += parseInt(item.qty, 10)))
+          return totalItems
+        } catch {
+          return 0
+        }
       }
       // need this so that its responsive once it is dispatched
       return this.$store.getters['basket/numberOfItems']
@@ -128,6 +152,7 @@ body {
         font-weight: 600;
 
         &:hover {
+          text-shadow: none;
           color: $navhover;
         }
       }
@@ -181,7 +206,7 @@ body {
           text-shadow: none;
         }
 
-        &::after {
+        &:not(.basket)::after {
           content: '';
           display: block;
           width: 0;
