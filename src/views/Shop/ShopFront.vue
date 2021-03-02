@@ -89,11 +89,12 @@ export default {
     align-items: center;
     position: relative;
     // box-shadow: 0 0 6px 3px #b9bd45; // YELLOW
-    box-shadow: 0 0 6px 3px #652788;
+    // box-shadow: 0 0 6px 3px #652788;
+    box-shadow: 0 0 6px 3px #8a0000;
     width: 84%;
     height: 70%;
     margin: auto;
-    background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1614024082/Bridgo/statics/Exhibition_Header.jpg');
+    background-image: url('https://res.cloudinary.com/bridget-simpson-art/image/upload/w_auto,q_auto/v1614699818/Bridgo/statics/shop_background.jpg');
     background-size: cover;
     background-position: center;
 
@@ -123,17 +124,18 @@ export default {
       bottom: 32px;
 
       .tab-name {
-        margin: 0 30px;
+        margin: 0 40px;
         font-size: 17px;
         font-weight: 300;
         cursor: pointer;
         color: white;
         letter-spacing: 2px;
-        padding: 10px;
-        border-radius: 20px;
+        padding: 2px;
+        // border-radius: 20px;
       }
       .selected {
-        background-color: #1c1c282b;
+        // background-color: #1c1c282b;
+        border-bottom: 1px solid white;
       }
     }
   }

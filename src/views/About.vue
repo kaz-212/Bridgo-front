@@ -38,7 +38,8 @@ export default {
 
   .exhibition-banner {
     // box-shadow: 0 0 6px 3px #8c3a3a;
-    box-shadow: 0 0 6px 3px #2c7d48;
+    // box-shadow: 0 0 6px 3px #2c7d48;
+    box-shadow: 0 0 6px 3px #8a0000;
     width: 84%;
     height: 70%;
     margin: auto;
@@ -58,7 +59,7 @@ export default {
       color: white;
       // text-shadow: 0 0px 8px #b14e4e;
       // text-shadow: 0 4px 6px #41884f;
-      text-shadow: 0 0px 8px #123719;
+      // text-shadow: 0 0px 8px #123719;
       font-weight: 600;
       letter-spacing: 9px;
       z-index: 2;
