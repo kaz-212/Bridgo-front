@@ -43,7 +43,7 @@ export default {
   .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin: 10vh auto;
+    margin: 18vh auto;
     width: 68vw;
     grid-gap: 20px;
 
@@ -87,7 +87,7 @@ export default {
 
           h3,
           h4 {
-            max-width: 96%;
+            max-width: 80%;
             text-align: center;
             margin-top: 20px;
           }
@@ -100,7 +100,7 @@ export default {
     }
   }
   .toggle-view {
-    position: absolute;
+    position: fixed;
     bottom: 10vh;
     right: 6vw;
   }
