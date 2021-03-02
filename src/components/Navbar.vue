@@ -1,5 +1,5 @@
 <template>
-  <nav id="nav" :class="{ scrolling: scrolling, 'home-nav': isHome }">
+  <nav id="nav" :class="{ scrolling: scrolling }">
     <div class="logo">
       <h4><router-link to="/">Bridget Simpson Art</router-link></h4>
     </div>
@@ -62,15 +62,15 @@ export default {
       }
       // need this so that its responsive once it is dispatched
       return this.$store.getters['basket/numberOfItems']
-    },
-    isHome() {
-      try {
-        if (this.$route.matched[0].name === 'Home') return true
-        return false
-      } catch {
-        return false
-      }
     }
+    // isHome() {
+    //   try {
+    //     if (this.$route.matched[0].name === 'Home') return true
+    //     return false
+    //   } catch {
+    //     return false
+    //   }
+    // }
   },
   methods: {
     navSlide() {
@@ -109,9 +109,9 @@ body {
     background-size: cover;
     background-position: center;
     // box-shadow: 0 0 6px 3px #8c3a3a;
-    &.home-nav {
-      background: #8a0000;
-    }
+    // &.home-nav {
+    //   background: #8a0000;
+    // }
 
     &.scrolling {
       background: white;
