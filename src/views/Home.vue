@@ -5,10 +5,14 @@
         src="https://res.cloudinary.com/dqyymjqpg/video/upload/v1614430828/Bridgo/statics/FullSizeRender_ae3orh.mp4"
         type="video/mp4"
       /> -->
-      <source
+      <!-- <source
         src="https://res.cloudinary.com/dqyymjqpg/video/upload/v1614431322/Bridgo/statics/FullSizeRender_2_ccdc57.mp4"
         type="video/mp4"
         poster="https://res.cloudinary.com/bridget-simpson-art/image/upload/w_auto,q_auto/v1614692203/Bridgo/statics/A7885051-B336-4E48-A693-7DE5DD957E88_fpqwzs.jpg"
+      /> -->
+      <source
+        src="https://res.cloudinary.com/bridget-simpson-art/video/upload/v1614693342/Bridgo/statics/Intro_Green_jftd7o.mp4"
+        type="video/mp4"
       />
     </video>
   </div>
