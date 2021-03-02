@@ -63,7 +63,7 @@ export default {
   .exhibition-banner {
     // box-shadow: 0 0 6px 3px #8c3a3a;
     // box-shadow: 0 0 6px 3px #2c7d48;
-    box-shadow: 0 0 6px 3px #8a0000;
+    box-shadow: 0 0 6px 1px #1c1c1c;
     width: 84%;
     height: 76%;
     margin: auto;

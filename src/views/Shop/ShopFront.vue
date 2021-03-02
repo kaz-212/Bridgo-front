@@ -94,7 +94,7 @@ export default {
     position: relative;
     // box-shadow: 0 0 6px 3px #b9bd45; // YELLOW
     // box-shadow: 0 0 6px 3px #652788;
-    box-shadow: 0 0 6px 3px #8a0000;
+    box-shadow: 0 0 6px 1px #1c1c1c;
     width: 84%;
     height: 76%;
     margin: auto;
