@@ -119,6 +119,7 @@ export default {
 
     .top-half {
       display: flex;
+      width: 70%;
       .img {
         width: 45%;
         margin-right: auto;

@@ -9,28 +9,28 @@
         class="nav-link"
         :class="{ 'first-link': !hideLinks }"
         to="/about"
-        >About</router-link
+        >ABOUT</router-link
       >
       <router-link
         @click="hideLinks = true"
         class="nav-link"
         :class="{ 'second-link': !hideLinks }"
         to="/portfolio"
-        >Portfolio</router-link
+        >PORTFOLIO</router-link
       >
       <router-link
         @click="hideLinks = true"
         class="nav-link"
         :class="{ 'third-link': !hideLinks }"
         to="/exhibitions"
-        >Exhibitions</router-link
+        >EXHIBITIONS</router-link
       >
       <router-link
         @click="hideLinks = true"
         class="nav-link"
         :class="{ 'fourth-link': !hideLinks }"
         to="/shop"
-        >Shop</router-link
+        >SHOP</router-link
       >
       <!-- <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
         >Admin</router-link
@@ -324,4 +324,5 @@ body {
     transform: translateX(0);
   }
 }
+// #8a0000;
 </style>
