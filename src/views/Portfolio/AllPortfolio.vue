@@ -23,7 +23,6 @@
         </div>
         <div class="view-all" v-if="!scrollView">
           <PortfolioViewAll :projects="theme.projects" @toggle-scroll-view="scrollView = true" />
-          <button @click="scrollView = true">Scroll View</button>
         </div>
       </Tab>
     </Tabs>

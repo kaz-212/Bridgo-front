@@ -5,21 +5,24 @@
     </div>
     <div class="nav-links" :class="{ 'nav-active': !hideLinks }">
       <router-link class="nav-link" :class="{ 'first-link': !hideLinks }" to="/about"
-        >About</router-link
+        >ABOUT</router-link
       >
       <router-link class="nav-link" :class="{ 'second-link': !hideLinks }" to="/portfolio"
-        >Portfolio</router-link
+        >PORTFOLIO</router-link
       >
       <router-link class="nav-link" :class="{ 'third-link': !hideLinks }" to="/exhibitions"
-        >Exhibitions</router-link
+        >EXHIBITIONS</router-link
       >
       <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/shop"
-        >Shop</router-link
+        >SHOP</router-link
       >
       <!-- <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
         >Admin</router-link
       > -->
-      <router-link class="nav-link" :class="{ 'sixth-link': !hideLinks }" :to="{ name: 'Basket' }"
+      <router-link
+        class="nav-link basket"
+        :class="{ 'sixth-link': !hideLinks }"
+        :to="{ name: 'Basket' }"
         ><i class="fas fa-shopping-cart"
           ><span v-if="basketItems > 0" class="basket-items">{{ basketItems }}</span></i
         >
@@ -48,14 +51,26 @@ export default {
       // get basket from local storage if shop page hasnt been loaded/dispatched
       if (!this.$store.state.basket.basket.length) {
         let totalItems = 0
-        const basket = JSON.parse(localStorage.getItem('basket'))
-        /* eslint-disable no-return-assign */
-        basket.basket.forEach(item => (totalItems += parseInt(item.qty, 10)))
-        return totalItems
+        try {
+          const basket = JSON.parse(localStorage.getItem('basket'))
+          /* eslint-disable no-return-assign */
+          basket.basket.forEach(item => (totalItems += parseInt(item.qty, 10)))
+          return totalItems
+        } catch {
+          return 0
+        }
       }
       // need this so that its responsive once it is dispatched
       return this.$store.getters['basket/numberOfItems']
     }
+    // isHome() {
+    //   try {
+    //     if (this.$route.matched[0].name === 'Home') return true
+    //     return false
+    //   } catch {
+    //     return false
+    //   }
+    // }
   },
   methods: {
     navSlide() {
@@ -94,6 +109,9 @@ body {
     background-size: cover;
     background-position: center;
     // box-shadow: 0 0 6px 3px #8c3a3a;
+    // &.home-nav {
+    //   background: #8a0000;
+    // }
 
     &.scrolling {
       background: white;
@@ -128,6 +146,7 @@ body {
         font-weight: 600;
 
         &:hover {
+          text-shadow: none;
           color: $navhover;
         }
       }
@@ -181,7 +200,7 @@ body {
           text-shadow: none;
         }
 
-        &::after {
+        &:not(.basket)::after {
           content: '';
           display: block;
           width: 0;
@@ -299,4 +318,5 @@ body {
     transform: translateX(0);
   }
 }
+// #8a0000;
 </style>

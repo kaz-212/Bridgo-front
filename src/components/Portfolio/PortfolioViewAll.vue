@@ -37,61 +37,72 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 10vh auto;
-  width: 68vw;
-  grid-gap: 20px;
+.view-all {
+  position: relative;
+  min-height: calc(81vh);
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 10vh auto;
+    width: 68vw;
+    grid-gap: 20px;
 
-  .project-window {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 280px;
-    width: 285px;
-    position: relative;
-    .img-box {
-      max-height: 260px;
-      max-width: 260px;
-      height: auto;
-      width: auto;
+    .project-window {
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      height: 280px;
+      width: 285px;
       position: relative;
-      cursor: pointer;
-
-      img {
+      .img-box {
         max-height: 260px;
-        max-width: 100%;
-        display: block;
-      }
-
-      .img-info {
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        position: absolute;
+        max-width: 260px;
+        height: auto;
+        width: auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
-        opacity: 0;
-        transition: all 0.5s ease-out;
+        position: relative;
+        cursor: pointer;
 
-        &:hover {
-          opacity: 1;
+        img {
+          max-height: 260px;
+          max-width: 100%;
+          display: block;
+        }
+
+        .img-info {
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
+          color: white;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          opacity: 0;
+          transition: all 0.5s ease-out;
+
+          h3,
+          h4 {
+            max-width: 96%;
+            text-align: center;
+            margin-top: 20px;
+          }
+
+          &:hover {
+            opacity: 1;
+          }
         }
       }
     }
   }
-}
-.toggle-view {
-  position: absolute;
-  bottom: 10vh;
-  right: 6vw;
+  .toggle-view {
+    position: absolute;
+    bottom: 10vh;
+    right: 6vw;
+  }
 }
 </style>
