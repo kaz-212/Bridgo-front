@@ -1,42 +1,25 @@
 <template>
-  <nav id="nav" :class="{ scrolling: scrolling }">
+  <nav id="nav" :class="{ scrolling: scrolling, 'home-nav': isHome }">
     <div class="logo">
       <h4><router-link to="/">Bridget Simpson Art</router-link></h4>
     </div>
     <div class="nav-links" :class="{ 'nav-active': !hideLinks }">
-      <router-link
-        @click="hideLinks = true"
-        class="nav-link"
-        :class="{ 'first-link': !hideLinks }"
-        to="/about"
+      <router-link class="nav-link" :class="{ 'first-link': !hideLinks }" to="/about"
         >ABOUT</router-link
       >
-      <router-link
-        @click="hideLinks = true"
-        class="nav-link"
-        :class="{ 'second-link': !hideLinks }"
-        to="/portfolio"
+      <router-link class="nav-link" :class="{ 'second-link': !hideLinks }" to="/portfolio"
         >PORTFOLIO</router-link
       >
-      <router-link
-        @click="hideLinks = true"
-        class="nav-link"
-        :class="{ 'third-link': !hideLinks }"
-        to="/exhibitions"
+      <router-link class="nav-link" :class="{ 'third-link': !hideLinks }" to="/exhibitions"
         >EXHIBITIONS</router-link
       >
-      <router-link
-        @click="hideLinks = true"
-        class="nav-link"
-        :class="{ 'fourth-link': !hideLinks }"
-        to="/shop"
+      <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/shop"
         >SHOP</router-link
       >
       <!-- <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
         >Admin</router-link
       > -->
       <router-link
-        @click="hideLinks = true"
         class="nav-link basket"
         :class="{ 'sixth-link': !hideLinks }"
         :to="{ name: 'Basket' }"
@@ -79,6 +62,14 @@ export default {
       }
       // need this so that its responsive once it is dispatched
       return this.$store.getters['basket/numberOfItems']
+    },
+    isHome() {
+      try {
+        if (this.$route.matched[0].name === 'Home') return true
+        return false
+      } catch {
+        return false
+      }
     }
   },
   methods: {
@@ -118,6 +109,9 @@ body {
     background-size: cover;
     background-position: center;
     // box-shadow: 0 0 6px 3px #8c3a3a;
+    &.home-nav {
+      background: #8a0000;
+    }
 
     &.scrolling {
       background: white;
