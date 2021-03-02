@@ -167,8 +167,10 @@ body {
       justify-content: space-around;
       width: 30%;
       margin-left: auto;
+      margin-right: 30px;
 
       .nav-link {
+        margin: 0 16px;
         i {
           position: relative;
           margin-right: 20px;
