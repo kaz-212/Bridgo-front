@@ -19,6 +19,8 @@
 <script>
 import ExhibitionCard from '@/components/Exhibitions/ExhibitionCard.vue'
 
+// TODO show fulscreen scroll down so banner is out of view
+
 export default {
   name: 'AllExhibitions',
   components: { ExhibitionCard },
@@ -51,8 +53,9 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  margin-top: 60px;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +65,7 @@ export default {
     // box-shadow: 0 0 6px 3px #2c7d48;
     box-shadow: 0 0 6px 3px #8a0000;
     width: 84%;
-    height: 70%;
+    height: 76%;
     margin: auto;
     background-image: url('https://res.cloudinary.com/dqyymjqpg/image/upload/w_auto,q_auto/v1614024082/Bridgo/statics/Exhibition_Header.jpg');
     background-size: cover;
@@ -106,6 +109,7 @@ export default {
 .exhibitions {
   .exhibitions-container {
     width: 84%;
+    min-height: 90vh;
     margin: 7vh auto;
     display: grid;
     grid-template-columns: 1fr 1fr;

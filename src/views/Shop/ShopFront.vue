@@ -22,16 +22,19 @@
         <Tab ref="tab1" name="Prints" :selected="selectedTab == 'Prints'">
           <section class="shop-container">
             <ProductWindow v-for="product in prints" :key="product._id" :product="product" />
+            <h2 v-if="!prints.length">Coming Soon.</h2>
           </section>
         </Tab>
         <Tab ref="tab2" name="Pieces" :selected="selectedTab == 'Pieces'">
           <section class="shop-container">
             <ProductWindow v-for="product in pieces" :key="product._id" :product="product" />
+            <h2 v-if="!prints.length">Coming Soon.</h2>
           </section>
         </Tab>
         <Tab ref="tab3" name="Other" :selected="selectedTab == 'Other'">
           <section class="shop-container">
             <ProductWindow v-for="product in other" :key="product._id" :product="product" />
+            <h2 v-if="!prints.length">Coming Soon.</h2>
           </section>
         </Tab>
       </Tabs>
@@ -76,8 +79,9 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  margin-top: 60px;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,7 +96,7 @@ export default {
     // box-shadow: 0 0 6px 3px #652788;
     box-shadow: 0 0 6px 3px #8a0000;
     width: 84%;
-    height: 70%;
+    height: 76%;
     margin: auto;
     background-image: url('https://res.cloudinary.com/bridget-simpson-art/image/upload/w_auto,q_auto/v1614699818/Bridgo/statics/shop_background.jpg');
     background-size: cover;
@@ -143,10 +147,15 @@ export default {
 
 .shop-container {
   margin: 7vh auto;
+  min-height: 90vh;
   width: 63vw;
   max-width: 1000px;
   display: grid;
   grid-gap: 25px;
   grid-template-columns: repeat(3, auto);
+  h2 {
+    font-weight: 300;
+    font-size: 27px;
+  }
 }
 </style>
