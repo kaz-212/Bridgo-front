@@ -7,7 +7,7 @@
       /> -->
 
       <source
-        src="https://res.cloudinary.com/bridget-simpson-art/video/upload/v1614698267/Bridgo/statics/home_back_video.mp4"
+        src="https://res.cloudinary.com/bridget-simpson-art/video/upload/v1614724620/Bridgo/statics/My_Movie_2_2_drnaun.mp4"
         type="video/mp4"
       />
     </video>
@@ -47,7 +47,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #79d3e157, #c187ca4f);
+    // background: linear-gradient(to bottom, #79d3e157, #c187ca4f);
     display: flex;
     justify-content: center;
     align-items: center;
