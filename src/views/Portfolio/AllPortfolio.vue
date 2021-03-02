@@ -93,7 +93,7 @@ export default {
     z-index: 2;
 
     .tab {
-      margin: 0 10px;
+      margin: 0 20px;
       letter-spacing: 1px;
       &.selected {
         border-bottom: 1px solid black;
