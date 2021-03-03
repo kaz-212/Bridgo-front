@@ -12,7 +12,7 @@
       />
     </video>
     <div class="foreground">
-      <h1>bridget simpson</h1>
+      <h1>Bridget Simpson</h1>
     </div>
   </div>
 </template>
@@ -26,6 +26,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap');
+
 #home {
   top: 60px;
   height: calc(100vh - 60px);
@@ -47,18 +49,19 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    // background: linear-gradient(to bottom, #79d3e157, #c187ca4f);
+    background: linear-gradient(#999999d4, #979797c2);
     display: flex;
     justify-content: center;
     align-items: center;
     h1 {
       color: rgba(255, 255, 255, 0);
-      font-size: 63px;
+      font-size: 73px;
       color: white;
       text-shadow: 0 0 5px #534040;
-      font-weight: 600;
-      letter-spacing: 9px;
+      // font-weight: 600;
+      // letter-spacing: 17px;
       z-index: 2;
+      font-family: 'Libre Barcode 39 Text', cursive;
     }
   }
 }
