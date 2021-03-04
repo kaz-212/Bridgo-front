@@ -1,4 +1,10 @@
-# client
+# Bridgo-front
+[Check it out](https://www.bridgetsimpson.art/)
+
+## Stack
+Front end framework: Vue.js
+Payment processing: Stripe
+
 
 ## Project setup
 ```
