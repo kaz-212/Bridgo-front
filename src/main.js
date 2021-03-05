@@ -12,7 +12,6 @@ createApp(App)
   .mount('#app')
 
 // axios.defaults.baseURL = 'http://localhost:5000/api/'
-// axios.defaults.baseURL = 'https://floating-headland-85976.herokuapp.com/api/'
 axios.defaults.baseURL = 'https://www.bridgetsimpson.art/api'
 
 const secure = process.env.NODE_ENV === 'production'

@@ -2,11 +2,13 @@
   <div>
     <Draggable v-model="projects" item-key="name" class="list-group">
       <template #item="{ element }">
-        <div class="list-group-item">
-          <router-link :to="{ name: 'EditProject', params: { id: element._id } }"
-            ><img :src="element.images[0].thumbnail"
-          /></router-link>
-          <h4>{{ element.name }}</h4>
+        <div class="list-group-item grid">
+          <div class="project">
+            <router-link :to="{ name: 'EditProject', params: { id: element._id } }"
+              ><img :src="element.images[0].thumbnail"
+            /></router-link>
+            <h4>{{ element.name }}</h4>
+          </div>
         </div>
       </template>
     </Draggable>
@@ -14,6 +16,8 @@
 </template>
 
 <script>
+// TODO vue draggable side by side in a grid
+
 import Draggable from 'vuedraggable'
 
 export default {
