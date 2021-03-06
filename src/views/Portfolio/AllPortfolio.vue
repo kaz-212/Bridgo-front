@@ -77,6 +77,13 @@ export default {
     setTab(tab) {
       this.selectedTab = tab.name
     }
+  },
+  mounted() {
+    try {
+      this.selectedTab = this.themes[0].name
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 </script>
