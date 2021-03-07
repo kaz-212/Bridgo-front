@@ -11,8 +11,11 @@ createApp(App)
   .use(VueCookieNext)
   .mount('#app')
 
-// axios.defaults.baseURL = 'http://localhost:5000/api/'
-axios.defaults.baseURL = 'https://www.bridgetsimpson.art/api'
+if (process.env.NODE_ENV !== 'production') {
+  axios.defaults.baseURL = 'http://localhost:5000/api/'
+} else {
+  axios.defaults.baseURL = 'https://www.bridgetsimpson.art/api'
+}
 
 const secure = process.env.NODE_ENV === 'production'
 VueCookieNext.config({ expire: '7d', secure, sameSite: 'Strict' })
