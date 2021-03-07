@@ -10,7 +10,7 @@
 <script>
 export default {
   name: 'BackButton',
-  props: { whereTo: String, text: String }
+  props: { whereTo: String, text: { type: String, default: 'Back' } }
 }
 </script>
 
