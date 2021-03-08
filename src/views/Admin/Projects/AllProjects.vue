@@ -71,6 +71,6 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  margin-left: 15vw;
+  margin-bottom: 8vh;
 }
 </style>

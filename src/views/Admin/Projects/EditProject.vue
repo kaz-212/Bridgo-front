@@ -1,9 +1,15 @@
 <template>
   <div class="main" v-if="project">
-    <BackButton @click="resetProjectData" whereTo="AdminProjects" />
+    <h1>Edit Project</h1>
+    <BackButton
+      class="back"
+      @click="resetProjectData"
+      whereTo="AdminProjects"
+      text="All Projects"
+    />
     <form class="form" action="#">
-      <div class="form-holder form" id="project">
-        <label for="theme">Select theme</label>
+      <div class="form-holder">
+        <label for="theme">Select theme: </label>
         <select name="theme" id="theme" v-model="project.theme">
           <option
             v-for="theme in allThemes"
@@ -18,7 +24,7 @@
         <textarea id="description" v-model="project.description" rows="8" required />
         <TextInput id="materials" label="Materials" v-model="project.materials" />
         <TextInput id="year" label="Year" v-model="project.year" />
-        <label for="yes">Show this project in portfoio?</label>
+        <label class="form-item" for="yes">Show this project in portfoio?</label>
         <input class="check-box" v-model="project.onShow" id="yes" type="checkbox" checked />
         <DeleteImage v-model:images="project.images" v-model:deleteFilenames="deleteFilenames" />
         <div>
@@ -124,61 +130,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
-  margin-left: 15vw;
-  h2 {
-    margin-top: 15px;
-    margin-left: 5px;
+h1 {
+  margin: 8% auto 3% 5%;
+}
+.back {
+  position: absolute;
+  width: 200px;
+  right: 0;
+  top: 100px;
+}
+
+.form {
+  width: 90%;
+  margin: 3% auto;
+
+  i {
+    cursor: pointer;
   }
-  .project-container {
-    border: 1px solid black;
-    width: 95%;
-    align-self: center;
+
+  .form-item {
     margin-top: 10px;
-    padding: 15px;
   }
 
-  .main-piece {
-    margin-left: 20px;
-    li {
-      list-style-type: none;
-    }
-  }
-
-  .piece-container {
-    display: grid;
-    grid-template-columns: 65% 35%;
-    border: 1px solid black;
-    width: 95%;
-    align-self: center;
-    margin-top: 10px;
-    padding: 15px;
-
-    &.delete {
-      border: 2px solid red;
-    }
-
-    input,
-    textarea {
-      width: 90%;
-      margin-left: 5px;
-      padding-left: 3px;
-      margin-bottom: 5px;
-      &.changed {
-        border: 1px solid red;
-      }
-    }
-
-    img {
-      margin-top: auto;
-    }
-
-    button {
-      &.delete {
-        color: white;
-        background-color: red;
-      }
-    }
+  button {
+    max-width: 200px;
   }
 }
 </style>
