@@ -24,6 +24,6 @@ html {
 
 #exhibitions {
   margin-left: 15vw;
-  width: 100%;
+  width: 85vw;
 }
 </style>

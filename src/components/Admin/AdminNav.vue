@@ -46,7 +46,7 @@ export default {
 #nav {
   // float: left;
   height: 100%;
-  background-color: olive;
+  background-color: #9e98c8;
   width: 15vw;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@ export default {
   top: 0;
 
   h1 {
-    margin-top: 0;
+    margin-top: 30%;
     margin-left: 0;
   }
 

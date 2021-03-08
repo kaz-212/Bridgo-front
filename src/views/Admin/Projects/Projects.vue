@@ -23,6 +23,7 @@ html {
 }
 
 #projects {
-  max-width: 100vw;
+  margin-left: 15vw;
+  width: 85vw;
 }
 </style>

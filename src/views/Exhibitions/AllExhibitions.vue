@@ -3,7 +3,6 @@
     <section class="header">
       <div class="exhibition-banner">
         <h1>EXHIBITIONS</h1>
-        <h2>EXHIBITIONS</h2>
       </div>
     </section>
     <section class="exhibitions">
@@ -18,8 +17,6 @@
 
 <script>
 import ExhibitionCard from '@/components/Exhibitions/ExhibitionCard.vue'
-
-// TODO show fulscreen scroll down so banner is out of view
 
 export default {
   name: 'AllExhibitions',
@@ -61,9 +58,7 @@ export default {
   align-items: center;
 
   .exhibition-banner {
-    // box-shadow: 0 0 6px 3px #8c3a3a;
-    // box-shadow: 0 0 6px 3px #2c7d48;
-    box-shadow: 0 0 6px 3px #8a0000;
+    box-shadow: 0 0 6px 1px #1c1c1c;
     width: 84%;
     height: 76%;
     margin: auto;
@@ -79,32 +74,12 @@ export default {
       color: rgba(255, 255, 255, 0);
       font-size: 63px;
       color: white;
-      // text-shadow: 0 0px 8px #b14e4e;
-      // text-shadow: 0 0px 9px #83b58d, 0 50px #233340;
-      // text-shadow: 0 4px 6px #41884f;
       font-weight: 600;
       letter-spacing: 9px;
       z-index: 2;
     }
-    h2 {
-      position: absolute;
-      font-size: 64px;
-      letter-spacing: 11px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0);
-      // text-shadow: 0 65px 1px #808080;
-      // text-shadow: 0 65px 2px #80808087;
-      text-shadow: 0 65px 2px #8080805e;
-      z-index: 1;
-    }
   }
 }
-
-// .spacer {
-//   margin-top: 70px;
-//   height: 28vh;
-//   max-height: 250px;
-// }
 
 .exhibitions {
   .exhibitions-container {

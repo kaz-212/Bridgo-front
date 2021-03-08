@@ -12,6 +12,13 @@ export default {
   name: 'Admin',
   components: {
     AdminNav
+  },
+  async created() {
+    try {
+      await this.$store.dispatch('orders/getOrders')
+    } catch (e) {
+      console.log(e.response.data)
+    }
   }
 }
 </script>

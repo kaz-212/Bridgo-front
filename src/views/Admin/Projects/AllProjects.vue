@@ -59,15 +59,18 @@ export default {
       this.selectedTab = tab.name
     }
   },
-  // updated() {
-  //   console.log(this.refs)
-  // },
-  mounted() {}
+  mounted() {
+    try {
+      this.selectedTab = this.themes[0].name
+    } catch (e) {
+      console.log(e)
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .main {
-  margin-left: 15vw;
+  margin-bottom: 8vh;
 }
 </style>

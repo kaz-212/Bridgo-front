@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Draggable v-model="projects" item-key="name" class="list-group">
+  <div class="container">
+    <Draggable v-model="projects" item-key="name" class="list-group grid">
       <template #item="{ element }">
-        <div class="list-group-item">
+        <div class="list-group-item grid-container">
           <router-link :to="{ name: 'EditProject', params: { id: element._id } }"
             ><img :src="element.images[0].thumbnail"
           /></router-link>
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+// TODO vue draggable side by side in a grid
+
 import Draggable from 'vuedraggable'
 
 export default {
@@ -43,4 +45,20 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.container {
+  width: 80%;
+  margin: 7% auto 0 auto;
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    .grid-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+</style>

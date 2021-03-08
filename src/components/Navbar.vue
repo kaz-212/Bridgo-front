@@ -16,9 +16,6 @@
       <router-link class="nav-link" :class="{ 'fourth-link': !hideLinks }" to="/shop"
         >SHOP</router-link
       >
-      <!-- <router-link class="nav-link" :class="{ 'fifth-link': !hideLinks }" to="/admin"
-        >Admin</router-link
-      > -->
       <router-link
         class="nav-link basket"
         :class="{ 'sixth-link': !hideLinks }"
@@ -63,14 +60,6 @@ export default {
       // need this so that its responsive once it is dispatched
       return this.$store.getters['basket/numberOfItems']
     }
-    // isHome() {
-    //   try {
-    //     if (this.$route.matched[0].name === 'Home') return true
-    //     return false
-    //   } catch {
-    //     return false
-    //   }
-    // }
   },
   methods: {
     navSlide() {
@@ -105,17 +94,13 @@ body {
     top: 0;
     z-index: 10000;
     transition: background 0.5s ease-out, height 0.5s ease-out;
-    background: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1614101165/Bridgo/statics/6FD606E8-0E12-4D56-8834-48A13B0F7FB5_jt0zlm.jpg');
+    // background: url('https://res.cloudinary.com/dqyymjqpg/image/upload/v1614101165/Bridgo/statics/6FD606E8-0E12-4D56-8834-48A13B0F7FB5_jt0zlm.jpg');
+    background: url('https://res.cloudinary.com/bridget-simpson-art/image/upload/w_auto,q_auto/v1614869687/Bridgo/statics/clearer_header.jpg');
     background-size: cover;
-    background-position: center;
-    // box-shadow: 0 0 6px 3px #8c3a3a;
-    // &.home-nav {
-    //   background: #8a0000;
-    // }
+    background-position-y: 45%;
 
     &.scrolling {
       background: white;
-      // max-height: 40px;
       height: 44px;
       a,
       i {
@@ -123,9 +108,6 @@ body {
         text-shadow: none;
       }
     }
-    // &:hover {
-    //   background: rgba(255, 255, 255, 0.548);
-    // }
 
     a {
       text-decoration: none;

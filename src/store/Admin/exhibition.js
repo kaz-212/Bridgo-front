@@ -47,6 +47,17 @@ export default {
         }
       })
     },
+    async getExhibitionById({ commit }, id) {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await axios.get(`admin/exhibitions/${id}`)
+          commit('EDIT_EXHIBITION', res.data)
+          resolve('success')
+        } catch (e) {
+          reject(e)
+        }
+      })
+    },
     async deleteExhibition({ commit }, id) {
       return new Promise(async (resolve, reject) => {
         try {

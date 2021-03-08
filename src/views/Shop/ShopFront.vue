@@ -3,7 +3,6 @@
     <section class="header">
       <div class="shop-banner">
         <h1>SHOP</h1>
-        <h2>SHOP</h2>
         <div class="tabs">
           <span
             v-for="tab in tabs"
@@ -92,9 +91,7 @@ export default {
     justify-content: center;
     align-items: center;
     position: relative;
-    // box-shadow: 0 0 6px 3px #b9bd45; // YELLOW
-    // box-shadow: 0 0 6px 3px #652788;
-    box-shadow: 0 0 6px 3px #8a0000;
+    box-shadow: 0 0 6px 1px #1c1c1c;
     width: 84%;
     height: 76%;
     margin: auto;
@@ -107,25 +104,13 @@ export default {
       color: rgba(255, 255, 255, 0);
       font-size: 63px;
       color: white;
-      // text-shadow: 0 4px 4px #a2a037; // YELLOW
-      // text-shadow: 0 4px 6px #7f268c;
       font-weight: 600;
       letter-spacing: 9px;
     }
-    h2 {
-      position: absolute;
-      font-size: 64px;
-      letter-spacing: 11px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0);
-      // text-shadow: 0 65px 1px #808080;
-      // text-shadow: 0 65px 2px #80808087;
-      text-shadow: 0 65px 2px #8080805e;
-      z-index: 1;
-    }
+
     .tabs {
       position: absolute;
-      bottom: 32px;
+      bottom: 43px;
 
       .tab-name {
         margin: 0 40px;
@@ -135,10 +120,8 @@ export default {
         color: white;
         letter-spacing: 2px;
         padding: 2px;
-        // border-radius: 20px;
       }
       .selected {
-        // background-color: #1c1c282b;
         border-bottom: 1px solid white;
       }
     }
