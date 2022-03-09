@@ -6,6 +6,7 @@ import inventoryModule from './Admin/inventory'
 import ordersModule from './Admin/orders'
 import adminProjectModule from './Admin/projects'
 import adminExhibitionModule from './Admin/exhibition'
+import adminUser from './Admin/user'
 
 export default createStore({
   modules: {
@@ -15,6 +16,7 @@ export default createStore({
     basket: basketModule,
     orders: ordersModule,
     adminProject: adminProjectModule,
-    adminExhibition: adminExhibitionModule
+    adminExhibition: adminExhibitionModule,
+    user: adminUser
   }
 })

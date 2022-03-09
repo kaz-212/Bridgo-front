@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
+import Login from '@/views/Login.vue'
 
 import Portfolio from '@/views/Portfolio/Portfolio.vue'
 import AllPortfolio from '@/views/Portfolio/AllPortfolio.vue'
@@ -111,6 +112,14 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title: 'Admin Login'
+    }
   },
   Admin
 ]

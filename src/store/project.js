@@ -1,6 +1,6 @@
 import axios from 'axios'
 // import router from '../router'
-
+// TODO for all non admin routes (except basket) change with credentials to false
 export default {
   namespaced: true,
   state: {

@@ -1,5 +1,6 @@
 // ======== Admin ========
 import Admin from '@/views/Admin/Admin.vue'
+// import store from '@/store/index.js'
 
 // project
 import Projects from '@/views/Admin/Projects/Projects.vue'
@@ -30,6 +31,17 @@ export default {
   path: '/admin',
   name: 'Admin',
   component: Admin,
+  async beforeEnter(to, from, next) {
+    try {
+      // const hasPermission = await store.dispatch('user/isLoggedIn')
+      // if (hasPermission) {
+      return next()
+      // }
+      // return next({ name: 'Login' })
+    } catch (e) {
+      return next({ name: 'Login' })
+    }
+  },
   children: [
     {
       path: 'projects',
